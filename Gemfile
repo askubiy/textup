@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
+# Ruby version for Heroku
+ruby "2.0.0"
 # Use pg as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -44,6 +46,8 @@ gem 'bootstrap_form'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
