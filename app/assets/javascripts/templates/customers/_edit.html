@@ -9,12 +9,17 @@
         <label for="name">Название компании</label>
         <input type="text" autocomplete="off" class="form-control" id="name" ng-model="customer.name" placeholder="Название компании">
       </div>
+      <div class="form-group">
+        <label for="description">Краткое описание:</label>
+        <textarea class="form-control" ng-model="customer.description"
+          rows="5" id="description" placeholder="Краткое описание"></textarea>
+      </div>
       <input ng-click="updateCustomer()" type="submit" class="btn btn-success" value="Сохранить">
     </form>
   </div>
 </div>
 
 <div class="actions" ng-model="customer">
-  <a href='/#customers/{{customer.id}}/show'> Перейти к карточке заказчика </a> |
-  <a href='/#customers'> Вернуться к списку заказчиков </a>
+  <a href='/#customers/{{customer.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к карточке заказчика </a> |
+  <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> Вернуться к списку заказчиков </a>
 </div>

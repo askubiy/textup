@@ -31,6 +31,9 @@ a.add-customer {
 
 div.actions {
   margin-top: 10px;
+  a:hover {
+    text-decoration: none;
+  }
 }
 
 .welcome-message {

@@ -19,10 +19,14 @@ angular.module('textUp')
 
     $scope.addCustomer = function() {
       if($scope.newCustomerName === '') { return; }
-      var customer = new Customer({user_id: $scope.user.id, name: $scope.newCustomerName});
+      var customer = new Customer({
+        user_id: $scope.user.id,
+        name: $scope.newCustomerName,
+        description: $scope.newCustomerDescription
+      });
       customer.$save();
-      console.log(customer);
       $scope.newCustomerName = '';
+      $scope.newCustomerDescription = '';
     };
 
     $scope.updateCustomer = function() {
