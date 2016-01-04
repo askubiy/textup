@@ -1,0 +1,16 @@
+<div class="page-header">
+  <h1>Добавить заказчика</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <form class="customer-form">
+      <div class="form-group">
+        <label for="name">Название компании</label>
+        <input type="text" autocomplete="off" class="form-control" id="name" ng-model="newCustomerName" placeholder="Название компании">
+      </div>
+      <input ng-click="addCustomer()" type="submit" class="btn btn-success" value="Добавить">
+      <a href='/#customers'> Вернуться к списку заказчиков </a>
+    </form>
+  </div>
+</div>

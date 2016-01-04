@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Пользователи</h1>
+<p> <%= link_to '+ Новый пользователь', new_user_path, class: "btn btn-link" %> </p>
+
+<div class="users-table">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Отчество</th>
+        <th>Email</th>
+        <th> Действия </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.last_name %></td>
+          <td><%= user.first_name %></td>
+          <td><%= user.middle_name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <%= link_to 'Показать', user, class: "btn btn-info" %>
+            <%= link_to 'Редактировать', edit_user_path(user), class: "btn btn-warning" %>
+            <%= link_to 'Удалить', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p> <%= link_to '+ Новый пользователь', new_user_path, class: "btn btn-link" %> </p>

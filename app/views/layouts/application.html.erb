@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TextUp</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body ng-cloak ng-app="textUp">
+  <div class="container-fluid">
+    <div class="col-md-6 col-md-offset-3">
+      <div ng-include="'nav/_nav.html'"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <ui-view></ui-view>
+    </div>
+  </div>
+
+</body>
+</html>
