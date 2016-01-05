@@ -74,7 +74,6 @@ angular.module('textUp', ['ui.router', 'templates', 'Devise', 'ngResource'])
       }
     })
 
-
     .state('show_customer', {
       url: '/customers/:customer_id/show',
       templateUrl: 'customers/_show.html',
@@ -109,6 +108,52 @@ angular.module('textUp', ['ui.router', 'templates', 'Devise', 'ngResource'])
               function(user){
                 return {
                   customer: Customer.get({user_id: user.id, id: $stateParams.customer_id})
+                }
+              },
+              function(error){
+                $state.go('welcome');
+              });
+          }
+        ]
+      }
+    })
+
+    .state('projects', {
+      url: '/projects',
+      templateUrl: 'projects/_index.html',
+      controller: 'ProjectsCtrl',
+
+      resolve: {
+        projects: ['$state', 'Auth', 'Project',
+          function($state, Auth, Project){
+            return Auth.currentUser().then(
+              function(user){
+                return {
+                  projects: Project.query({user_id: user.id}),
+                  user: user
+                }
+              },
+              function(error){
+                $state.go('welcome');
+              });
+          }
+        ]
+      }
+    })
+
+    .state('new_project', {
+      url: '/projects/new',
+      templateUrl: 'projects/_new.html',
+      controller: 'ProjectsCtrl',
+
+      resolve: {
+        projects: ['$state', 'Auth', 'Project',
+          function($state, Auth, Project){
+            return Auth.currentUser().then(
+              function(user){
+                return {
+                  projects: Project.query({user_id: user.id}),
+                  user: user
                 }
               },
               function(error){

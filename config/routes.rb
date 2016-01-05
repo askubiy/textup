@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :users
 
@@ -9,7 +10,10 @@ Rails.application.routes.draw do
   root 'application#angular'
 
   resources :users do
-    resources :customers, :defaults => { :format => 'json' }
+    resources :customers, :defaults => { :format => 'json' } do
+      resources :projects, :defaults => { :format => 'json' }
+    end
+    resources :projects, :defaults => { :format => 'json' }
   end
 
   # Example of regular route:

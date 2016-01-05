@@ -10,15 +10,18 @@
         </thead>
         <tbody>
           <tr>
-            <td class="col-md-4" style="background-color: #f4eded;">Название компании</td>
-            <td class="col-md-8">{{customer.name}}</td>
+            <td class="col-md-2 bg-grey">Название компании</td>
+            <td class="col-md-8">
+              <span class="glyphicon glyphicon-stop" style="color: {{customer.colour}}"></span>
+              {{customer.name}}
+            </td>
           </tr>
           <tr>
-            <td class="col-md-4" style="background-color: #f4eded;">Добавлен</td>
+            <td class="col-md-2 bg-grey">Добавлен</td>
             <td class="col-md-8">{{customer.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>
           <tr>
-            <td class="col-md-4" style="background-color: #f4eded;">Краткое описание</td>
+            <td class="col-md-2 bg-grey">Краткое описание</td>
             <td class="col-md-8">{{customer.description}}</td>
           </tr>
         </tbody>

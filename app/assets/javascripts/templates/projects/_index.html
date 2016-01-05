@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Заказчики</h1>
+  <h1>Проекты</h1>
 </div>
 
 <div>
@@ -14,8 +14,8 @@
     </form>
   </div>
 
-  <a class="btn btn-success add-customer" href="#/customers/new">
-    <span class="glyphicon glyphicon-plus"> </span> Добавить заказчика
+  <a class="btn btn-success add-customer" href="#/projects/new">
+    <span class="glyphicon glyphicon-plus"> </span> Добавить проект
   </a>
 </div>
 
@@ -23,24 +23,22 @@
   <table class="table table-hover table-vcenter table-header-centered">
     <thead>
       <tr>
-        <th></th>
         <th>Название</th>
         <th>Добавлен</th>
         <th>Действия</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="customer in customers | filter:tableFilter | orderBy: 'name'">
-        <td class="col-md-1"><div class="colorPicker-picker" style="background-color: {{customer.colour}}"></div></td>
-        <td class="col-md-4">{{customer.name}}</td>
-        <td class="col-md-3">{{customer.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+      <tr ng-repeat="project in projects | filter:tableFilter | orderBy: 'name'">
+        <td class="col-md-4">{{project.title}}</td>
+        <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
         <td class="col-md-4">
-          <a href="#/customers/{{customer.id}}/show" class="btn btn-info">
+          <a href="#/customers/{{project.id}}/show" class="btn btn-info">
             Подробнее </a>
-          <a href="#/customers/{{customer.id}}/edit" class="btn btn-warning">
+          <a href="#/customers/{{project.id}}/edit" class="btn btn-warning">
             Редактировать </a>
           <button class="btn btn-danger"
-            ng-click="destroyCustomer(customer)">
+            ng-click="destroyProject(project)">
             Удалить
           </button>
         </td>
