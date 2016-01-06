@@ -5,14 +5,24 @@ angular.module('textUp')
     restrict: 'A',
 
     link: function(scope, element, attrs) {
-      scope.customer.$promise.then(function(customer){
-        var colorPicker = $(element).colorPicker({
-          showHexField: false,
-          onColorChange: function(id, newValue) {
-            scope.newCustomerColour = newValue;
-          }
+      if (scope.customer) {
+        scope.customer.$promise.then(function(customer){
+          element.val(customer.colour);
+          $(element).colorPicker({
+            showHexField: false,
+            onColorChange: function(id, newValue) {
+              scope.newCustomerColour = newValue;
+            }
+          });
         });
-      });
+      } else {
+        $(element).colorPicker({
+            showHexField: false,
+            onColorChange: function(id, newValue) {
+              scope.newCustomerColour = newValue;
+            }
+          });
+      };
 
     }
   };
