@@ -13,18 +13,6 @@ angular.module('textUp')
     $scope.newCustomerName = '';
     $scope.user = customers.user;
 
-    angular.element(document).ready(function () {
-      $timeout(function(){
-        $('#color-picker').colorPicker({
-          showHexField: false,
-          onColorChange : function(id, newValue) {
-            $scope.newCustomerColour = newValue;
-          }
-        });
-        },
-      70);
-    });
-
     $scope.destroyCustomer = function(customer) {
       if (confirm('Вы уверены что хотите удалить этого заказчика?')) {
         Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
@@ -41,10 +29,11 @@ angular.module('textUp')
         description: $scope.newCustomerDescription,
         colour: $scope.newCustomerColour
       });
-      customer.$save();
-      $scope.newCustomerName = '';
-      $scope.newCustomerDescription = '';
-      $state.go('show_customer', {customer_id: customer.id});
+      customer.$save().then(function(customer){
+        $scope.newCustomerName = '';
+        $scope.newCustomerDescription = '';
+        $state.go('show_customer', {customer_id: customer.id});
+      });
     };
 
     $scope.updateCustomer = function() {

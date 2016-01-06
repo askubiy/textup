@@ -26,10 +26,11 @@ angular.module('textUp')
         title: $scope.newProjectTitle,
         description: $scope.newProjectDescription
       });
-      project.$save();
-      $scope.newProjectTitle = '';
-      $scope.newProjectDescription = '';
-      $state.go('projects');
+      project.$save().then(function(project){
+        $scope.newProjectTitle = '';
+        $scope.newProjectDescription = '';
+        $state.go('projects');
+      });
     };
 
   }
