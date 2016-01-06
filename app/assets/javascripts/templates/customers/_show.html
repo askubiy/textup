@@ -2,6 +2,11 @@
   <h1>Карточка заказчика</h1>
 </div>
 
+<div class="actions" ng-model="customer">
+  <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> К списку заказчиков </a> |
+  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a>
+</div>
+
 <div ng-model="customer">
   <div class="row">
     <div class="col-md-8">
@@ -30,7 +35,37 @@
   </div>
 </div>
 
-<div class="actions" ng-model="customer">
-  <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> Вернуться к списку заказчиков </a> |
-  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a>
+<div class="customer-projects">
+  <h3>Проекты</h3>
+    <a class="btn btn-success add-customer" href="#/customers/{{customer.id}}/projects/new">
+      <span class="glyphicon glyphicon-plus"></span>
+      Добавить проект
+    </a>
+  </div>
+
+  <table class="table table-hover table-vcenter">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Добавлен</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="project in customer.projects | orderBy: 'title'">
+        <td class="col-md-3">{{project.title}}</td>
+        <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+        <td class="col-md-4">
+          <a href="#/projects/{{project.id}}/show" class="btn btn-info">
+            Подробнее </a>
+          <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
+            Редактировать </a>
+          <button class="btn btn-danger"
+            ng-click="destroyProject(project)">
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

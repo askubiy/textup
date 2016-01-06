@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Проект</h1>
+</div>
+
+<div class="actions" ng-model="project">
+  <a href='/#projects'><span class="glyphicon glyphicon-th-list"></span> К списку проектов </a> |
+  <a href='/#projects/{{project.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a>
+</div>
+
+<div ng-model="project">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-stripped table-bordered table-vcenter">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-md-2 bg-grey">Название проекта</td>
+            <td class="col-md-8">{{project.title}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Заказчик</td>
+            <td class="col-md-8">
+              <a ng-show="project.customer" href="/#customers/{{project.customer ? project.customer.id : '' }}/show">
+                <span class="glyphicon glyphicon-stop" style="color: {{project.customer.colour}}"></span>
+                  {{project.customer ? project.customer.name : '' }}
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Добавлен</td>
+            <td class="col-md-8">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Краткое описание</td>
+            <td class="col-md-8">{{project.description}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

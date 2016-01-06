@@ -147,13 +147,83 @@ angular.module('textUp', ['ui.router', 'templates', 'Devise', 'ngResource'])
       controller: 'ProjectsCtrl',
 
       resolve: {
-        projects: ['$state', 'Auth', 'Project',
-          function($state, Auth, Project){
+        projects: ['$state', 'Auth', 'Project', 'Customer',
+          function($state, Auth, Project, Customer){
             return Auth.currentUser().then(
               function(user){
                 return {
                   projects: Project.query({user_id: user.id}),
+                  customers: Customer.query({user_id: user.id}),
                   user: user
+                }
+              },
+              function(error){
+                $state.go('welcome');
+              });
+          }
+        ]
+      }
+    })
+
+    .state('new_customer_project', {
+      url: '/customers/:customer_id/projects/new',
+      templateUrl: 'projects/_customer_new.html',
+      controller: 'ProjectsCtrl',
+
+      resolve: {
+        projects: ['$state', 'Auth', 'Project', 'Customer', '$stateParams',
+          function($state, Auth, Project, Customer, $stateParams){
+            return Auth.currentUser().then(
+              function(user){
+                return {
+                  customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
+                  customers: Customer.query({user_id: user.id}),
+                  user: user
+                }
+              },
+              function(error){
+                $state.go('welcome');
+              });
+          }
+        ]
+      }
+    })
+
+    .state('show_project', {
+      url: '/projects/:project_id/show',
+      templateUrl: 'projects/_show.html',
+      controller: 'ProjectsCtrl',
+
+      resolve: {
+        projects: ['$state', 'Auth', 'Project', '$stateParams',
+          function($state, Auth, Project, $stateParams){
+            return Auth.currentUser().then(
+              function(user){
+                return {
+                  project: Project.get({user_id: user.id, id: $stateParams.project_id})
+                }
+              },
+              function(error){
+                $state.go('welcome');
+              });
+          }
+        ]
+      }
+    })
+
+    .state('edit_project', {
+      url: '/projects/:project_id/edit',
+      templateUrl: 'projects/_edit.html',
+      controller: 'ProjectsCtrl',
+
+      resolve: {
+        projects: ['$state', 'Auth', 'Project', '$stateParams', 'Customer',
+          function($state, Auth, Project, $stateParams, Customer){
+            return Auth.currentUser().then(
+              function(user){
+                return {
+                  project: Project.get({user_id: user.id, id: $stateParams.project_id}),
+                  customers: Customer.query({user_id: user.id})
                 }
               },
               function(error){

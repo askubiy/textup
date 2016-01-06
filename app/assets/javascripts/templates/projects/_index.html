@@ -2,7 +2,7 @@
   <h1>Проекты</h1>
 </div>
 
-<div class="customer-top-menu">
+<div class="table-top-menu">
   <div class="search-box col-md-4">
     <form role="form">
       <div class="form-group has-feedback has-feedback-left">
@@ -15,27 +15,34 @@
   </div>
 
   <a class="btn btn-success add-customer" href="#/projects/new">
-    <span class="glyphicon glyphicon-plus"> </span> Добавить проект
+    <span class="glyphicon glyphicon-plus"></span> Добавить проект
   </a>
 </div>
 
 <div>
-  <table class="table table-hover table-vcenter table-header-centered">
+  <table class="table table-hover table-vcenter">
     <thead>
       <tr>
         <th>Название</th>
         <th>Добавлен</th>
+        <th>Заказчик</th>
         <th>Действия</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="project in projects | filter:tableFilter | orderBy: 'name'">
-        <td class="col-md-4">{{project.title}}</td>
-        <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+      <tr ng-repeat="project in projects | filter:tableFilter | orderBy: 'title'">
+        <td class="col-md-2">{{project.title}}</td>
+        <td class="col-md-2">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+        <td class="col-md-2">
+          <a ng-show="project.customer" href="/#customers/{{project.customer ? project.customer.id : '' }}/show">
+            <span class="glyphicon glyphicon-stop" style="color: {{project.customer.colour}}"></span>
+            {{project.customer ? project.customer.name : '' }}
+          </a>
+        </td>
         <td class="col-md-4">
-          <a href="#/customers/{{project.id}}/show" class="btn btn-info">
+          <a href="#/projects/{{project.id}}/show" class="btn btn-info">
             Подробнее </a>
-          <a href="#/customers/{{project.id}}/edit" class="btn btn-warning">
+          <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
             Редактировать </a>
           <button class="btn btn-danger"
             ng-click="destroyProject(project)">
