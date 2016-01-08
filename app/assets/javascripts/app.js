@@ -85,7 +85,9 @@ angular.module('textUp', ['ui.router', 'templates', 'Devise', 'ngResource'])
             return Auth.currentUser().then(
               function(user){
                 return {
-                  customer: Customer.get({user_id: user.id, id: $stateParams.customer_id})
+                  customers: Customer.query({user_id: user.id}),
+                  customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
+                  user: user
                 }
               },
               function(error){
@@ -200,7 +202,9 @@ angular.module('textUp', ['ui.router', 'templates', 'Devise', 'ngResource'])
             return Auth.currentUser().then(
               function(user){
                 return {
-                  project: Project.get({user_id: user.id, id: $stateParams.project_id})
+                  projects: Project.query({user_id: user.id}),
+                  project: Project.get({user_id: user.id, id: $stateParams.project_id}),
+                  user: user
                 }
               },
               function(error){

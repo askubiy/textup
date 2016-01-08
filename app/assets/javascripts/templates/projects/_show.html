@@ -4,7 +4,8 @@
 
 <div class="actions" ng-model="project">
   <a href='/#projects'><span class="glyphicon glyphicon-th-list"></span> К списку проектов </a> |
-  <a href='/#projects/{{project.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a>
+  <a href='/#projects/{{project.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
+  <a class='delete' ng-click="destroyProject(project, 'projects')"><span class="glyphicon glyphicon-remove"></span> Удалить </a>
 </div>
 
 <div ng-model="project">

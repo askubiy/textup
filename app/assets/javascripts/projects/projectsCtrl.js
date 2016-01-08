@@ -15,11 +15,15 @@ angular.module('textUp')
     $scope.newProjectTitle = '';
     $scope.newProjectDescription = '';
 
-    $scope.destroyProject = function(project) {
+    $scope.destroyProject = function(project, redirectState) {
       if (confirm('Вы уверены что хотите удалить этот проект?')) {
         Project.remove({user_id: $scope.user.id, id: project.id}, function() {
           $scope.projects.splice($scope.projects.indexOf(project), 1);
         });
+      };
+
+      if (redirectState) {
+        $state.go(redirectState);
       };
     };
 

@@ -43,6 +43,14 @@ div.actions {
   }
 }
 
+a.delete {
+  cursor: pointer;
+}
+
+a.delete:hover {
+  color: red;
+}
+
 .welcome-message {
   width: 50%;
   margin-left: auto;

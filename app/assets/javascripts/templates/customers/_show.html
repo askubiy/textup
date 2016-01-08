@@ -4,7 +4,8 @@
 
 <div class="actions" ng-model="customer">
   <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> К списку заказчиков </a> |
-  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a>
+  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
+  <a class='delete' ng-click="destroyCustomer(customer, 'customers')"><span class="glyphicon glyphicon-remove"></span> Удалить </a>
 </div>
 
 <div ng-model="customer">

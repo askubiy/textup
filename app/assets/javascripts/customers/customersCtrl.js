@@ -3,21 +3,38 @@ angular.module('textUp')
   '$scope',
   '$state',
   '$timeout',
+  'Project',
   'Customer',
   'customers',
 
-  function($scope, $state, $timeout, Customer, customers){
+  function($scope, $state, $timeout, Project, Customer, customers){
     $scope.customers = customers.customers;
     $scope.customer = customers.customer;
     $scope.newCustomerColour = "#FFFFFF";
     $scope.newCustomerName = '';
     $scope.user = customers.user;
 
-    $scope.destroyCustomer = function(customer) {
+    $scope.destroyCustomer = function(customer, redirectState) {
       if (confirm('Вы уверены что хотите удалить этого заказчика?')) {
         Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
           $scope.customers.splice($scope.customers.indexOf(customer), 1);
         });
+      };
+
+      if (redirectState) {
+        $state.go(redirectState);
+      };
+    };
+
+    $scope.destroyProject = function(project, goBack) {
+      if (confirm('Вы уверены что хотите удалить этот проект?')) {
+        Project.remove({user_id: $scope.user.id, id: project.id}, function() {
+          $scope.customer.projects.splice($scope.customer.projects.indexOf(project), 1);
+        });
+      };
+
+      if (goBack) {
+        history.back();
       };
     };
 
