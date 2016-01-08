@@ -1,0 +1,56 @@
+<div class="page-header">
+  <h1>Задачи</h1>
+</div>
+
+<div class="table-top-menu">
+  <div class="search-box col-md-4">
+    <form role="form">
+      <div class="form-group has-feedback has-feedback-left">
+        <input type="text" class="form-control"
+          ng-model="tableFilter" placeholder="Фильтр" />
+        <i class="form-control-feedback glyphicon
+          glyphicon-search pull-left"></i>
+      </div>
+    </form>
+  </div>
+
+  <a class="btn btn-success add-customer" href="#/tasks/new">
+    <span class="glyphicon glyphicon-plus"></span> Добавить задачу
+  </a>
+</div>
+
+<div>
+  <table class="table table-hover table-vcenter">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Добавлена</th>
+        <th>Статус</th>
+        <th>Проект</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in tasks | filter:tableFilter | orderBy: 'title'">
+        <td class="col-md-2">{{task.title}}</td>
+        <td class="col-md-2">{{task.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+        <td class="col-md-2">{{task.status.name}}</td>
+        <td class="col-md-2">
+          <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">
+            {{task.project ? task.project.title : '' }}
+          </a>
+        </td>
+        <td class="col-md-4">
+          <a href="#/tasks/{{task.id}}/show" class="btn btn-info">
+            Подробнее </a>
+          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning">
+            Редактировать </a>
+          <button class="btn btn-danger"
+            ng-click="destroyTask(task)">
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

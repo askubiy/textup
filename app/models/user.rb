@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_many :customers, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 end

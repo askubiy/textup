@@ -11,9 +11,12 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :customers, :defaults => { :format => 'json' } do
-      resources :projects, :defaults => { :format => 'json' }
+      resources :projects, :defaults => { :format => 'json' } do
+        resources :tasks, :defaults => { :format => 'json' }
+      end
     end
     resources :projects, :defaults => { :format => 'json' }
+    resources :tasks, :defaults => { :format => 'json' }
   end
 
   # Example of regular route:
