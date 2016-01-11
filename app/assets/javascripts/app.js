@@ -6,7 +6,8 @@ angular.module('textUp', [
   'textUp.home',
   'textUp.welcome',
   'textUp.customers',
-  'textUp.projects'
+  'textUp.projects',
+  'textUp.tasks',
 ])
 .config([
   '$stateProvider',
@@ -14,29 +15,6 @@ angular.module('textUp', [
   function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-    .state('tasks', {
-      url: '/tasks',
-      templateUrl: 'tasks/_index.html',
-      controller: 'TasksCtrl',
-
-      resolve: {
-        tasks: ['$state', 'Auth', 'Task',
-          function($state, Auth, Task){
-            return Auth.currentUser().then(
-              function(user){
-                return {
-                  tasks: Task.query({user_id: user.id}),
-                  user: user
-                }
-              },
-              function(error){
-                $state.go('welcome');
-              });
-          }
-        ]
-      }
-    })
-
     .state('login', {
       url: '/login',
       templateUrl: 'auth/_login.html',

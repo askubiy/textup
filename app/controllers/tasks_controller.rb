@@ -4,6 +4,22 @@ class TasksController < ApplicationController
     respond_with @tasks.to_json(:include => [:project, :status])
   end
 
+  def show
+    @task = current_user.tasks.find(params[:id])
+    respond_with @task.to_json(:include => :project)
+  end
+
+  def create
+    @task = current_user.tasks.create(task_params)
+    respond_with @task, location: user_tasks_url
+  end
+
+  def update
+    @task = current_user.task.find(params[:id])
+    @task.update_attributes(task_params)
+    respond_with @task.to_json(:include => :project)
+  end
+
   def destroy
     @task = current_user.tasks.find(params[:id])
     @task.destroy
@@ -14,6 +30,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description, :project_id)
+      params.require(:task).permit(:title, :description, :project_id, :status_id)
     end
 end

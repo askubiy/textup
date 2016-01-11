@@ -7,6 +7,8 @@ angular.module('textUp')
 
   function($scope, $state, Task, tasks){
     $scope.tasks = tasks.tasks;
+    $scope.task = tasks.task;
+    $scope.projects = tasks.projects;
     $scope.user = tasks.user;
 
     $scope.destroyTask = function(task, redirectState) {
@@ -21,18 +23,18 @@ angular.module('textUp')
       };
     };
 
-    $scope.addProject = function() {
-      if($scope.newProjectTitle === '') { return; };
-      var project = new Project({
+    $scope.addTask = function() {
+      if($scope.newTaskTitle === '') { return; };
+      var task = new Task({
         user_id: $scope.user.id,
-        customer_id: $scope.customerId.id,
-        title: $scope.newProjectTitle,
-        description: $scope.newProjectDescription
+        project_id: $scope.projectId.id,
+        title: $scope.newTaskTitle,
+        description: $scope.newTaskDescription
       });
-      project.$save().then(function(project){
-        $scope.newProjectTitle = '';
-        $scope.newProjectDescription = '';
-        $state.go('projects');
+      task.$save().then(function(project){
+        $scope.newTaskTitle = '';
+        $scope.newTaskDescription = '';
+        $state.go('tasks');
       });
     };
 

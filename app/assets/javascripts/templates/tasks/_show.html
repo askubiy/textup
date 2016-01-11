@@ -1,0 +1,42 @@
+<div class="page-header">
+  <h1>Задача</h1>
+</div>
+
+<div class="actions" ng-model="task">
+  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> К списку задач </a> |
+  <a href='/#tasks/{{task.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
+  <a class='delete' ng-click="destroyTask(task, 'tasks')"><span class="glyphicon glyphicon-remove"></span> Удалить </a>
+</div>
+
+<div ng-model="tasks">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-stripped table-bordered table-vcenter">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-md-2 bg-grey">Имя задачи</td>
+            <td class="col-md-8">{{task.title}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Проект</td>
+            <td class="col-md-8">
+              <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">
+                {{task.project ? task.project.title : '' }}
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Добавлена</td>
+            <td class="col-md-8">{{task.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Краткое описание</td>
+            <td class="col-md-8">{{task.description}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
