@@ -3,9 +3,10 @@ angular.module('textUp')
   '$scope',
   '$state',
   'Project',
+  'Task',
   'projects',
 
-  function($scope, $state, Project, projects){
+  function($scope, $state, Project, Task, projects){
     $scope.projects = projects.projects;
     $scope.project = projects.project;
     $scope.customers = projects.customers;
@@ -55,6 +56,18 @@ angular.module('textUp')
         $scope.newProjectDescription = '';
         $state.go('show_customer', { customer_id: $scope.customer.id });
       });
+    };
+
+    $scope.destroyTask = function(task, redirectState) {
+      if (confirm('Вы уверены что хотите удалить эту задачу?')) {
+        Task.remove({user_id: $scope.user.id, id: task.id}, function() {
+          $scope.project.tasks.splice($scope.project.tasks.indexOf(task), 1);
+        });
+      };
+
+      if (redirectState) {
+        $state.go(redirectState);
+      };
     };
 
     $scope.updateProject = function() {

@@ -9,10 +9,11 @@ angular.module('textUp')
     $scope.tasks = tasks.tasks;
     $scope.task = tasks.task;
     $scope.projects = tasks.projects;
+    $scope.project = tasks.project;
     $scope.user = tasks.user;
 
     $scope.destroyTask = function(task, redirectState) {
-      if (confirm('Вы уверены что хотите удалить этот проект?')) {
+      if (confirm('Вы уверены что хотите удалить эту задачу?')) {
         Task.remove({user_id: $scope.user.id, id: task.id}, function() {
           $scope.tasks.splice($scope.tasks.indexOf(task), 1);
         });
@@ -27,7 +28,7 @@ angular.module('textUp')
       if($scope.newTaskTitle === '') { return; };
       var task = new Task({
         user_id: $scope.user.id,
-        project_id: $scope.projectId.id,
+        project_id: $scope.project.id,
         title: $scope.newTaskTitle,
         description: $scope.newTaskDescription
       });
@@ -38,26 +39,26 @@ angular.module('textUp')
       });
     };
 
-    $scope.addProjectForCustomer = function() {
-      if($scope.newProjectTitle === '') { return; };
-      var project = new Project({
+    $scope.addTaskForProject = function() {
+      if($scope.newTaskTitle === '') { return; };
+      var task = new Task({
         user_id: $scope.user.id,
-        customer_id: $scope.customer.id,
-        title: $scope.newProjectTitle,
-        description: $scope.newProjectDescription
+        project_id: $scope.project.id,
+        title: $scope.newTaskTitle,
+        description: $scope.newTaskDescription
       });
-      project.$save().then(function(project){
-        $scope.newProjectTitle = '';
-        $scope.newProjectDescription = '';
-        $state.go('show_customer', { customer_id: $scope.customer.id });
+      task.$save().then(function(task){
+        $scope.newTaskTitle = '';
+        $scope.newTaskDescription = '';
+        $state.go('show_project', { project_id: $scope.project.id });
       });
     };
 
-    $scope.updateProject = function() {
-      if($scope.project.title === '') { return; };
-      $scope.project.customer_id = $scope.project.customer.id;
-      Project.update({ id: $scope.project.id }, $scope.project);
-      $state.go('show_project', { project_id: $scope.project.id });
+    $scope.updateTask = function() {
+      if($scope.task.title === '') { return; };
+      $scope.task.project_id = $scope.task.project.id;
+      Task.update({ id: $scope.task.id }, $scope.task);
+      $state.go('show_task', { task_id: $scope.task.id });
     };
 
   }

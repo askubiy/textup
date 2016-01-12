@@ -4,32 +4,32 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="project-form">
+    <form class="task-form">
       <div class="form-group">
         <label for="name">Имя задачи</label>
         <input type="text" required="true" autocomplete="off" class="form-control"
-          id="name" ng-model="project.title" placeholder="Название проекта">
+          id="name" ng-model="task.title" placeholder="Имя задачи">
       </div>
 
       <div class="form-group">
-        <label for="customer-select">Заказчик:</label>
-        <select class="form-control" id="customer-select" ng-model="project.customer"
-          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
-          <option value="">--- Выберите заказчика ---</option>
+        <label for="project-select">Проект:</label>
+        <select class="form-control" id="project-select" ng-model="task.project"
+          ng-options="project.title for project in projects | orderBy:'title' track by project.id" required="true">
+          <option value="">--- Выберите проект ---</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="description">Описание:</label>
-        <textarea class="form-control" ng-model="project.description"
+        <textarea class="form-control" ng-model="task.description"
           rows="5" id="description" placeholder="Описание"></textarea>
       </div>
-      <input ng-click="updateProject()" type="submit" class="btn btn-success" value="Сохранить">
+      <input ng-click="updateTask()" type="submit" class="btn btn-success" value="Сохранить">
     </form>
   </div>
 </div>
 
-<div class="actions" ng-model="project">
-  <a href='/#projects/{{project.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к проекту </a> |
-  <a href='/#projects'><span class="glyphicon glyphicon-th-list"></span> К списку проектов </a>
+<div class="actions" ng-model="task">
+  <a href='/#tasks/{{task.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к задаче </a> |
+  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> К списку задач </a>
 </div>

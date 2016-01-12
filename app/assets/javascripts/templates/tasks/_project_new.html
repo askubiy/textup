@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Добавить задачу</h1>
+  <h1>Добавить задачу для проекта {{project.title}}</h1>
 </div>
 
 <div class="row">
@@ -13,7 +13,7 @@
 
       <div class="form-group">
         <label for="project-select">Проект:</label>
-        <select class="form-control" id="project-select" ng-model="projectId"
+        <select disabled="true" class="form-control" id="project-select" ng-model="project"
           ng-options="project.title for project in projects | orderBy:'title' track by project.id" required="true">
           <option value="">--- Выберите проект ---</option>
         </select>
@@ -27,7 +27,7 @@
 
       <input ng-click="addTask()" type="submit"
         class="btn btn-success" value="Добавить">
-      <a href='/#tasks'> К списку задач </a>
+      <a href='/#/projects/{{project.id}}/show'> К списку задач проекта</a>
     </form>
   </div>
 </div>

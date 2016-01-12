@@ -41,3 +41,39 @@
     </div>
   </div>
 </div>
+
+<div>
+  <a class="btn btn-success add-customer"  href="#/projects/{{project.id}}/tasks/new">
+    <span class="glyphicon glyphicon-plus"></span> Добавить задачу
+  </a>
+</div>
+
+<div>
+  <table class="table table-hover table-vcenter">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Добавлена</th>
+        <th>Статус</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="task in project.tasks | filter:tableFilter | orderBy: 'title'">
+        <td class="col-md-2">{{task.title}}</td>
+        <td class="col-md-2">{{task.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+        <td class="col-md-2">{{task.status.name}}</td>
+        <td class="col-md-4">
+          <a href="#/tasks/{{task.id}}/show" class="btn btn-info">
+            Подробнее </a>
+          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning">
+            Редактировать </a>
+          <button class="btn btn-danger"
+            ng-click="destroyTask(task)">
+            Удалить
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

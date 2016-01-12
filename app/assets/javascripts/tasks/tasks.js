@@ -52,6 +52,30 @@ config([
         }
       })
 
+      .state('edit_task', {
+        url: '/tasks/:task_id/edit',
+        templateUrl: 'tasks/_edit.html',
+        controller: 'TasksCtrl',
+
+        resolve: {
+          tasks: ['$state', 'Auth', 'Task', '$stateParams', 'Project',
+            function($state, Auth, Task, $stateParams, Project){
+              return Auth.currentUser().then(
+                function(user){
+                  return {
+                    task: Task.get({user_id: user.id, id: $stateParams.task_id}),
+                    projects: Project.query({user_id: user.id}),
+                    user: user
+                  }
+                },
+                function(error){
+                  $state.go('welcome');
+                });
+            }
+          ]
+        }
+      })
+
       .state('new_task', {
         url: '/tasks/new',
         templateUrl: 'tasks/_new.html',

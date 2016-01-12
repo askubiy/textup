@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = current_user.projects.find(params[:id])
-    respond_with @project.to_json(:include => :customer)
+    respond_with @project.to_json(:include => [:customer, :tasks])
   end
 
   def create

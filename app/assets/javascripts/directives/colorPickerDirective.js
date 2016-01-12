@@ -7,6 +7,7 @@ angular.module('textUp')
     link: function(scope, element, attrs) {
       if (scope.customer) {
         scope.customer.$promise.then(function(customer){
+          scope.newCustomerColour = customer.colour;
           element.val(customer.colour);
           $(element).colorPicker({
             showHexField: false,
