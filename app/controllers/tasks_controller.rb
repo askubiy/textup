@@ -6,7 +6,7 @@ class TasksController < ApplicationController
 
   def show
     @task = current_user.tasks.find(params[:id])
-    respond_with @task.to_json(:include => :project)
+    respond_with @task.to_json(:include => [:project, :status])
   end
 
   def create
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   def update
     @task = current_user.tasks.find(params[:id])
     @task.update_attributes(task_params)
-    respond_with @task.to_json(:include => :project)
+    respond_with @task.to_json(:include => [:project, :status])
   end
 
   def destroy

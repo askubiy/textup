@@ -12,8 +12,16 @@
       </div>
 
       <div class="form-group">
+        <label for="status-select">Статус:</label>
+        <select class="form-control" id="status-select" ng-model="status"
+          ng-options="status.name for status in statuses | orderBy:'id' track by status.id" required="true">
+          <option value="">--- Выберите статус ---</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="project-select">Проект:</label>
-        <select class="form-control" id="project-select" ng-model="projectId"
+        <select class="form-control" id="project-select" ng-model="project"
           ng-options="project.title for project in projects | orderBy:'title' track by project.id" required="true">
           <option value="">--- Выберите проект ---</option>
         </select>

@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+statuses = Status.create([
+  { name: "Открыта" },
+  { name: "Новая" },
+  { name: "В работе" },
+  { name: "Выполнена" },
+  { name: "Отложена" },
+  { name: "Оплачена" }
+])

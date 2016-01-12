@@ -20,6 +20,10 @@
             <td class="col-md-8">{{task.title}}</td>
           </tr>
           <tr>
+            <td class="col-md-2 bg-grey">Статус</td>
+            <td class="col-md-8">{{task.status.name}}</td>
+          </tr>
+          <tr>
             <td class="col-md-2 bg-grey">Проект</td>
             <td class="col-md-8">
               <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">

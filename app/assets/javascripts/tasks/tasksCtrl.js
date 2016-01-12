@@ -10,6 +10,7 @@ angular.module('textUp')
     $scope.task = tasks.task;
     $scope.projects = tasks.projects;
     $scope.project = tasks.project;
+    $scope.statuses = tasks.statuses;
     $scope.user = tasks.user;
 
     $scope.destroyTask = function(task, redirectState) {
@@ -29,10 +30,11 @@ angular.module('textUp')
       var task = new Task({
         user_id: $scope.user.id,
         project_id: $scope.project.id,
+        status_id: $scope.status.id,
         title: $scope.newTaskTitle,
         description: $scope.newTaskDescription
       });
-      task.$save().then(function(project){
+      task.$save().then(function(task){
         $scope.newTaskTitle = '';
         $scope.newTaskDescription = '';
         $state.go('tasks');

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :tasks, :defaults => { :format => 'json' }
   end
 
+  resources :statuses, :defaults => { :format => 'json' }, only: [:index]
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
