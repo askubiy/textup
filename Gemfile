@@ -21,9 +21,11 @@ gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
 gem 'angular-ui-router-rails'
-#gem 'angularjs-rails-resource', '~> 2.0.0'
 gem 'sprockets', '2.12.3'
 gem 'responders', '~> 2.0'
+
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

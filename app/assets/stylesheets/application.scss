@@ -17,6 +17,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 
 .navbar-nav > li > a {
   cursor: pointer;
@@ -60,6 +61,16 @@ a.delete:hover {
 
 .bg-grey {
   background-color: #f4eded;
+}
+
+td.task-date-start {
+  text-align: center;
+  color: #33CC66;
+}
+
+td.task-date-finish {
+  text-align: center;
+  color: #FF3300;
 }
 
 .table-vcenter td {

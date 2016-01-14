@@ -54,6 +54,8 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap3-datetimepicker-rails (4.17.37)
+      momentjs-rails (>= 2.8.1)
     bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (8.2.1)
@@ -100,6 +102,8 @@ GEM
     mime-types (2.99)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
+    momentjs-rails (2.11.0)
+      railties (>= 3.1)
     multi_json (1.11.2)
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
@@ -209,6 +213,7 @@ DEPENDENCIES
   angular_rails_csrf
   angularjs-rails
   bootstrap-sass (~> 3.3.3)
+  bootstrap3-datetimepicker-rails (~> 4.17.37)
   bootstrap_form
   byebug
   coffee-rails (~> 4.1.0)
@@ -217,6 +222,7 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   jquery-rails
+  momentjs-rails (>= 2.9.0)
   pg
   rails (= 4.2.0)
   rails_12factor

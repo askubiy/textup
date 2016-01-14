@@ -11,6 +11,34 @@
           id="name" ng-model="task.title" placeholder="Имя задачи">
       </div>
 
+      <div class="form-group has-feedback">
+        <label for="start-date">Дата начала:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="start-date" ng-model="task.started_at" placeholder="Дата начала"
+          ng-if="task.started_at"
+          date-time-picker>
+        <i class="form-control-feedback glyphicon
+          glyphicon-calendar pull-left"></i>
+      </div>
+
+      <div class="form-group has-feedback">
+        <label for="start-date">Планируемая дата завершения (deadline):</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="start-date" ng-model="task.estimated_finish" placeholder="Дата завершения"
+          ng-if="task.estimated_finish"
+          date-time-picker>
+        <i class="form-control-feedback glyphicon
+          glyphicon-calendar pull-left"></i>
+      </div>
+
+      <div class="form-group">
+        <label for="status-select">Статус:</label>
+        <select class="form-control" id="status-select" ng-model="task.status"
+          ng-options="status.name for status in statuses | orderBy:'id' track by status.id" required="true">
+          <option value="">--- Выберите статус ---</option>
+        </select>
+      </div>
+
       <div class="form-group">
         <label for="project-select">Проект:</label>
         <select class="form-control" id="project-select" ng-model="task.project"

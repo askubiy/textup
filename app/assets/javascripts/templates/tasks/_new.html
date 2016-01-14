@@ -8,7 +8,25 @@
       <div class="form-group">
         <label for="title">Имя задачи:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newTaskTitle" placeholder="Имя задачи">
+          id="title" ng-model="newTaskTitle" placeholder="Имя задачи">
+      </div>
+
+      <div class="form-group has-feedback">
+        <label for="start-date">Дата начала:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="start-date" ng-model="startDateTime" placeholder="Дата начала"
+          date-time-picker>
+        <i class="form-control-feedback glyphicon
+          glyphicon-calendar pull-left"></i>
+      </div>
+
+      <div class="form-group has-feedback">
+        <label for="start-date">Планируемая дата завершения (deadline):</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="start-date" ng-model="estimatedFinishDateTime" placeholder="Дата завершения"
+          date-time-picker>
+        <i class="form-control-feedback glyphicon
+          glyphicon-calendar pull-left"></i>
       </div>
 
       <div class="form-group">

@@ -58,13 +58,15 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task', '$stateParams', 'Project',
-            function($state, Auth, Task, $stateParams, Project){
+          tasks: ['$state', 'Auth', 'Task',
+            '$stateParams', 'Project', 'Status',
+            function($state, Auth, Task, $stateParams, Project, Status){
               return Auth.currentUser().then(
                 function(user){
                   return {
                     task: Task.get({user_id: user.id, id: $stateParams.task_id}),
                     projects: Project.query({user_id: user.id}),
+                    statuses: Status.query(),
                     user: user
                   }
                 },

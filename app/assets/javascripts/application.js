@@ -19,9 +19,8 @@
 //= require_tree ./templates
 //= require angular-ui-router
 //= require angular-resource.min
+//= require moment
+//= require bootstrap-datetimepicker
+//= require moment/ru
 //= require_tree .
 //= require_self
-
-jQuery(document).ready(function($) {
-  $('#color-picker').colorPicker();
-})
