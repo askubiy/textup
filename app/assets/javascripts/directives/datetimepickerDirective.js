@@ -12,10 +12,10 @@ angular.module('textUp')
             pick12HourFormat: scope.pick12HourFormat,
             locale: 'ru',
             allowInputToggle: true,
-            useCurrent: false,
+            useCurrent: true,
             //keepInvalid: true,
-            extraFormats: ["YYYY-MM-DDTHH:mm:ss.SSSZ"]
-            //defaultDate: moment()
+            extraFormats: ["YYYY-MM-DDTHH:mm:ss.SSSZ"],
+            defaultDate: moment()
           }).on('dp.change', function(event) {
             scope.$apply(function() {
               ngModel.$setViewValue(event.date);
