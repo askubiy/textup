@@ -15,6 +15,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.colorPicker.min
+//= require angular-ui-bootstrap-tpls
+//= require angular-bootstrap-calendar-tpls
 //= require angular-rails-templates
 //= require_tree ./templates
 //= require angular-ui-router

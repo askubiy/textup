@@ -1,5 +1,7 @@
-angular.module('textUp', [
+var app = angular.module('textUp', [
   'ui.router',
+  'ui.bootstrap',
+  'mwl.calendar',
   'templates',
   'Devise',
   'ngResource',
@@ -42,3 +44,5 @@ angular.module('textUp', [
 
   $urlRouterProvider.otherwise('welcome');
 }])
+
+app.constant("moment", moment);

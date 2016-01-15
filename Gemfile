@@ -39,6 +39,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Bootstrap
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'bootstrap_form'
+gem 'angular-ui-bootstrap-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
