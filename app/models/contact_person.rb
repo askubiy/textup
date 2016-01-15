@@ -6,6 +6,7 @@ class ContactPerson < ActiveRecord::Base
     name = first_name
     name += " #{middle_name}" if middle_name
     name += " #{last_name}" if last_name
+    name
   end
 
   def as_json(options={})
