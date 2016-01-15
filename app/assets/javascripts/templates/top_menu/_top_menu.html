@@ -1,0 +1,12 @@
+<div class="navbar-collapse pull-right top-menu" ng-controller="NavCtrl">
+  <ul class="nav navbar-nav">
+    <li ng-show="signedIn()"><a href="#/customers" class="list-group-item list-group-item-info">
+      <span class="glyphicon glyphicon-th-large"></span> Заказчики</a></li>
+    <li ng-show="signedIn()"><a href="#/projects" class="list-group-item list-group-item-danger">
+      <span class="glyphicon glyphicon-log-in"></span> Проекты</a></li>
+    <li ng-show="signedIn()"><a href="#/tasks" class="list-group-item list-group-item-warning">
+      <span class="glyphicon glyphicon-th-list"></span> Задачи</a></li>
+    <li ng-show="signedIn()"><a href="#/contact_people" class="list-group-item list-group-item-success">
+      <span class="glyphicon glyphicon-user"></span> Контакты</a></li>
+  </ul>
+</div>

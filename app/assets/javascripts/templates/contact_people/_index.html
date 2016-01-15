@@ -39,7 +39,7 @@
           </a>
         </td>
         <td class="col-md-2">{{person.position}}</td>
-        <td class="col-md-1">{{person.email}}</td>
+        <td class="col-md-2">{{person.email}}</td>
         <td class="col-md-1">{{person.phone}}</td>
         <td class="col-md-1">
           <a ng-show="person.customer" href="/#customers/{{person.customer ? person.customer.id : '' }}/show">
@@ -47,7 +47,7 @@
             {{person.customer ? person.customer.name : '' }}
           </a>
         </td>
-        <td class="col-md-2">
+        <td class="col-md-3">
           <a href="#/contact_people/{{person.id}}/edit" class="btn btn-warning">
             Редактировать </a>
           <button class="btn btn-danger"
