@@ -11,12 +11,14 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :customers, :defaults => { :format => 'json' } do
+      resources :contact_people, :defaults => { :format => 'json' }
       resources :projects, :defaults => { :format => 'json' } do
         resources :tasks, :defaults => { :format => 'json' }
       end
     end
     resources :projects, :defaults => { :format => 'json' }
     resources :tasks, :defaults => { :format => 'json' }
+    resources :contact_people, :defaults => { :format => 'json' }
   end
 
   resources :statuses, :defaults => { :format => 'json' }, only: [:index]

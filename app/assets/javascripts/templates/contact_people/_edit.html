@@ -1,0 +1,77 @@
+<div class="page-header">
+  <h1>Редактировать контакт</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="first-name">Имя:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="first-name" ng-model="contact_person.first_name" placeholder="Имя">
+      </div>
+
+      <div class="form-group">
+        <label for="middle-name">Отчество:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="middle-name" ng-model="contact_person.middle_name" placeholder="Отчество">
+      </div>
+
+      <div class="form-group">
+        <label for="last-name">Фамилия:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="last-name" ng-model="contact_person.last_name" placeholder="Фамилия">
+      </div>
+
+      <div class="form-group">
+        <label for="customer-select">Компания:</label>
+        <select class="form-control" id="customer-select" ng-model="contact_person.customer"
+          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
+          <option value="">--- Выберите компанию ---</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="position">Должность:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="position" ng-model="contact_person.position" placeholder="Должность">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="email" ng-model="contact_person.email" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Телефон:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="phone" ng-model="contact_person.phone" placeholder="Телефон">
+      </div>
+
+      <div class="form-group">
+        <label for="phone2">Телефон 2:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="phone2" ng-model="contact_person.phone2" placeholder="Телефон 2">
+      </div>
+
+      <div class="form-group">
+        <label for="im">IM:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="im" ng-model="contact_person.im" placeholder="IM">
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Коментарий:</label>
+        <textarea class="form-control" ng-model="contact_person.comment"
+          rows="5" id="comment" placeholder="Коментарий"></textarea>
+      </div>
+      <input ng-click="updateContact()" type="submit" class="btn btn-success" value="Сохранить">
+    </form>
+  </div>
+</div>
+
+<div class="actions" ng-model="contact_person">
+  <a href='/#contact_people/{{contact_person.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к контакту </a> |
+  <a href='/#contact_people'><span class="glyphicon glyphicon-th-list"></span> К списку контактов </a>
+</div>

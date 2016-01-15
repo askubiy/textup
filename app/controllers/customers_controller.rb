@@ -17,7 +17,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = current_user.customers.find(params[:id])
-    respond_with @customer.to_json(:include => :projects), location: user_customer_url(current_user, @customer)
+    respond_with @customer.to_json(:include => [:projects, :contact_people => {:methods => [:name]}]), location: user_customer_url(current_user, @customer)
   end
 
   def destroy

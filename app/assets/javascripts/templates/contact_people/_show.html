@@ -1,0 +1,66 @@
+<div class="page-header">
+  <h1>Контактное лицо</h1>
+</div>
+
+<div class="actions" ng-model="contact_person">
+  <a href='/#contact_people'><span class="glyphicon glyphicon-th-list">
+    </span> К списку контактов </a> |
+  <a href='/#contact_people/{{contact_person.id}}/edit'>
+    <span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
+  <a class='delete' ng-click="destroyContact(contact_person, 'contact_people')">
+    <span class="glyphicon glyphicon-remove"></span> Удалить </a>
+</div>
+
+<div ng-model="contact_person">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table table-stripped table-bordered table-vcenter">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-md-2 bg-grey">Имя</td>
+            <td class="col-md-8">{{contact_person.name}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Должность</td>
+            <td class="col-md-8">{{contact_person.position}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Заказчик</td>
+            <td class="col-md-8">
+              <a ng-show="contact_person.customer" href="/#customers/{{contact_person.customer ? contact_person.customer.id : '' }}/show">
+                <span class="glyphicon glyphicon-stop" style="color: {{contact_person.customer.colour}}"></span>
+                  {{contact_person.customer ? contact_person.customer.name : '' }}
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Email</td>
+            <td class="col-md-8">{{contact_person.email}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Телефон</td>
+            <td class="col-md-8">{{contact_person.phone}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Телефон 2</td>
+            <td class="col-md-8">{{contact_person.phone2}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">IM</td>
+            <td class="col-md-8">{{contact_person.im}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Добавлен</td>
+            <td class="col-md-8">{{contact_person.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+          </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">Коментарий</td>
+            <td class="col-md-8">{{contact_person.comment}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

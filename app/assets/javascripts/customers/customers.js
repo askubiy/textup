@@ -86,7 +86,32 @@ config([
               return Auth.currentUser().then(
                 function(user){
                   return {
-                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id})
+                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
+                    user: user
+                  }
+                },
+                function(error){
+                  $state.go('welcome');
+                });
+            }
+          ]
+        }
+      })
+
+      .state('new_customer_contact_person', {
+        url: '/customers/:customer_id/contact_people/new',
+        templateUrl: 'contact_people/_customer_new.html',
+        controller: 'ContactsCtrl',
+
+        resolve: {
+          contact_people: ['$state', 'Auth', 'ContactPerson', 'Customer', '$stateParams',
+            function($state, Auth, ContactPerson, Customer, $stateParams){
+              return Auth.currentUser().then(
+                function(user){
+                  return {
+                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
+                    customers: Customer.query({user_id: user.id}),
+                    user: user
                   }
                 },
                 function(error){

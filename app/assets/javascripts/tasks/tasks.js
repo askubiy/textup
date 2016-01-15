@@ -39,7 +39,6 @@ config([
               return Auth.currentUser().then(
                 function(user){
                   return {
-                    tasks: Task.query({user_id: user.id}),
                     task: Task.get({user_id: user.id, id: $stateParams.task_id}),
                     user: user
                   }

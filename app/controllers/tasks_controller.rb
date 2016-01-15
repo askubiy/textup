@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+
   def index
     @tasks = current_user.tasks.all
     respond_with @tasks.to_json(:include => [:project, :status])

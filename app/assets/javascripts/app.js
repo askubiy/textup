@@ -8,6 +8,7 @@ angular.module('textUp', [
   'textUp.customers',
   'textUp.projects',
   'textUp.tasks',
+  'textUp.contact_people'
 ])
 .config([
   '$stateProvider',

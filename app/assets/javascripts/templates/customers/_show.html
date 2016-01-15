@@ -30,6 +30,18 @@
             <td class="col-md-2 bg-grey">Краткое описание</td>
             <td class="col-md-8">{{customer.description}}</td>
           </tr>
+          <tr>
+            <td class="col-md-2 bg-grey">
+              Контактные лица <br />
+              <a href="#/customers/{{customer.id}}/contact_people/new">Добавить</a>
+            </td>
+            <td class="col-md-8">
+              <span ng-repeat="person in customer.contact_people | orderBy: 'name'">
+                <a href="#/contact_people/{{person.id}}/show">
+                  {{person.name}}</a>{{$last ? '' : ', '}}
+              </span>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -55,11 +67,11 @@
     </thead>
     <tbody>
       <tr ng-repeat="project in customer.projects | orderBy: 'title'">
-        <td class="col-md-3">{{project.title}}</td>
+        <td class="col-md-3">
+          <a href="#/projects/{{project.id}}/show">{{project.title}}</a>
+        </td>
         <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
         <td class="col-md-4">
-          <a href="#/projects/{{project.id}}/show" class="btn btn-info">
-            Подробнее </a>
           <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
             Редактировать </a>
           <button class="btn btn-danger"

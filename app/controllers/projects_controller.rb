@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   def index
     @projects = current_user.projects.all
     respond_with @projects.to_json(:include => :customer)
