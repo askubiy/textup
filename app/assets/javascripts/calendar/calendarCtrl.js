@@ -25,35 +25,12 @@ angular.module('textUp')
     vm.calendarView = 'month';
     vm.viewDate = new Date();
 
-    $scope.$watch("calendarEvents.events", function(){
-      console.log($scope.calendarEvents.formatEvents());
-    });
-
     vm.events = $scope.calendarEvents.formatEvents();
 
     vm.isCellOpen = false;
 
     vm.eventClicked = function(event) {
       $state.go("show_task", { task_id: event.id });
-      //alert.show('Clicked', event);
-    };
-
-    vm.eventEdited = function(event) {
-      alert.show('Edited', event);
-    };
-
-    vm.eventDeleted = function(event) {
-      alert.show('Deleted', event);
-    };
-
-    vm.eventTimesChanged = function(event) {
-      alert.show('Dropped or resized', event);
-    };
-
-    vm.toggle = function($event, field, event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-      event[field] = !event[field];
     };
   }
 ])

@@ -19,10 +19,9 @@ angular.module('textUp')
         Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
           $scope.customers.splice($scope.customers.indexOf(customer), 1);
         });
-      };
-
-      if (redirectState) {
-        $state.go(redirectState);
+        if (redirectState) {
+          $state.go(redirectState);
+        };
       };
     };
 

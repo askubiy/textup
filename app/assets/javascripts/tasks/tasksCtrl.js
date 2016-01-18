@@ -24,10 +24,10 @@ angular.module('textUp')
         Task.remove({user_id: $scope.user.id, id: task.id}, function() {
           $scope.tasks.splice($scope.tasks.indexOf(task), 1);
         });
-      };
 
-      if (redirectState) {
-        $state.go(redirectState);
+        if (redirectState) {
+          $state.go(redirectState);
+        };
       };
     };
 
