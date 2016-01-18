@@ -11,18 +11,25 @@ config([
         controller: 'CustomersCtrl',
 
         resolve: {
-          customers: ['$state', 'Auth', 'Customer',
-            function($state, Auth, Customer){
-              return Auth.currentUser().then(
+          customers: ['$state', 'Auth', 'Customer', '$q',
+            function($state, Auth, Customer, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      deferred.resolve({
+                        customers: customers,
+                        user: user
+                      });
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }
@@ -34,18 +41,25 @@ config([
         controller: 'CustomersCtrl',
 
         resolve: {
-          customers: ['$state', 'Auth', 'Customer',
-            function($state, Auth, Customer){
-              return Auth.currentUser().then(
+          customers: ['$state', 'Auth', 'Customer', '$q',
+            function($state, Auth, Customer, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      deferred.resolve({
+                        customers: customers,
+                        user: user
+                      });
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }
@@ -57,19 +71,30 @@ config([
         controller: 'CustomersCtrl',
 
         resolve: {
-          customers: ['$state', 'Auth', 'Customer', '$stateParams',
-            function($state, Auth, Customer, $stateParams){
-              return Auth.currentUser().then(
+          customers: ['$state', 'Auth', 'Customer', '$stateParams', '$q',
+            function($state, Auth, Customer, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customers: Customer.query({user_id: user.id}),
-                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      Customer.get({user_id: user.id, id: $stateParams.customer_id}).$promise.then(
+                        function(customer){
+                          deferred.resolve({
+                            customers: customers,
+                            customer: customer,
+                            user: user
+                          });
+                        }
+                      )
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }
@@ -81,18 +106,25 @@ config([
         controller: 'CustomersCtrl',
 
         resolve: {
-          customers: ['$state', 'Auth', 'Customer', '$stateParams',
-            function($state, Auth, Customer, $stateParams){
-              return Auth.currentUser().then(
+          customers: ['$state', 'Auth', 'Customer', '$stateParams', '$q',
+            function($state, Auth, Customer, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
-                    user: user
-                  }
+                  Customer.get({user_id: user.id, id: $stateParams.customer_id}).$promise.then(
+                    function(customer){
+                      deferred.resolve({
+                        customer: customer,
+                        user: user
+                      });
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }
@@ -104,19 +136,30 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'ContactPerson', 'Customer', '$stateParams',
-            function($state, Auth, ContactPerson, Customer, $stateParams){
-              return Auth.currentUser().then(
+          contact_people: ['$state', 'Auth', 'Customer', '$stateParams', '$q',
+            function($state, Auth, Customer, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      Customer.get({user_id: user.id, id: $stateParams.customer_id}).$promise.then(
+                        function(customer){
+                          deferred.resolve({
+                            customers: customers,
+                            customer: customer,
+                            user: user
+                          });
+                        }
+                      )
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }
@@ -128,19 +171,30 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project', 'Customer', '$stateParams',
-            function($state, Auth, Project, Customer, $stateParams){
-              return Auth.currentUser().then(
+          projects: ['$state', 'Auth', 'Customer', '$stateParams', '$q',
+            function($state, Auth, Customer, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customer: Customer.get({user_id: user.id, id: $stateParams.customer_id}),
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      Customer.get({user_id: user.id, id: $stateParams.customer_id}).$promise.then(
+                        function(customer){
+                          deferred.resolve({
+                            customers: customers,
+                            customer: customer,
+                            user: user
+                          });
+                        }
+                      )
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+              return deferred.promise;
             }
           ]
         }

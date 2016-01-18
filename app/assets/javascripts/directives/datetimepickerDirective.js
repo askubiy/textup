@@ -21,7 +21,6 @@ angular.module('textUp')
             extraFormats: ["YYYY-MM-DDTHH:mm:ss.SSSZ"],
             defaultDate: moment()
           }).on('dp.change', function(event) {
-            console.log('dp.change');
             scope.$apply(function() {
               ngModel.$setViewValue(event.date);
             });
