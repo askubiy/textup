@@ -7,6 +7,16 @@
   <%= javascript_include_tag 'application' %>
 </head>
 <body ng-cloak ng-app="textUp">
+  <growl-notifications></growl-notifications>
+
+  <div ng-controller="NotificationsCtrl">
+    <div ng-repeat="notification in notifications">
+      <growl-notification class="fading" ng-class="notification.type">
+        {{notification.message}}
+      </growl-notification>
+    </div>
+  </div>
+
   <div class="container-fluid">
     <div class="col-md-4">
     </div>

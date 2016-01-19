@@ -3,6 +3,8 @@ var app = angular.module('textUp', [
   'ui.bootstrap',
   'mwl.calendar',
   'templates',
+  'growlNotifications',
+  'ngAnimate',
   'Devise',
   'ngResource',
   'textUp.home',

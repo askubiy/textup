@@ -21,6 +21,8 @@
 //= require_tree ./templates
 //= require angular-ui-router
 //= require angular-resource.min
+//= require angular-growl-notifications
+//= require angular-animate
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/ru

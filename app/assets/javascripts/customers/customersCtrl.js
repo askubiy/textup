@@ -6,8 +6,9 @@ angular.module('textUp')
   'Project',
   'Customer',
   'customers',
+  'notifications',
 
-  function($scope, $state, $timeout, Project, Customer, customers){
+  function($scope, $state, $timeout, Project, Customer, customers, notifications){
     $scope.customers = customers.customers;
     $scope.customer = customers.customer;
     $scope.newCustomerColour = "#FFFFFF";
@@ -19,6 +20,10 @@ angular.module('textUp')
         Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
           $scope.customers.splice($scope.customers.indexOf(customer), 1);
         });
+
+        var message = "Заказчик '" + customer.name + "' удалён успешно";
+        notifications.addNotification(message, "alert-success");
+
         if (redirectState) {
           $state.go(redirectState);
         };
@@ -31,6 +36,9 @@ angular.module('textUp')
           $scope.customer.projects.splice($scope.customer.projects.indexOf(project), 1);
         });
       };
+
+      var message = "Проект '" + project.title + "' удалён успешно";
+      notifications.addNotification(message, "alert-success");
 
       if (goBack) {
         history.back();
@@ -48,6 +56,10 @@ angular.module('textUp')
       customer.$save().then(function(customer){
         $scope.newCustomerName = '';
         $scope.newCustomerDescription = '';
+
+        var message = "Заказчик '" + customer.name + "' добавлен";
+        notifications.addNotification(message, "alert-success");
+
         $state.go('show_customer', {customer_id: customer.id});
       });
     };
@@ -56,6 +68,10 @@ angular.module('textUp')
       if($scope.customer.name === '') { return; };
       $scope.customer.colour = $scope.newCustomerColour;
       Customer.update({ id: $scope.customer.id }, $scope.customer);
+
+      var message = "Заказчик '" + $scope.customer.name + "' обновлён";
+      notifications.addNotification(message, "alert-success");
+
       $state.go('show_customer', {customer_id: $scope.customer.id});
     };
 

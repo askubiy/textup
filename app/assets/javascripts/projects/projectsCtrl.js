@@ -5,8 +5,9 @@ angular.module('textUp')
   'Project',
   'Task',
   'projects',
+  'notifications',
 
-  function($scope, $state, Project, Task, projects){
+  function($scope, $state, Project, Task, projects, notifications){
     $scope.projects = projects.projects;
     $scope.project = projects.project;
     $scope.customers = projects.customers;
@@ -23,6 +24,9 @@ angular.module('textUp')
         });
       };
 
+      var message = "Проект '" + project.title + "' удалён успешно";
+      notifications.addNotification(message, "alert-success");
+
       if (redirectState) {
         $state.go(redirectState);
       };
@@ -37,6 +41,10 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
+
+        var message = "Проект '" + project.title + "' добавлен";
+        notifications.addNotification(message, "alert-success");
+
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('projects');
@@ -52,6 +60,10 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
+
+        var message = "Проект '" + project.title + "' добавлен";
+        notifications.addNotification(message, "alert-success");
+
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('show_customer', { customer_id: $scope.customer.id });
@@ -62,6 +74,10 @@ angular.module('textUp')
       if (confirm('Вы уверены что хотите удалить эту задачу?')) {
         Task.remove({user_id: $scope.user.id, id: task.id}, function() {
           $scope.project.tasks.splice($scope.project.tasks.indexOf(task), 1);
+
+          var message = "Задача '" + task.title + "' удалена";
+          notifications.addNotification(message, "alert-success");
+
         });
       };
 
@@ -74,6 +90,10 @@ angular.module('textUp')
       if($scope.project.title === '') { return; };
       $scope.project.customer_id = $scope.project.customer.id;
       Project.update({ id: $scope.project.id }, $scope.project);
+
+      var message = "Проект '" + $scope.project.title + "' обновлён";
+      notifications.addNotification(message, "alert-success");
+
       $state.go('show_project', { project_id: $scope.project.id });
     };
 
