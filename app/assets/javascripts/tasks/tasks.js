@@ -11,18 +11,26 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task',
-            function($state, Auth, Task){
-              return Auth.currentUser().then(
+          tasks: ['$state', 'Auth', 'Task', '$q',
+            function($state, Auth, Task, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    tasks: Task.query({user_id: user.id}),
-                    user: user
-                  }
+                  Task.query({user_id: user.id}).$promise.then(
+                    function(tasks){
+                      deferred.resolve({
+                        tasks: tasks,
+                        user: user
+                      });
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -34,19 +42,31 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task', '$stateParams',
-            function($state, Auth, Task, $stateParams){
-              return Auth.currentUser().then(
+          tasks: ['$state', 'Auth', 'Task', '$stateParams', '$q',
+            function($state, Auth, Task, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    tasks: Task.query({user_id: user.id}),
-                    task: Task.get({user_id: user.id, id: $stateParams.task_id}),
-                    user: user
-                  }
+                  Task.query({user_id: user.id}).$promise.then(
+                    function(tasks){
+                      Task.get({user_id: user.id, id: $stateParams.task_id }).$promise.then(
+                        function(task){
+                          deferred.resolve({
+                            tasks: tasks,
+                            task: task,
+                            user: user
+                          });
+                        }
+                      )
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -59,20 +79,36 @@ config([
 
         resolve: {
           tasks: ['$state', 'Auth', 'Task',
-            '$stateParams', 'Project', 'Status',
-            function($state, Auth, Task, $stateParams, Project, Status){
-              return Auth.currentUser().then(
+            '$stateParams', 'Project', 'Status', '$q',
+            function($state, Auth, Task, $stateParams, Project, Status, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    task: Task.get({user_id: user.id, id: $stateParams.task_id}),
-                    projects: Project.query({user_id: user.id}),
-                    statuses: Status.query(),
-                    user: user
-                  }
+                  Task.get({user_id: user.id, id: $stateParams.task_id}).$promise.then(
+                    function(task){
+                      Project.query({user_id: user.id}).$promise.then(
+                        function(projects){
+                          Status.query().$promise.then(
+                            function(statuses){
+                              deferred.resolve({
+                                task: task,
+                                projects: projects,
+                                statuses: statuses,
+                                user: user
+                              });
+                            }
+                          );
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -84,20 +120,36 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task', 'Project', 'Status',
-            function($state, Auth, Task, Project, Status){
-              return Auth.currentUser().then(
+          tasks: ['$state', 'Auth', 'Task', 'Project', 'Status', '$q',
+            function($state, Auth, Task, Project, Status, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    tasks: Task.query({user_id: user.id}),
-                    projects: Project.query({user_id: user.id}),
-                    statuses: Status.query(),
-                    user: user
-                  }
+                  Task.query({user_id: user.id}).$promise.then(
+                    function(tasks){
+                      Project.query({user_id: user.id}).$promise.then(
+                        function(projects){
+                          Status.query().$promise.then(
+                            function(statuses){
+                              deferred.resolve({
+                                tasks: tasks,
+                                projects: projects,
+                                statuses: statuses,
+                                user: user
+                              });
+                            }
+                          );
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }

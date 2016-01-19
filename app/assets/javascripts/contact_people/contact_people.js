@@ -11,18 +11,26 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'ContactPerson',
-            function($state, Auth, ContactPerson){
-              return Auth.currentUser().then(
+          contact_people: ['$state', 'Auth', 'ContactPerson', '$q',
+            function($state, Auth, ContactPerson, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    contact_people: ContactPerson.query({user_id: user.id}),
-                    user: user
-                  }
+                  ContactPerson.query({user_id: user.id}).$promise.then(
+                    function(contact_people){
+                      deferred.resolve({
+                        contact_people: contact_people,
+                        user: user
+                      });
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -34,18 +42,26 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'Customer', 'ContactPerson',
-            function($state, Auth, Customer, ContactPerson){
-              return Auth.currentUser().then(
+          contact_people: ['$state', 'Auth', 'Customer', 'ContactPerson', '$q',
+            function($state, Auth, Customer, ContactPerson, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      deferred.resolve({
+                        customers: customers,
+                        user: user
+                      });
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -57,18 +73,30 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'ContactPerson', '$stateParams', 'Customer',
-            function($state, Auth, ContactPerson, $stateParams, Customer){
-              return Auth.currentUser().then(
+          contact_people: ['$state', 'Auth', 'ContactPerson', '$stateParams', 'Customer', '$q',
+            function($state, Auth, ContactPerson, $stateParams, Customer, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    contact_person: ContactPerson.get({user_id: user.id, id: $stateParams.contact_person_id}),
-                    customers: Customer.query({user_id: user.id})
-                  }
+                  ContactPerson.get({user_id: user.id, id: $stateParams.contact_person_id}).$promise.then(
+                    function(contact_person){
+                      Customer.query({user_id: user.id}).$promise.then(
+                        function(customers){
+                          deferred.resolve({
+                            customers: customers,
+                            contact_person: contact_person
+                          });
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -80,19 +108,31 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'ContactPerson', '$stateParams',
-            function($state, Auth, ContactPerson, $stateParams){
-              return Auth.currentUser().then(
+          contact_people: ['$state', 'Auth', 'ContactPerson', '$stateParams', '$q',
+            function($state, Auth, ContactPerson, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    contact_people: ContactPerson.query({user_id: user.id}),
-                    contact_person: ContactPerson.get({user_id: user.id, id: $stateParams.contact_person_id}),
-                    user: user
-                  }
+                  ContactPerson.query({user_id: user.id}).$promise.then(
+                    function(contact_people){
+                      ContactPerson.get({user_id: user.id, id: $stateParams.contact_person_id}).$promise.then(
+                        function(contact_person){
+                          deferred.resolve({
+                            contact_people: contact_people,
+                            contact_person: contact_person,
+                            user: user
+                          });
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }

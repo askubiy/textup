@@ -11,18 +11,26 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project',
-            function($state, Auth, Project){
-              return Auth.currentUser().then(
+          projects: ['$state', 'Auth', 'Project', '$q',
+            function($state, Auth, Project, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    projects: Project.query({user_id: user.id}),
-                    user: user
-                  }
+                  Project.query({user_id: user.id}).$promise.then(
+                    function(projects){
+                      deferred.resolve({
+                        projects: projects,
+                        user: user
+                      });
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -34,19 +42,31 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project', 'Customer',
-            function($state, Auth, Project, Customer){
-              return Auth.currentUser().then(
+          projects: ['$state', 'Auth', 'Project', 'Customer', '$q',
+            function($state, Auth, Project, Customer, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    projects: Project.query({user_id: user.id}),
-                    customers: Customer.query({user_id: user.id}),
-                    user: user
-                  }
+                  Project.query({user_id: user.id}).$promise.then(
+                    function(projects) {
+                      Customer.query({user_id: user.id}).$promise.then(
+                        function(customers){
+                          deferred.resolve({
+                            projects: projects,
+                            customers: customers,
+                            user: user
+                          });
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -58,19 +78,31 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project', '$stateParams',
-            function($state, Auth, Project, $stateParams){
-              return Auth.currentUser().then(
+          projects: ['$state', 'Auth', 'Project', '$stateParams', '$q',
+            function($state, Auth, Project, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    projects: Project.query({user_id: user.id}),
-                    project: Project.get({user_id: user.id, id: $stateParams.project_id}),
-                    user: user
-                  }
+                  Project.query({user_id: user.id}).$promise.then(
+                    function(projects) {
+                      Project.get({user_id: user.id, id: $stateParams.project_id }).$promise.then(
+                        function(project){
+                          deferred.resolve({
+                            projects: projects,
+                            project: project,
+                            user: user
+                          });
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -82,20 +114,36 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Project', '$stateParams', 'Status',
-            function($state, Auth, Project, $stateParams, Status){
-              return Auth.currentUser().then(
+          tasks: ['$state', 'Auth', 'Project', '$stateParams', 'Status', '$q',
+            function($state, Auth, Project, $stateParams, Status, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    project: Project.get({user_id: user.id, id: $stateParams.project_id}),
-                    projects: Project.query({user_id: user.id}),
-                    statuses: Status.query(),
-                    user: user
-                  }
+                  Project.query({user_id: user.id}).$promise.then(
+                    function(projects){
+                      Project.get({user_id: user.id, id: $stateParams.project_id }).$promise.then(
+                        function(project){
+                          Status.query().$promise.then(
+                            function(statuses){
+                              deferred.resolve({
+                                projects: projects,
+                                project: project,
+                                statuses: statuses,
+                                user: user
+                              });
+                            }
+                          )
+                        }
+                      )
+                    }
+                  )
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
@@ -107,18 +155,31 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project', '$stateParams', 'Customer',
-            function($state, Auth, Project, $stateParams, Customer){
-              return Auth.currentUser().then(
+          projects: ['$state', 'Auth', 'Project', 'Customer', '$stateParams', '$q',
+            function($state, Auth, Project, Customer, $stateParams, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
                 function(user){
-                  return {
-                    project: Project.get({user_id: user.id, id: $stateParams.project_id}),
-                    customers: Customer.query({user_id: user.id})
-                  }
+                  Project.get({user_id: user.id, id: $stateParams.project_id}).$promise.then(
+                    function(project) {
+                      Customer.query({user_id: user.id}).$promise.then(
+                        function(customers){
+                          deferred.resolve({
+                            project: project,
+                            customers: customers,
+                            user: user
+                          });
+                        }
+                      );
+                    }
+                  );
                 },
                 function(error){
                   $state.go('welcome');
-                });
+                }
+              );
+
+              return deferred.promise;
             }
           ]
         }
