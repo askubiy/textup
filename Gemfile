@@ -1,9 +1,7 @@
-source 'https://rails-assets.org' do
-  gem 'rails-assets-angular-animate'
-end
-
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
+gem 'rails-assets-angular-animate'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Ruby version for Heroku
