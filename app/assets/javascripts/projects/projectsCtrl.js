@@ -21,14 +21,12 @@ angular.module('textUp')
       if (confirm('Вы уверены что хотите удалить этот проект?')) {
         Project.remove({user_id: $scope.user.id, id: project.id}, function() {
           $scope.projects.splice($scope.projects.indexOf(project), 1);
+          var message = "Проект '" + project.title + "' удалён успешно";
+          notifications.addNotification(message, "success");
+          if (redirectState) {
+            $state.go(redirectState);
+          };
         });
-      };
-
-      var message = "Проект '" + project.title + "' удалён успешно";
-      notifications.addNotification(message, "alert-success");
-
-      if (redirectState) {
-        $state.go(redirectState);
       };
     };
 
@@ -41,10 +39,8 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
-
         var message = "Проект '" + project.title + "' добавлен";
-        notifications.addNotification(message, "alert-success");
-
+        notifications.addNotification(message, "success");
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('projects');
@@ -60,10 +56,8 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
-
         var message = "Проект '" + project.title + "' добавлен";
-        notifications.addNotification(message, "alert-success");
-
+        notifications.addNotification(message, "success");
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('show_customer', { customer_id: $scope.customer.id });
@@ -74,10 +68,8 @@ angular.module('textUp')
       if (confirm('Вы уверены что хотите удалить эту задачу?')) {
         Task.remove({user_id: $scope.user.id, id: task.id}, function() {
           $scope.project.tasks.splice($scope.project.tasks.indexOf(task), 1);
-
           var message = "Задача '" + task.title + "' удалена";
-          notifications.addNotification(message, "alert-success");
-
+          notifications.addNotification(message, "success");
         });
       };
 
@@ -89,12 +81,14 @@ angular.module('textUp')
     $scope.updateProject = function() {
       if($scope.project.title === '') { return; };
       $scope.project.customer_id = $scope.project.customer.id;
-      Project.update({ id: $scope.project.id }, $scope.project);
-
-      var message = "Проект '" + $scope.project.title + "' обновлён";
-      notifications.addNotification(message, "alert-success");
-
-      $state.go('show_project', { project_id: $scope.project.id });
+      Project.update({ id: $scope.project.id }, $scope.project)
+        .$promise.then(
+          function(project){
+            var message = "Проект '" + project.title + "' обновлён";
+            notifications.addNotification(message, "success");
+            $state.go('show_project', { project_id: project.id });
+          }
+        );
     };
 
   }

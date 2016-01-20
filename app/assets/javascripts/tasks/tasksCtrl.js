@@ -4,8 +4,9 @@ angular.module('textUp')
   '$state',
   'Task',
   'tasks',
+  'notifications',
 
-  function($scope, $state, Task, tasks){
+  function($scope, $state, Task, tasks, notifications){
     $scope.tasks = tasks.tasks;
     $scope.task = tasks.task;
     $scope.projects = tasks.projects;
@@ -23,11 +24,12 @@ angular.module('textUp')
       if (confirm('Вы уверены что хотите удалить эту задачу?')) {
         Task.remove({user_id: $scope.user.id, id: task.id}, function() {
           $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+          var message = "Задача '" + task.title + "' удалёна успешно";
+          notifications.addNotification(message, "success");
+          if (redirectState) {
+            $state.go(redirectState);
+          };
         });
-
-        if (redirectState) {
-          $state.go(redirectState);
-        };
       };
     };
 
@@ -47,6 +49,8 @@ angular.module('textUp')
         $scope.newTaskDescription = '';
         $scope.startDateTime = undefined;
         $scope.estimatedFinishDateTime = undefined;
+        var message = "Задача '" + task.title + "' добавлена";
+        notifications.addNotification(message, "success");
         if (redirectState) {
           $state.go(redirectState);
         } else {
@@ -63,8 +67,14 @@ angular.module('textUp')
       if($scope.task.title === '') { return; };
       $scope.task.project_id = $scope.task.project.id;
       $scope.task.status_id = $scope.task.status.id;
-      Task.update({ id: $scope.task.id }, $scope.task);
-      $state.go('show_task', { task_id: $scope.task.id });
+      Task.update({ id: $scope.task.id }, $scope.task)
+        .$promise.then(
+          function(task){
+            var message = "Задача '" + task.title + "' обновлена";
+            notifications.addNotification(message, "success");
+            $state.go('show_task', { task_id: task.id });
+          }
+        );
     };
 
   }

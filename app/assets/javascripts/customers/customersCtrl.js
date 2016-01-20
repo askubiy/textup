@@ -19,29 +19,22 @@ angular.module('textUp')
       if (confirm('Вы уверены что хотите удалить этого заказчика?')) {
         Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
           $scope.customers.splice($scope.customers.indexOf(customer), 1);
+          var message = "Заказчик '" + customer.name + "' удалён успешно";
+          notifications.addNotification(message, "success");
+          if (redirectState) {
+            $state.go(redirectState);
+          };
         });
-
-        var message = "Заказчик '" + customer.name + "' удалён успешно";
-        notifications.addNotification(message, "alert-success");
-
-        if (redirectState) {
-          $state.go(redirectState);
-        };
       };
     };
 
-    $scope.destroyProject = function(project, goBack) {
+    $scope.destroyProject = function(project) {
       if (confirm('Вы уверены что хотите удалить этот проект?')) {
         Project.remove({user_id: $scope.user.id, id: project.id}, function() {
           $scope.customer.projects.splice($scope.customer.projects.indexOf(project), 1);
+          var message = "Проект '" + project.title + "' удалён успешно";
+          notifications.addNotification(message, "success");
         });
-      };
-
-      var message = "Проект '" + project.title + "' удалён успешно";
-      notifications.addNotification(message, "alert-success");
-
-      if (goBack) {
-        history.back();
       };
     };
 
@@ -56,10 +49,8 @@ angular.module('textUp')
       customer.$save().then(function(customer){
         $scope.newCustomerName = '';
         $scope.newCustomerDescription = '';
-
         var message = "Заказчик '" + customer.name + "' добавлен";
-        notifications.addNotification(message, "alert-success");
-
+        notifications.addNotification(message, "success");
         $state.go('show_customer', {customer_id: customer.id});
       });
     };
@@ -67,12 +58,14 @@ angular.module('textUp')
     $scope.updateCustomer = function() {
       if($scope.customer.name === '') { return; };
       $scope.customer.colour = $scope.newCustomerColour;
-      Customer.update({ id: $scope.customer.id }, $scope.customer);
-
-      var message = "Заказчик '" + $scope.customer.name + "' обновлён";
-      notifications.addNotification(message, "alert-success");
-
-      $state.go('show_customer', {customer_id: $scope.customer.id});
+      Customer.update({ id: $scope.customer.id }, $scope.customer)
+        .$promise.then(
+          function(customer){
+            var message = "Заказчик '" + customer.name + "' обновлён";
+            notifications.addNotification(message, "success");
+            $state.go('show_customer', {customer_id: customer.id});
+          }
+        );
     };
 
   }
