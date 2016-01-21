@@ -42,7 +42,6 @@ GEM
       sprockets (~> 2)
       tilt
     angular-ui-bootstrap-rails (0.14.3)
-    angular-ui-router-rails (0.2.15)
     angular_rails_csrf (1.0.4)
       rails (>= 3, < 5)
     angularjs-rails (1.4.8)
@@ -128,6 +127,8 @@ GEM
     rails-assets-angular (1.4.8)
     rails-assets-angular-animate (1.4.8)
       rails-assets-angular (= 1.4.8)
+    rails-assets-angular-ui-router (0.2.5)
+      rails-assets-angular (>= 1.0.6)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -215,7 +216,6 @@ PLATFORMS
 DEPENDENCIES
   angular-rails-templates
   angular-ui-bootstrap-rails
-  angular-ui-router-rails
   angular_rails_csrf
   angularjs-rails
   bootstrap-sass (~> 3.3.3)
@@ -232,6 +232,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails-assets-angular-animate
+  rails-assets-angular-ui-router (= 0.2.5)
   rails_12factor
   responders (~> 2.0)
   rspec-rails

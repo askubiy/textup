@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   include ActionController::RespondWith
 
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
   respond_to :json
 
   before_action :configure_permitted_parameters, if: :devise_controller?

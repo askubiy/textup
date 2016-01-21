@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
 gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-ui-router', '0.2.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Ruby version for Heroku
@@ -21,7 +22,7 @@ gem 'devise'
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
-gem 'angular-ui-router-rails'
+#gem 'angular-ui-router-rails', '0.2.5'
 gem 'sprockets', '2.12.3'
 gem 'responders', '~> 2.0'
 

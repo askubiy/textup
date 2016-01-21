@@ -20,6 +20,7 @@ angular.module('textUp')
 
     $scope.$on('devise:logout', function (e, user){
       $scope.user = {};
+      location.reload();
       $state.go('welcome');
     });
   }
