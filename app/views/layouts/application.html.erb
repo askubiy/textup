@@ -4,6 +4,13 @@
   <title>TextUp</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "i18n" %>
+  <%= javascript_include_tag "translations" %>
+  <script type="text/javascript">
+    I18n = {}
+    I18n.defaultLocale = "ru";
+    I18n.locale = "ru";
+  </script>
 </head>
 <body ng-cloak ng-app="textUp">
   <growl-notifications></growl-notifications>

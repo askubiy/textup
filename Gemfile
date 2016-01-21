@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
 gem 'rails-assets-angular-animate'
+gem 'rails-assets-angular-translate'
 gem 'rails-assets-angular-ui-router', '0.2.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -22,9 +23,9 @@ gem 'devise'
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
-#gem 'angular-ui-router-rails', '0.2.5'
 gem 'sprockets', '2.12.3'
 gem 'responders', '~> 2.0'
+gem "i18n-js", ">= 3.0.0.rc11"
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'

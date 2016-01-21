@@ -26,5 +26,8 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require moment/ru
+//= require i18n
+//= require i18n/translations
+//= require angular-translate
 //= require_tree .
 //= require_self

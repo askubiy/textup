@@ -5,6 +5,7 @@ var app = angular.module('textUp', [
   'templates',
   'growlNotifications',
   'ngAnimate',
+  'pascalprecht.translate',
   'Devise',
   'ngResource',
   'textUp.home',
@@ -17,7 +18,16 @@ var app = angular.module('textUp', [
 .config([
   '$stateProvider',
   '$urlRouterProvider',
-  function($stateProvider, $urlRouterProvider) {
+  '$translateProvider',
+  'I18n',
+
+function($stateProvider, $urlRouterProvider, $translateProvider, I18n) {
+  I18n.defaultLocale = "ru";
+  I18n.locale = "ru";
+
+  locale = I18n.currentLocale();
+  $translateProvider.translations(locale, I18n.translations[locale]);
+  $translateProvider.preferredLanguage(locale);
 
   $stateProvider
     .state('login', {
@@ -45,6 +55,7 @@ var app = angular.module('textUp', [
     });
 
   $urlRouterProvider.otherwise('welcome');
-}])
+}]);
 
 app.constant("moment", moment);
+app.constant("I18n", I18n);

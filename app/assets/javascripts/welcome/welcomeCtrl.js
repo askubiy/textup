@@ -1,7 +1,9 @@
 angular.module('textUp')
 .controller('WelcomeCtrl', [
   '$scope',
-  function($scope){
+  '$translate',
+
+  function($scope, $translate){
 
   }
 ])
