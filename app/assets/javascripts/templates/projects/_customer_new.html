@@ -1,33 +1,33 @@
 <div class="page-header">
-  <h1>Добавить проект для {{customer.name}}</h1>
+  <h1>{{'add_project_for' | translate}} {{customer.name}}</h1>
 </div>
 
 <div class="row">
   <div class="col-md-4">
     <form class="customer-form">
       <div class="form-group">
-        <label for="title">Название проекта:</label>
+        <label for="title">{{'project_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newProjectTitle" placeholder="Название проекта">
+          id="name" ng-model="newProjectTitle" placeholder="{{'project_name' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="customer-select">Заказчик:</label>
+        <label for="customer-select">{{'customer' | translate}}:</label>
         <select disabled="true" class="form-control" id="customer-select" ng-model="customer"
           ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
-          <option value="">--- Выберите заказчика ---</option>
+          <option value="">--- {{'select_customer' | translate}} ---</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="description">Описание:</label>
+        <label for="description">{{'description' | translate}}:</label>
         <textarea class="form-control" ng-model="newProjectDescription"
-          rows="5" id="description" placeholder="Описание"></textarea>
+          rows="5" id="description" placeholder="{{'description' | translate}}"></textarea>
       </div>
 
       <input ng-click="addProjectForCustomer()" type="submit"
-        class="btn btn-success" value="Добавить">
-      <a href='/#projects'> К списку проектов </a>
+        class="btn btn-success" value="{{'add' | translate}}">
+      <a href='/#projects'> {{'go_to_project_list' | translate}} </a>
     </form>
   </div>
 </div>

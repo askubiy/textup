@@ -2,8 +2,10 @@ angular.module('textUp')
 .controller('NavCtrl', [
   '$state',
   '$scope',
+  '$translate',
   'Auth',
-  function($state, $scope, Auth){
+
+  function($state, $scope, $translate, Auth){
     $scope.signedIn = Auth.isAuthenticated;
     $scope.logout = Auth.logout;
     Auth.currentUser().then(function (user){

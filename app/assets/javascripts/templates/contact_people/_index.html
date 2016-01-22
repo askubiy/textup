@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Контактные лица</h1>
+  <h1 translate>contact_persons</h1>
 </div>
 
 <div class="table-top-menu">
@@ -7,7 +7,7 @@
     <form role="form">
       <div class="form-group has-feedback has-feedback-left">
         <input type="text" class="form-control"
-          ng-model="tableFilter" placeholder="Фильтр" />
+          ng-model="tableFilter" placeholder="{{'filter' | translate}}" />
         <i class="form-control-feedback glyphicon
           glyphicon-search pull-left"></i>
       </div>
@@ -15,7 +15,7 @@
   </div>
 
   <a class="btn btn-success add-customer" href="#/contact_people/new">
-    <span class="glyphicon glyphicon-plus"></span> Добавить контакт
+    <span class="glyphicon glyphicon-plus"></span> {{'add_contact' | translate}}
   </a>
 </div>
 
@@ -23,12 +23,12 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>Имя</th>
-        <th>Должность</th>
+        <th>{{'first_name' | translate}}</th>
+        <th>{{'position' | translate}}</th>
         <th>Email</th>
-        <th>Телефон</th>
-        <th>Заказчик</th>
-        <th>Действия</th>
+        <th>{{'phone' | translate}}</th>
+        <th>{{'customer' | translate}}</th>
+        <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -49,10 +49,10 @@
         </td>
         <td class="col-md-3">
           <a href="#/contact_people/{{person.id}}/edit" class="btn btn-warning">
-            Редактировать </a>
+            {{'edit' | translate}} </a>
           <button class="btn btn-danger"
             ng-click="destroyContact(person)">
-            Удалить
+            {{'delete' | translate}}
           </button>
         </td>
       </tr>

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Календарь задач</h1>
+  <h1>{{'task_calendar' | translate}}</h1>
 </div>
 
 <div ng-controller="CalendarCtrl as vm">
@@ -15,21 +15,21 @@
           mwl-date-modifier
           date="vm.viewDate"
           decrement="vm.calendarView">
-          Предыдущий
+          <span translate>previous</span>
         </button>
         <button
           class="btn btn-default"
           mwl-date-modifier
           date="vm.viewDate"
           set-to-today>
-          Сегодня
+          <span translate>today</span>
         </button>
         <button
           class="btn btn-primary"
           mwl-date-modifier
           date="vm.viewDate"
           increment="vm.calendarView">
-          Следующий
+          <span translate>next</span>
         </button>
       </div>
     </div>
@@ -38,10 +38,10 @@
 
     <div class="col-md-6 text-center">
       <div class="btn-group">
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'">Год</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'">Месяц</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'">Неделя</label>
-        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'">День</label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'year'"><span translate>year</span></label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'month'"><span translate>month</span></label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'week'"><span translate>week</span></label>
+        <label class="btn btn-primary" ng-model="vm.calendarView" uib-btn-radio="'day'"><span translate>day</span></label>
       </div>
     </div>
 

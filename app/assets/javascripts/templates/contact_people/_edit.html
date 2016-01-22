@@ -1,40 +1,40 @@
 <div class="page-header">
-  <h1>Редактировать контакт</h1>
+  <h1 translate>edit_contact</h1>
 </div>
 
 <div class="row">
   <div class="col-md-4">
     <form class="contact-form">
       <div class="form-group">
-        <label for="first-name">Имя:</label>
+        <label for="first-name">{{'first_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="first-name" ng-model="contact_person.first_name" placeholder="Имя">
+          id="first-name" ng-model="contact_person.first_name" placeholder="{{'first_name' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="middle-name">Отчество:</label>
+        <label for="middle-name">{{'middle_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="middle-name" ng-model="contact_person.middle_name" placeholder="Отчество">
+          id="middle-name" ng-model="contact_person.middle_name" placeholder="{{'middle_name' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="last-name">Фамилия:</label>
+        <label for="last-name">{{'last_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="last-name" ng-model="contact_person.last_name" placeholder="Фамилия">
+          id="last-name" ng-model="contact_person.last_name" placeholder="{{'last_name' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="customer-select">Компания:</label>
+        <label for="customer-select">{{'customer' | translate}}:</label>
         <select class="form-control" id="customer-select" ng-model="contact_person.customer"
           ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
-          <option value="">--- Выберите компанию ---</option>
+          <option value="">--- {{'select_customer' | translate}} ---</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="position">Должность:</label>
+        <label for="position">{{'position' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="position" ng-model="contact_person.position" placeholder="Должность">
+          id="position" ng-model="contact_person.position" placeholder="{{'position' | translate}}">
       </div>
 
       <div class="form-group">
@@ -44,15 +44,15 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Телефон:</label>
+        <label for="phone">{{'phone' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="phone" ng-model="contact_person.phone" placeholder="Телефон">
+          id="phone" ng-model="contact_person.phone" placeholder="{{'phone' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="phone2">Телефон 2:</label>
+        <label for="phone2">{{'phone' | translate}} 2:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="phone2" ng-model="contact_person.phone2" placeholder="Телефон 2">
+          id="phone2" ng-model="contact_person.phone2" placeholder="{{'phone' | translate}} 2">
       </div>
 
       <div class="form-group">
@@ -62,16 +62,16 @@
       </div>
 
       <div class="form-group">
-        <label for="comment">Коментарий:</label>
+        <label for="comment">{{'comment' | translate}}:</label>
         <textarea class="form-control" ng-model="contact_person.comment"
-          rows="5" id="comment" placeholder="Коментарий"></textarea>
+          rows="5" id="comment" placeholder="{{'comment' | translate}}"></textarea>
       </div>
-      <input ng-click="updateContact()" type="submit" class="btn btn-success" value="Сохранить">
+      <input ng-click="updateContact()" type="submit" class="btn btn-success" value="{{'save' | translate}}">
     </form>
   </div>
 </div>
 
 <div class="actions" ng-model="contact_person">
-  <a href='/#contact_people/{{contact_person.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к контакту </a> |
-  <a href='/#contact_people'><span class="glyphicon glyphicon-th-list"></span> К списку контактов </a>
+  <a href='/#contact_people/{{contact_person.id}}/show'><span class="glyphicon glyphicon-file"></span> {{'go_to_contact' | translate}} </a> |
+  <a href='/#contact_people'><span class="glyphicon glyphicon-th-list"></span> {{'go_to_contact_people_list' | translate}} </a>
 </div>

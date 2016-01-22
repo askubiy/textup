@@ -2,11 +2,12 @@ angular.module('textUp')
 .controller('ContactsCtrl', [
   '$scope',
   '$state',
+  '$translate',
   'ContactPerson',
   'contact_people',
   'notifications',
 
-  function($scope, $state, ContactPerson, contact_people, notifications){
+  function($scope, $state, $translate, ContactPerson, contact_people, notifications){
     $scope.contact_people = contact_people.contact_people;
     $scope.contact_person = contact_people.contact_person;
     $scope.customers = contact_people.customers;

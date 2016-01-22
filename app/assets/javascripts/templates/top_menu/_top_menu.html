@@ -2,22 +2,22 @@
   <ul class="nav navbar-nav">
     <li ng-show="signedIn()">
       <a href="#/customers" ui-sref="customers" ui-sref-active="active" class="list-group-item list-group-item-info">
-        <span class="glyphicon glyphicon-th-large"></span> Заказчики {{$state.current}}
+        <span class="glyphicon glyphicon-th-large"></span> <span translate>customers</span>
       </a>
     </li>
     <li ng-show="signedIn()">
       <a href="#/projects" ui-sref="projects" ui-sref-active="active" class="list-group-item list-group-item-danger">
-        <span class="glyphicon glyphicon-blackboard"></span> Проекты
+        <span class="glyphicon glyphicon-blackboard"></span> <span translate>projects</span>
       </a>
     </li>
     <li ng-show="signedIn()">
       <a href="#/tasks" ui-sref="tasks" ui-sref-active="active" class="list-group-item list-group-item-warning">
-        <span class="glyphicon glyphicon-th-list"></span> Задачи
+        <span class="glyphicon glyphicon-th-list"></span> <span translate>tasks</span>
       </a>
     </li>
     <li ng-show="signedIn()">
       <a href="#/contact_people" ui-sref="contact_people" ui-sref-active="active" class="list-group-item list-group-item-success">
-        <span class="glyphicon glyphicon-user"></span> Контакты
+        <span class="glyphicon glyphicon-user"></span> <span translate>contact_people</span>
       </a>
     </li>
   </ul>

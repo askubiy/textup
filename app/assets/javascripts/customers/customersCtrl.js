@@ -3,12 +3,13 @@ angular.module('textUp')
   '$scope',
   '$state',
   '$timeout',
+  '$translate',
   'Project',
   'Customer',
   'customers',
   'notifications',
 
-  function($scope, $state, $timeout, Project, Customer, customers, notifications){
+  function($scope, $state, $timeout, $translate, Project, Customer, customers, notifications){
     $scope.customers = customers.customers;
     $scope.customer = customers.customer;
     $scope.newCustomerColour = "#FFFFFF";

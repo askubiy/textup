@@ -2,12 +2,13 @@ angular.module('textUp')
 .controller('ProjectsCtrl', [
   '$scope',
   '$state',
+  '$translate',
   'Project',
   'Task',
   'projects',
   'notifications',
 
-  function($scope, $state, Project, Task, projects, notifications){
+  function($scope, $state, $translate, Project, Task, projects, notifications){
     $scope.projects = projects.projects;
     $scope.project = projects.project;
     $scope.customers = projects.customers;

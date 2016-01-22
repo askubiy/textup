@@ -1,11 +1,13 @@
 <div class="page-header">
-  <h1>Карточка заказчика</h1>
+  <h1>{{'customer_info' | translate}}</h1>
 </div>
 
 <div class="actions" ng-model="customer">
-  <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> К списку заказчиков </a> |
-  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
-  <a class='delete' ng-click="destroyCustomer(customer, 'customers')"><span class="glyphicon glyphicon-remove"></span> Удалить </a>
+  <a href='/#customers'><span class="glyphicon glyphicon-th-list"></span> {{'go_to_customer_list' | translate}} </a> |
+  <a href='/#customers/{{customer.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> {{'edit' | translate}} </a> |
+  <a class='delete' ng-click="destroyCustomer(customer, 'customers')">
+    <span class="glyphicon glyphicon-remove"></span> {{'delete' | translate}}
+  </a>
 </div>
 
 <div ng-model="customer">
@@ -16,24 +18,24 @@
         </thead>
         <tbody>
           <tr>
-            <td class="col-md-2 bg-grey">Название компании</td>
+            <td class="col-md-2 bg-grey">{{'name' | translate}}</td>
             <td class="col-md-8">
               <span class="glyphicon glyphicon-stop" style="color: {{customer.colour}}"></span>
               {{customer.name}}
             </td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Добавлен</td>
+            <td class="col-md-2 bg-grey">{{'added' | translate}}</td>
             <td class="col-md-8">{{customer.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Краткое описание</td>
+            <td class="col-md-2 bg-grey">{{'short_description' | translate}}</td>
             <td class="col-md-8">{{customer.description}}</td>
           </tr>
           <tr>
             <td class="col-md-2 bg-grey">
-              Контактные лица <br />
-              <a href="#/customers/{{customer.id}}/contact_people/new">Добавить</a>
+              {{'contact_persons' | translate}} <br />
+              <a href="#/customers/{{customer.id}}/contact_people/new">{{'add' | translate}}</a>
             </td>
             <td class="col-md-8">
               <span ng-repeat="person in customer.contact_people | orderBy: 'name'">
@@ -50,19 +52,19 @@
 
 <div class="customer-projects">
   <div>
-    <h3>Проекты</h3>
+    <h3 translate>projects</h3>
     <a class="btn btn-success add-customer" href="#/customers/{{customer.id}}/projects/new">
       <span class="glyphicon glyphicon-plus"></span>
-      Добавить проект
+      {{'add_project' | translate}}
     </a>
   </div>
 
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>Название</th>
-        <th>Добавлен</th>
-        <th>Действия</th>
+        <th translate>project_title</th>
+        <th translate>added</th>
+        <th translate>actions</th>
       </tr>
     </thead>
     <tbody>
@@ -73,10 +75,10 @@
         <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
         <td class="col-md-4">
           <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
-            Редактировать </a>
+            {{'edit' | translate}} </a>
           <button class="btn btn-danger"
             ng-click="destroyProject(project)">
-            Удалить
+            {{'delete' | translate}}
           </button>
         </td>
       </tr>

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Регистрация</h1>
+  <h1 translate>register_nav</h1>
 </div>
 <div class="errors">
   <p class="bg-danger" ng-repeat="(error, messages) in errors">
@@ -10,7 +10,7 @@
 <div class="auth-form">
   <form name="registerForm" autocomplete="off" ng-submit="register()">
     <div class="form-group" ng-submit="register()">
-      <label for="email">Email address</label>
+      <label for="email">Email {{'address' | translate}}</label>
       <input type="email" class="form-control" name="email" id="email"
         ng-model="user.email" placeholder="Email" autocomplete="off" />
     </div>
@@ -20,9 +20,9 @@
         ng-model="user.username" placeholder="Username" autocomplete="off" />
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="password">{{'password' | translate}}</label>
       <input type="password" class="form-control" id="password"
-        ng-model="user.password" placeholder="Password" autocomplete="off" />
+        ng-model="user.password" placeholder="{{'password' | translate}}" autocomplete="off" />
     </div>
     <input type="submit" class="btn btn-default" value="Register">
   </form>

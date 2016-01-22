@@ -1,14 +1,14 @@
 <div class="page-header">
-  <h1>Контактное лицо</h1>
+  <h1 translate>contact_person</h1>
 </div>
 
 <div class="actions" ng-model="contact_person">
   <a href='/#contact_people'><span class="glyphicon glyphicon-th-list">
-    </span> К списку контактов </a> |
+    </span> {{'go_to_contact_people_list' | translate}} </a> |
   <a href='/#contact_people/{{contact_person.id}}/edit'>
-    <span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
+    <span class="glyphicon glyphicon-pencil"></span> {{'edit' | translate}} </a> |
   <a class='delete' ng-click="destroyContact(contact_person, 'contact_people')">
-    <span class="glyphicon glyphicon-remove"></span> Удалить </a>
+    <span class="glyphicon glyphicon-remove"></span> {{'delete' | translate}} </a>
 </div>
 
 <div ng-model="contact_person">
@@ -19,15 +19,15 @@
         </thead>
         <tbody>
           <tr>
-            <td class="col-md-2 bg-grey">Имя</td>
+            <td class="col-md-2 bg-grey">{{'contact_name' | translate}}</td>
             <td class="col-md-8">{{contact_person.name}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Должность</td>
+            <td class="col-md-2 bg-grey">{{'position' | translate}}</td>
             <td class="col-md-8">{{contact_person.position}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Заказчик</td>
+            <td class="col-md-2 bg-grey">{{'customer' | translate}}</td>
             <td class="col-md-8">
               <a ng-show="contact_person.customer" href="/#customers/{{contact_person.customer ? contact_person.customer.id : '' }}/show">
                 <span class="glyphicon glyphicon-stop" style="color: {{contact_person.customer.colour}}"></span>
@@ -40,11 +40,11 @@
             <td class="col-md-8">{{contact_person.email}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Телефон</td>
+            <td class="col-md-2 bg-grey">{{'phone' | translate}}</td>
             <td class="col-md-8">{{contact_person.phone}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Телефон 2</td>
+            <td class="col-md-2 bg-grey">{{'phone' | translate}} 2</td>
             <td class="col-md-8">{{contact_person.phone2}}</td>
           </tr>
           <tr>
@@ -52,11 +52,11 @@
             <td class="col-md-8">{{contact_person.im}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Добавлен</td>
+            <td class="col-md-2 bg-grey">{{'added' | translate}}</td>
             <td class="col-md-8">{{contact_person.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Коментарий</td>
+            <td class="col-md-2 bg-grey">{{'comment' | translate}}</td>
             <td class="col-md-8">{{contact_person.comment}}</td>
           </tr>
         </tbody>

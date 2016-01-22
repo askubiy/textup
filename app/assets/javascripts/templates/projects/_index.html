@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Проекты</h1>
+  <h1>{{'projects' | translate}}</h1>
 </div>
 
 <div class="table-top-menu">
@@ -7,7 +7,7 @@
     <form role="form">
       <div class="form-group has-feedback has-feedback-left">
         <input type="text" class="form-control"
-          ng-model="tableFilter" placeholder="Фильтр" />
+          ng-model="tableFilter" placeholder="{{'filter' | translate}}" />
         <i class="form-control-feedback glyphicon
           glyphicon-search pull-left"></i>
       </div>
@@ -15,7 +15,7 @@
   </div>
 
   <a class="btn btn-success add-customer" href="#/projects/new">
-    <span class="glyphicon glyphicon-plus"></span> Добавить проект
+    <span class="glyphicon glyphicon-plus"></span> {{'add_project' | translate}}
   </a>
 </div>
 
@@ -23,10 +23,10 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>Название</th>
-        <th>Добавлен</th>
-        <th>Заказчик</th>
-        <th>Действия</th>
+        <th>{{'project_name' | translate}}</th>
+        <th>{{'added' | translate}}</th>
+        <th>{{'customer' | translate}}</th>
+        <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -43,10 +43,10 @@
         </td>
         <td class="col-md-4">
           <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
-            Редактировать </a>
+            {{'edit' | translate}} </a>
           <button class="btn btn-danger"
             ng-click="destroyProject(project)">
-            Удалить
+            {{'delete' | translate}}
           </button>
         </td>
       </tr>

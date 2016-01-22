@@ -6,6 +6,9 @@
   <%= javascript_include_tag 'application' %>
   <%= javascript_include_tag "i18n" %>
   <%= javascript_include_tag "translations" %>
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <script type="text/javascript">
     I18n = {}
     I18n.defaultLocale = "ru";
@@ -25,9 +28,13 @@
 
   <div class="container-fluid">
     <div class="col-md-8">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="#/home">
         <img src="/assets/textup_logo.png">
       </a>
+      <div ng-controller="LocaleCtrl" class="ng-scope">
+        <button ng-class="{'btn-success': (currentLanguage == 'en')}" class="btn" ng-click="changeLanguage('en')">En</button>
+        <button ng-class="{'btn-success': (currentLanguage == 'ru')}" class="btn" ng-click="changeLanguage('ru')">Ру</button>
+      </div>
       <div ng-include="'top_menu/_top_menu.html'"></div>
     </div>
     <div class="col-md-4">

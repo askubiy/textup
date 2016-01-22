@@ -1,31 +1,31 @@
 <div class="page-header">
-  <h1>Добавить заказчика</h1>
+  <h1 translate>add_customer</h1>
 </div>
 
 <div class="row">
   <div class="col-md-4">
     <form class="customer-form">
       <div class="form-group">
-        <label for="name">Название компании:</label>
+        <label for="name">{{'customer_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newCustomerName" placeholder="Название компании">
+          id="name" ng-model="newCustomerName" placeholder="{{'customer_name' | translate}}">
       </div>
 
       <div class="form-group">
-        <label for="color-picker">Цвет:</label>
+        <label for="color-picker">{{'colour' | translate}}:</label>
         <input id="color-picker" ng-model="newCustomerColour" type="text"
           color-picker name="color1" value="#FFFFFF" />
       </div>
 
       <div class="form-group">
-        <label for="description">Краткое описание:</label>
+        <label for="description">{{'short_description' | translate}}:</label>
         <textarea class="form-control" ng-model="newCustomerDescription"
-          rows="5" id="description" placeholder="Краткое описание"></textarea>
+          rows="5" id="description" placeholder="{{'short_description' | translate}}"></textarea>
       </div>
 
       <input ng-click="addCustomer()" type="submit"
-        class="btn btn-success" value="Добавить">
-      <a href='/#customers'> К списку заказчиков </a>
+        class="btn btn-success" value="{{'add' | translate}}">
+      <a href='/#customers'> {{'go_to_customer_list' | translate}} </a>
     </form>
   </div>
 </div>
