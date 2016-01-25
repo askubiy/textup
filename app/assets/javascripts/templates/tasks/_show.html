@@ -1,11 +1,11 @@
 <div class="page-header">
-  <h1>Задача</h1>
+  <h1 translate>task</h1>
 </div>
 
 <div class="actions" ng-model="task">
-  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> К списку задач </a> |
-  <a href='/#tasks/{{task.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> Редактировать </a> |
-  <a class='delete' ng-click="destroyTask(task, 'tasks')"><span class="glyphicon glyphicon-remove"></span> Удалить </a>
+  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> {{'go_to_task_list' | translate}} </a> |
+  <a href='/#tasks/{{task.id}}/edit'><span class="glyphicon glyphicon-pencil"></span> {{'edit' | translate}} </a> |
+  <a class='delete' ng-click="destroyTask(task, 'tasks')"><span class="glyphicon glyphicon-remove"></span> {{'delete' | translate}} </a>
 </div>
 
 <div ng-model="tasks">
@@ -16,15 +16,15 @@
         </thead>
         <tbody>
           <tr>
-            <td class="col-md-2 bg-grey">Имя задачи</td>
+            <td class="col-md-2 bg-grey">{{'task_name' | translate}}</td>
             <td class="col-md-8" colspan="3">{{task.title}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Статус</td>
-            <td class="col-md-8" colspan="3">{{task.status.name}}</td>
+            <td class="col-md-2 bg-grey">{{'status' | translate}}</td>
+            <td class="col-md-8" colspan="3">{{task.status.status_type | translate}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Проект</td>
+            <td class="col-md-2 bg-grey">{{'project' | translate}}</td>
             <td class="col-md-8" colspan="3">
               <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">
                 {{task.project ? task.project.title : '' }}
@@ -32,17 +32,17 @@
             </td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Добавлена</td>
+            <td class="col-md-2 bg-grey">{{'added' | translate}}</td>
             <td class="col-md-8" colspan="3">{{task.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>
           <tr>
-            <td class="col-md-3 bg-grey"><span class="glyphicon glyphicon-time"></span> Время старта</td>
+            <td class="col-md-3 bg-grey"><span class="glyphicon glyphicon-time"></span> {{'start_time' | translate}}</td>
             <td class="col-md-3 task-date-start">{{task.started_at | date: "dd/MM/yyyy HH:mm"}}</td>
-            <td class="col-md-3 bg-grey"><span class="glyphicon glyphicon-time"></span> Время завершения (deadline)</td>
+            <td class="col-md-3 bg-grey"><span class="glyphicon glyphicon-time"></span> {{'end_time' | translate}}</td>
             <td class="col-md-3 task-date-finish">{{task.estimated_finish | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>
           <tr>
-            <td class="col-md-2 bg-grey">Краткое описание</td>
+            <td class="col-md-2 bg-grey">{{'description' | translate}}</td>
             <td class="col-md-8" colspan="3">{{task.description}}</td>
           </tr>
         </tbody>

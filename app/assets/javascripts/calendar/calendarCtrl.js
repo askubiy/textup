@@ -30,7 +30,6 @@ angular.module('textUp')
       en: originali18n
     };
 
-    console.log(locales[I18n.locale]);
     calendarConfig.i18nStrings = locales[I18n.locale];
     vm.calendarView = 'month';
     vm.viewDate = new Date();

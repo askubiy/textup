@@ -1,20 +1,20 @@
 <div class="page-header">
-  <h1>Редактировать задачу</h1>
+  <h1 translate>edit_task</h1>
 </div>
 
 <div class="row">
   <div class="col-md-4">
     <form class="task-form">
       <div class="form-group">
-        <label for="name">Имя задачи</label>
+        <label for="name">{{'task_name' | translate}}</label>
         <input type="text" required="true" autocomplete="off" class="form-control"
           id="name" ng-model="task.title" placeholder="Имя задачи">
       </div>
 
       <div class="form-group has-feedback">
-        <label for="start-date">Дата начала:</label>
+        <label for="start-date">{{'start_date' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="start-date" ng-model="task.started_at" placeholder="Дата начала"
+          id="start-date" ng-model="task.started_at" placeholder="{{'start_date' | translate}}"
           ng-if="task.started_at"
           date-time-picker>
         <i class="form-control-feedback glyphicon
@@ -22,9 +22,9 @@
       </div>
 
       <div class="form-group has-feedback">
-        <label for="start-date">Планируемая дата завершения (deadline):</label>
+        <label for="start-date">{{'end_date' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="start-date" ng-model="task.estimated_finish" placeholder="Дата завершения"
+          id="start-date" ng-model="task.estimated_finish" placeholder="{{'end_date' | translate}}"
           ng-if="task.estimated_finish"
           date-time-picker>
         <i class="form-control-feedback glyphicon
@@ -32,32 +32,32 @@
       </div>
 
       <div class="form-group">
-        <label for="status-select">Статус:</label>
+        <label for="status-select">{{'status' | translate}}:</label>
         <select class="form-control" id="status-select" ng-model="task.status"
-          ng-options="status.name for status in statuses | orderBy:'id' track by status.id" required="true">
-          <option value="">--- Выберите статус ---</option>
+          ng-options="(status.status_type | translate) for status in statuses | orderBy:'id' track by status.id" required="true">
+          <option value="">--- {{'select_status' | translate}} ---</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="project-select">Проект:</label>
+        <label for="project-select">{{'project' | translate}}:</label>
         <select class="form-control" id="project-select" ng-model="task.project"
           ng-options="project.title for project in projects | orderBy:'title' track by project.id" required="true">
-          <option value="">--- Выберите проект ---</option>
+          <option value="">--- {{'select_project' | translate}} ---</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="description">Описание:</label>
+        <label for="description">{{'description' | translate}}:</label>
         <textarea class="form-control" ng-model="task.description"
-          rows="5" id="description" placeholder="Описание"></textarea>
+          rows="5" id="description" placeholder="{{'description' | translate}}"></textarea>
       </div>
-      <input ng-click="updateTask()" type="submit" class="btn btn-success" value="Сохранить">
+      <input ng-click="updateTask()" type="submit" class="btn btn-success" value="{{'save' | translate}}">
     </form>
   </div>
 </div>
 
 <div class="actions" ng-model="task">
-  <a href='/#tasks/{{task.id}}/show'><span class="glyphicon glyphicon-file"></span> Перейти к задаче </a> |
-  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> К списку задач </a>
+  <a href='/#tasks/{{task.id}}/show'><span class="glyphicon glyphicon-file"></span> {{'go_to_task' | translate}} </a> |
+  <a href='/#tasks'><span class="glyphicon glyphicon-th-list"></span> {{'go_to_task_list' | translate}} </a>
 </div>

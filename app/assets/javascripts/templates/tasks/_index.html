@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Задачи</h1>
+  <h1 translate>tasks</h1>
 </div>
 
 <div class="table-top-menu">
@@ -7,7 +7,7 @@
     <form role="form">
       <div class="form-group has-feedback has-feedback-left">
         <input type="text" class="form-control"
-          ng-model="tableFilter" placeholder="Фильтр" />
+          ng-model="tableFilter" placeholder="{{'filter' | translate}}" />
         <i class="form-control-feedback glyphicon
           glyphicon-search pull-left"></i>
       </div>
@@ -15,7 +15,7 @@
   </div>
 
   <a class="btn btn-success add-customer" href="#/tasks/new">
-    <span class="glyphicon glyphicon-plus"></span> Добавить задачу
+    <span class="glyphicon glyphicon-plus"></span> {{'add_task' | translate}}
   </a>
 </div>
 
@@ -23,12 +23,12 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>Название</th>
-        <th>Время начала</th>
+        <th>{{'name' | translate}}</th>
+        <th>{{'start_time' | translate}}</th>
         <th>Deadline</th>
-        <th>Статус</th>
-        <th>Проект</th>
-        <th>Действия</th>
+        <th>{{'status' | translate}}</th>
+        <th>{{'project' | translate}}</th>
+        <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@
         </td>
         <td class="col-md-1">{{task.started_at | date: "dd/MM/yyyy HH:mm"}}</td>
         <td class="col-md-1">{{task.estimated_finish | date: "dd/MM/yyyy HH:mm"}}</td>
-        <td class="col-md-1">{{task.status.name}}</td>
+        <td class="col-md-1">{{task.status.status_type | translate}}</td>
         <td class="col-md-1">
           <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">
             {{task.project ? task.project.title : '' }}
@@ -48,10 +48,10 @@
         </td>
         <td class="col-md-2">
           <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning">
-            Редактировать </a>
+            {{'edit' | translate}} </a>
           <button class="btn btn-danger"
             ng-click="destroyTask(task)">
-            Удалить
+            {{'delete' | translate}}
           </button>
         </td>
       </tr>

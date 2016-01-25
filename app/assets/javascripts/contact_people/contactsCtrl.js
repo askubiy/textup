@@ -15,16 +15,20 @@ angular.module('textUp')
     $scope.user = contact_people.user;
 
     $scope.destroyContact = function(contact_person, redirectState) {
-      if (confirm('Вы уверены что хотите удалить этот контакт?')) {
-        ContactPerson.remove({user_id: $scope.user.id, id: contact_person.id}, function() {
-          $scope.contact_people.splice($scope.contact_people.indexOf(contact_person), 1);
-          var message = "Контакт '" + contact_person.name + "' удалён успешно";
-          notifications.addNotification(message, "success");
-          if (redirectState) {
-            $state.go(redirectState);
+      $translate(['confirm_delete', 'contact_person', 'deleted_success']).then(
+        function(translations){
+          if (confirm(translations.confirm_delete)) {
+            ContactPerson.remove({user_id: $scope.user.id, id: contact_person.id}, function() {
+              $scope.contact_people.splice($scope.contact_people.indexOf(contact_person), 1);
+              var message = translations.contact_person + " '" + contact_person.name + "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+              if (redirectState) {
+                $state.go(redirectState);
+              };
+            });
           };
-        });
-      };
+        }
+      );
     };
 
     $scope.addContact = function(redirectState) {
@@ -47,8 +51,13 @@ angular.module('textUp')
         $scope.newContactMiddleName = '';
         $scope.newContactLastName = '';
         $scope.newContactPosition = '';
-        var message = "Контакт '" + contact_person.name + "' добавлен успешно";
-        notifications.addNotification(message, "success");
+        $translate(['contact_person', 'added_success']).then(
+          function(translations){
+            var message = translations.contact_person + " '" + contact_person.name +
+              "' " + translations.added_success;
+            notifications.addNotification(message, "success");
+          }
+        );
         if (redirectState) {
           $state.go(redirectState);
         } else {
@@ -63,8 +72,13 @@ angular.module('textUp')
       ContactPerson.update({ id: $scope.contact_person.id }, $scope.contact_person)
         .$promise.then(
           function(contact_person){
-            var message = "Контакт '" + contact_person.name + "' обновлён";
-            notifications.addNotification(message, "success");
+            $translate(['contact_person', 'updated_success']).then(
+              function(translations){
+                var message = translations.contact_person + " '" + contact_person.name +
+                  "' " + translations.updated_success;
+                notifications.addNotification(message, "success");
+              }
+            );
             $state.go('show_contact_person', { contact_person_id: contact_person.id });
           }
         );

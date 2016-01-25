@@ -29,8 +29,6 @@ function($stateProvider, $urlRouterProvider, $translateProvider, I18n) {
   $translateProvider.translations("ru", I18n.translations["ru"]);
   $translateProvider.translations("en", I18n.translations["en"]);
   $translateProvider.preferredLanguage("ru");
-  console.log(" ==== $translateProvider");
-  console.log($translateProvider);
 
   $stateProvider
     .state('login', {

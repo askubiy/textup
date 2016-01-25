@@ -1,20 +1,28 @@
 angular.module('textUp')
 
-.directive('dateTimePicker', ['$timeout', function ($timeout) {
+.directive('dateTimePicker', ['$timeout',
+  '$rootScope',
+  'I18n',
+
+  function ($timeout, $rootScope, I18n) {
   return {
     require: 'ngModel',
     restrict: 'A',
 
-    link: function (scope, elem, attrs, ngModel) {
+    link: function (scope, elem, attrs, ngModel, $rootScope) {
       return $timeout(function() {
         $timeout(function() {
+          scope.$on('locale:change', function (event, data) {
+            $(elem).data("DateTimePicker").locale(data);
+          });
+
           if (!ngModel.$modelValue) {
             ngModel.$setViewValue(moment());
           };
 
           $(elem).datetimepicker({
             pick12HourFormat: scope.pick12HourFormat,
-            locale: 'ru',
+            locale: I18n.locale,
             allowInputToggle: true,
             useCurrent: true,
             //keepInvalid: true,

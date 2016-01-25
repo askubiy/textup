@@ -17,26 +17,36 @@ angular.module('textUp')
     $scope.user = customers.user;
 
     $scope.destroyCustomer = function(customer, redirectState) {
-      if (confirm('Вы уверены что хотите удалить этого заказчика?')) {
-        Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
-          $scope.customers.splice($scope.customers.indexOf(customer), 1);
-          var message = "Заказчик '" + customer.name + "' удалён успешно";
-          notifications.addNotification(message, "success");
-          if (redirectState) {
-            $state.go(redirectState);
+      $translate(['confirm_delete', 'customer', 'deleted_success']).then(
+        function(translations){
+          if (confirm(translations.confirm_delete)) {
+            Customer.remove({user_id: $scope.user.id, id: customer.id}, function() {
+              $scope.customers.splice($scope.customers.indexOf(customer), 1);
+              var message = translations.customer + " '" +
+                customer.name + "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+              if (redirectState) {
+                $state.go(redirectState);
+              };
+            });
           };
-        });
-      };
+        }
+      );
     };
 
     $scope.destroyProject = function(project) {
-      if (confirm('Вы уверены что хотите удалить этот проект?')) {
-        Project.remove({user_id: $scope.user.id, id: project.id}, function() {
-          $scope.customer.projects.splice($scope.customer.projects.indexOf(project), 1);
-          var message = "Проект '" + project.title + "' удалён успешно";
-          notifications.addNotification(message, "success");
-        });
-      };
+      $translate(['confirm_delete', 'project', 'deleted_success']).then(
+        function(translations) {
+          if (confirm(translations.confirm_delete)) {
+            Project.remove({user_id: $scope.user.id, id: project.id}, function() {
+              $scope.customer.projects.splice($scope.customer.projects.indexOf(project), 1);
+              var message = translations.project + " '" + project.title +
+                "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+            });
+          };
+        }
+      );
     };
 
     $scope.addCustomer = function() {
@@ -50,8 +60,13 @@ angular.module('textUp')
       customer.$save().then(function(customer){
         $scope.newCustomerName = '';
         $scope.newCustomerDescription = '';
-        var message = "Заказчик '" + customer.name + "' добавлен";
-        notifications.addNotification(message, "success");
+        $translate(['customer', 'added_success']).then(
+          function(translations){
+            var message = translations.customer + " '" +
+              customer.name + "' " + translations.added_success;
+            notifications.addNotification(message, "success");
+          }
+        );
         $state.go('show_customer', {customer_id: customer.id});
       });
     };
@@ -62,8 +77,13 @@ angular.module('textUp')
       Customer.update({ id: $scope.customer.id }, $scope.customer)
         .$promise.then(
           function(customer){
-            var message = "Заказчик '" + customer.name + "' обновлён";
-            notifications.addNotification(message, "success");
+            $translate(['customer', 'updated_success']).then(
+              function(translations){
+                var message = translations.customer + " '" +
+                  customer.name + "' " + translations.updated_success;
+                notifications.addNotification(message, "success");
+              }
+            );
             $state.go('show_customer', {customer_id: customer.id});
           }
         );

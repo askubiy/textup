@@ -19,16 +19,21 @@ angular.module('textUp')
     $scope.newProjectDescription = '';
 
     $scope.destroyProject = function(project, redirectState) {
-      if (confirm('Вы уверены что хотите удалить этот проект?')) {
-        Project.remove({user_id: $scope.user.id, id: project.id}, function() {
-          $scope.projects.splice($scope.projects.indexOf(project), 1);
-          var message = "Проект '" + project.title + "' удалён успешно";
-          notifications.addNotification(message, "success");
-          if (redirectState) {
-            $state.go(redirectState);
+      $translate(['confirm_delete', 'project', 'deleted_success']).then(
+        function(translations){
+          if (confirm(translations.confirm_delete)) {
+            Project.remove({user_id: $scope.user.id, id: project.id}, function() {
+              $scope.projects.splice($scope.projects.indexOf(project), 1);
+              var message = translations.project + " '" +
+                project.title + "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+              if (redirectState) {
+                $state.go(redirectState);
+              };
+            });
           };
-        });
-      };
+        }
+      );
     };
 
     $scope.addProject = function() {
@@ -40,8 +45,13 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
-        var message = "Проект '" + project.title + "' добавлен";
-        notifications.addNotification(message, "success");
+        $translate(['project', 'added_success']).then(
+          function(translations){
+            var message = translations.project + " '" +
+              project.title + "' " + translations.added_success;
+            notifications.addNotification(message, "success");
+          }
+        );
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('projects');
@@ -57,8 +67,13 @@ angular.module('textUp')
         description: $scope.newProjectDescription
       });
       project.$save().then(function(project){
-        var message = "Проект '" + project.title + "' добавлен";
-        notifications.addNotification(message, "success");
+        $translate(['project', 'added_success']).then(
+          function(translations){
+            var message = translations.project + " '" +
+              project.title + "' " + translations.added_success;
+          }
+        );
+
         $scope.newProjectTitle = '';
         $scope.newProjectDescription = '';
         $state.go('show_customer', { customer_id: $scope.customer.id });
@@ -66,14 +81,18 @@ angular.module('textUp')
     };
 
     $scope.destroyTask = function(task, redirectState) {
-      if (confirm('Вы уверены что хотите удалить эту задачу?')) {
-        Task.remove({user_id: $scope.user.id, id: task.id}, function() {
-          $scope.project.tasks.splice($scope.project.tasks.indexOf(task), 1);
-          var message = "Задача '" + task.title + "' удалена";
-          notifications.addNotification(message, "success");
-        });
-      };
-
+      $translate(['confirm_delete', 'task', 'deleted_success']).then(
+        function(translations){
+          if (confirm(translations.confirm_delete)) {
+            Task.remove({user_id: $scope.user.id, id: task.id}, function() {
+              $scope.project.tasks.splice($scope.project.tasks.indexOf(task), 1);
+              var message = translations.task + " '" + task.title +
+                "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+            });
+          };
+        }
+      );
       if (redirectState) {
         $state.go(redirectState);
       };
@@ -85,8 +104,14 @@ angular.module('textUp')
       Project.update({ id: $scope.project.id }, $scope.project)
         .$promise.then(
           function(project){
-            var message = "Проект '" + project.title + "' обновлён";
-            notifications.addNotification(message, "success");
+            $translate(['project', 'updated_success']).then(
+              function(translations){
+                var message = translations.project + " '" +
+                  project.title + "' " + translations.updated_success;
+                notifications.addNotification(message, "success");
+              }
+            );
+
             $state.go('show_project', { project_id: project.id });
           }
         );
