@@ -50,38 +50,84 @@
   </div>
 </div>
 
-<div class="customer-projects">
-  <div>
-    <h3 translate>projects</h3>
-    <a class="btn btn-success add-customer" href="#/customers/{{customer.id}}/projects/new">
-      <span class="glyphicon glyphicon-plus"></span>
-      {{'add_project' | translate}}
-    </a>
-  </div>
+<uib-tabset>
+  <uib-tab heading="{{'projects' | translate}}">
+    <div class="customer-projects">
+      <br/>
+      <div>
+        <a class="btn btn-success add-customer" href="#/customers/{{customer.id}}/projects/new">
+          <span class="glyphicon glyphicon-plus"></span>
+          {{'add_project' | translate}}
+        </a>
+      </div>
 
-  <table class="table table-hover table-vcenter">
-    <thead>
-      <tr>
-        <th translate>project_title</th>
-        <th translate>added</th>
-        <th translate>actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="project in customer.projects | orderBy: 'title'">
-        <td class="col-md-3">
-          <a href="#/projects/{{project.id}}/show">{{project.title}}</a>
-        </td>
-        <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
-        <td class="col-md-4">
-          <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
-            {{'edit' | translate}} </a>
-          <button class="btn btn-danger"
-            ng-click="destroyProject(project)">
-            {{'delete' | translate}}
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+      <table class="table table-hover table-vcenter">
+        <thead>
+          <tr>
+            <th translate>project_title</th>
+            <th translate>added</th>
+            <th translate>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-click="projectRowClick(project)" ng-repeat="project in customer.projects | orderBy: 'title'">
+            <td class="col-md-3">
+              <a href="#/projects/{{project.id}}/show">{{project.title}}</a>
+            </td>
+            <td class="col-md-3">{{project.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
+            <td class="col-md-4">
+              <a href="#/projects/{{project.id}}/edit" class="btn btn-warning"
+                ng-click="$event.stopPropagation()">
+                {{'edit' | translate}} </a>
+              <button class="btn btn-danger"
+                ng-click="destroyProject(project); $event.stopPropagation();">
+                {{'delete' | translate}}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </uib-tab>
+  <uib-tab heading="{{'tasks' | translate}}">
+    <div class="customer-tasks">
+      <br />
+      <a class="btn btn-success add-customer"  href="#/customers/{{customer.id}}/tasks/new">
+        <span class="glyphicon glyphicon-plus"></span> {{'add_task' | translate}}
+      </a>
+    </div>
+
+    <div>
+      <table class="table table-hover table-vcenter">
+        <thead>
+          <tr>
+            <th>{{'name' | translate}}</th>
+            <th>{{'start_time' | translate}}</th>
+            <th>Deadline</th>
+            <th>{{'status' | translate}}</th>
+            <th>{{'actions' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-click="taskRowClick(task)" ng-repeat="task in customer.tasks | filter:tableFilter | orderBy: 'title'">
+            <td class="col-md-3">
+              <a href="#/tasks/{{task.id}}/show">{{task.title}}</a>
+            </td>
+            <td class="col-md-2">{{task.started_at | date: "dd/MM/yyyy HH:mm"}}</td>
+            <td class="col-md-2">{{task.estimated_finish | date: "dd/MM/yyyy HH:mm"}}</td>
+            <td class="col-md-1">{{task.status.name}}</td>
+            <td class="col-md-3">
+              <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning"
+                ng-click="$event.stopPropagation()">
+                {{'edit' | translate}} </a>
+              <button class="btn btn-danger"
+                ng-click="destroyTask(task); $event.stopPropagation()">
+                {{'delete' | translate}}
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </uib-tab>
+</uib-tabset>

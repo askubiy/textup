@@ -32,7 +32,7 @@ angular.module('textUp')
       angular.forEach(o.events, function(rawEvent) {
         var formatedEvent = {
           id: rawEvent.id,
-          title: rawEvent.title + " (" + rawEvent.project.title + ")",
+          title: rawEvent.title + " (" + (rawEvent.project ? rawEvent.project.title : rawEvent.customer.name) + ")",
           type: statusMapping[rawEvent.status.status_type],
           startsAt: new Date(rawEvent.started_at),
           endsAt: new Date(rawEvent.estimated_finish),

@@ -32,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="task in tasks | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="rowClick(task)" ng-repeat="task in tasks | filter:tableFilter | orderBy: 'title'">
         <td class="col-md-2">
           <a href="#/tasks/{{task.id}}/show">
             {{task.title}}
@@ -47,10 +47,11 @@
           </a>
         </td>
         <td class="col-md-2">
-          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning">
+          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning"
+            ng-click="$event.stopPropagation()">
             {{'edit' | translate}} </a>
           <button class="btn btn-danger"
-            ng-click="destroyTask(task)">
+            ng-click="destroyTask(task); $event.stopPropagation();">
             {{'delete' | translate}}
           </button>
         </td>

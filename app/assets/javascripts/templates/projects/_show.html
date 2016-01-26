@@ -60,7 +60,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="task in project.tasks | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="taskRowClick(task)" ng-repeat="task in project.tasks | filter:tableFilter | orderBy: 'title'">
         <td class="col-md-3">
           <a href="#/tasks/{{task.id}}/show">{{task.title}}</a>
         </td>
@@ -68,10 +68,11 @@
         <td class="col-md-2">{{task.estimated_finish | date: "dd/MM/yyyy HH:mm"}}</td>
         <td class="col-md-1">{{task.status.name}}</td>
         <td class="col-md-3">
-          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning">
+          <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning"
+            ng-click="$event.stopPropagation()">
             {{'edit' | translate}} </a>
           <button class="btn btn-danger"
-            ng-click="destroyTask(task)">
+            ng-click="destroyTask(task); $event.stopPropagation()">
             {{'delete' | translate}}
           </button>
         </td>

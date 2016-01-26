@@ -10,11 +10,21 @@ angular.module('textUp')
   'notifications',
 
   function($scope, $state, $timeout, $translate, Project, Customer, customers, notifications){
+    //console.log("$state.$current.name---");
+    //console.log($state.$current.name);
     $scope.customers = customers.customers;
     $scope.customer = customers.customer;
     $scope.newCustomerColour = "#FFFFFF";
     $scope.newCustomerName = '';
     $scope.user = customers.user;
+
+    $scope.rowClick = function(customer){
+      $state.go("show_customer", {customer_id: customer.id});
+    };
+
+    $scope.projectRowClick = function(project){
+      $state.go("show_project", {project_id: project.id});
+    };
 
     $scope.destroyCustomer = function(customer, redirectState) {
       $translate(['confirm_delete', 'customer', 'deleted_success']).then(

@@ -38,9 +38,19 @@
       </div>
 
       <div class="form-group">
+        <label for="customer-select">{{'customer' | translate}}:</label>
+        <select class="form-control" id="customer-select" ng-model="customer"
+          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id"
+          ng-change="changeCustomer(customer)">
+          <option value="">--- {{'select_customer' | translate}} ---</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="project-select">{{'project' | translate}}:</label>
         <select class="form-control" id="project-select" ng-model="project"
-          ng-options="project.title for project in projects | orderBy:'title' track by project.id" required="true">
+          ng-options="project.title for project in projects | orderBy:'title' track by project.id"
+          ng-change="changeProject(project)">
           <option value="">--- {{'select_project' | translate}} ---</option>
         </select>
       </div>

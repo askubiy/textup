@@ -18,6 +18,7 @@ en:
   add_project: "Add Project"
   task: "Task"
   tasks: "Tasks"
+  tasks_without_project: "Tasks (without Project)"
   contact_people: "Contacts"
   contact_persons: "Contacts"
   contact_person: "Contact Person"

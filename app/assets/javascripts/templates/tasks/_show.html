@@ -32,6 +32,15 @@
             </td>
           </tr>
           <tr>
+            <td class="col-md-2 bg-grey">{{'customer' | translate}}</td>
+            <td class="col-md-8" colspan="3">
+              <a ng-show="task.customer" href="/#customers/{{task.customer ? task.customer.id : '' }}/show">
+                <span class="glyphicon glyphicon-stop" style="color: {{task.customer.colour}}"></span>
+                {{task.customer ? task.customer.name : '' }}
+              </a>
+            </td>
+          </tr>
+          <tr>
             <td class="col-md-2 bg-grey">{{'added' | translate}}</td>
             <td class="col-md-8" colspan="3">{{task.created_at | date: "dd/MM/yyyy HH:mm"}}</td>
           </tr>

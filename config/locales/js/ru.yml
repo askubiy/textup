@@ -18,6 +18,7 @@ ru:
   add_project: "Добавить проект"
   task: "Задача"
   tasks: "Задачи"
+  tasks_without_project: "Задачи (без проекта)"
   contact_people: "Контакты"
   contact_persons: "Контактные лица"
   contact_person: "Контактное лицо"

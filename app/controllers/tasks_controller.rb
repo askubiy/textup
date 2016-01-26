@@ -2,12 +2,12 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks.all
-    respond_with @tasks.to_json(:include => [:project, :status])
+    respond_with @tasks.to_json(:include => [:project, :status, :customer])
   end
 
   def show
     @task = current_user.tasks.find(params[:id])
-    respond_with @task.to_json(:include => [:project, :status])
+    respond_with @task.to_json(:include => [:project, :status, :customer])
   end
 
   def create
@@ -32,6 +32,6 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:title, :description,
-       :project_id, :status_id, :started_at, :estimated_finish, :original_finish)
+       :project_id, :customer_id, :status_id, :started_at, :estimated_finish, :original_finish)
     end
 end

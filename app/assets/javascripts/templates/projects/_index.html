@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="project in projects | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="rowClick(project)" ng-repeat="project in projects | filter:tableFilter | orderBy: 'title'">
         <td class="col-md-2">
           <a href="#/projects/{{project.id}}/show">{{project.title}}
         </td>
@@ -42,10 +42,11 @@
           </a>
         </td>
         <td class="col-md-4">
-          <a href="#/projects/{{project.id}}/edit" class="btn btn-warning">
+          <a href="#/projects/{{project.id}}/edit" class="btn btn-warning"
+            ng-click="$event.stopPropagation()">
             {{'edit' | translate}} </a>
           <button class="btn btn-danger"
-            ng-click="destroyProject(project)">
+            ng-click="destroyProject(project); $event.stopPropagation();">
             {{'delete' | translate}}
           </button>
         </td>

@@ -32,7 +32,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="person in contact_people | filter:tableFilter | orderBy: 'name'">
+      <tr ng-click="rowClick(person)" ng-repeat="person in contact_people | filter:tableFilter | orderBy: 'name'">
         <td class="col-md-2">
           <a href="#/contact_people/{{person.id}}/show">
             {{person.name}}
@@ -48,10 +48,11 @@
           </a>
         </td>
         <td class="col-md-3">
-          <a href="#/contact_people/{{person.id}}/edit" class="btn btn-warning">
+          <a href="#/contact_people/{{person.id}}/edit" class="btn btn-warning"
+            ng-click="$event.stopPropagation()">
             {{'edit' | translate}} </a>
           <button class="btn btn-danger"
-            ng-click="destroyContact(person)">
+            ng-click="destroyContact(person); $event.stopPropagation();">
             {{'delete' | translate}}
           </button>
         </td>

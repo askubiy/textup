@@ -14,6 +14,10 @@ angular.module('textUp')
     $scope.customer = contact_people.customer;
     $scope.user = contact_people.user;
 
+    $scope.rowClick = function(contact_person){
+      $state.go("show_contact_person", {contact_person_id: contact_person.id});
+    };
+
     $scope.destroyContact = function(contact_person, redirectState) {
       $translate(['confirm_delete', 'contact_person', 'deleted_success']).then(
         function(translations){

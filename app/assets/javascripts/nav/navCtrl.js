@@ -3,9 +3,15 @@ angular.module('textUp')
   '$state',
   '$scope',
   '$translate',
+  '$rootScope',
   'Auth',
 
-  function($state, $scope, $translate, Auth){
+  function($state, $scope, $translate, $rootScope, Auth){
+    $rootScope.$on('$stateChangeSuccess',
+      function(event, toState, toParams, fromState, fromParams){
+        $scope.state_name = toState.name;
+      });
+
     $scope.signedIn = Auth.isAuthenticated;
     $scope.logout = Auth.logout;
     Auth.currentUser().then(function (user){

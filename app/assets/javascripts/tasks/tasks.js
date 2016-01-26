@@ -79,23 +79,28 @@ config([
 
         resolve: {
           tasks: ['$state', 'Auth', 'Task',
-            '$stateParams', 'Project', 'Status', '$q',
-            function($state, Auth, Task, $stateParams, Project, Status, $q){
+            '$stateParams', 'Project', 'Customer', 'Status', '$q',
+            function($state, Auth, Task, $stateParams, Project, Customer, Status, $q){
               var deferred = $q.defer();
               Auth.currentUser().then(
                 function(user){
                   Task.get({user_id: user.id, id: $stateParams.task_id}).$promise.then(
                     function(task){
-                      Project.query({user_id: user.id}).$promise.then(
-                        function(projects){
-                          Status.query().$promise.then(
-                            function(statuses){
-                              deferred.resolve({
-                                task: task,
-                                projects: projects,
-                                statuses: statuses,
-                                user: user
-                              });
+                      Customer.query({user_id: user.id}).$promise.then(
+                        function(customers){
+                          Project.query({user_id: user.id}).$promise.then(
+                            function(projects){
+                              Status.query().$promise.then(
+                                function(statuses){
+                                  deferred.resolve({
+                                    task: task,
+                                    customers: customers,
+                                    projects: projects,
+                                    statuses: statuses,
+                                    user: user
+                                  });
+                                }
+                              );
                             }
                           );
                         }
@@ -120,23 +125,28 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task', 'Project', 'Status', '$q',
-            function($state, Auth, Task, Project, Status, $q){
+          tasks: ['$state', 'Auth', 'Task', 'Project', 'Customer', 'Status', '$q',
+            function($state, Auth, Task, Project, Customer, Status, $q){
               var deferred = $q.defer();
               Auth.currentUser().then(
                 function(user){
                   Task.query({user_id: user.id}).$promise.then(
                     function(tasks){
-                      Project.query({user_id: user.id}).$promise.then(
-                        function(projects){
-                          Status.query().$promise.then(
-                            function(statuses){
-                              deferred.resolve({
-                                tasks: tasks,
-                                projects: projects,
-                                statuses: statuses,
-                                user: user
-                              });
+                      Customer.query({user_id: user.id}).$promise.then(
+                        function(customers){
+                          Project.query({user_id: user.id}).$promise.then(
+                            function(projects){
+                              Status.query().$promise.then(
+                                function(statuses){
+                                  deferred.resolve({
+                                    tasks: tasks,
+                                    customers: customers,
+                                    projects: projects,
+                                    statuses: statuses,
+                                    user: user
+                                  });
+                                }
+                              );
                             }
                           );
                         }
