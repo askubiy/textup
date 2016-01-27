@@ -28,6 +28,7 @@
         <th>Deadline</th>
         <th>{{'status' | translate}}</th>
         <th>{{'project' | translate}}</th>
+        <th>{{'customer' | translate}}</th>
         <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
@@ -44,6 +45,12 @@
         <td class="col-md-1">
           <a ng-show="task.project" href="/#projects/{{task.project ? task.project.id : '' }}/show">
             {{task.project ? task.project.title : '' }}
+          </a>
+        </td>
+        <td class="col-md-1">
+          <a ng-show="task.customer" href="/#customers/{{task.customer ? task.customer.id : '' }}/show">
+            <span class="glyphicon glyphicon-stop" style="color: {{task.customer.colour}}"></span>
+            {{task.customer ? task.customer.name : '' }}
           </a>
         </td>
         <td class="col-md-2">

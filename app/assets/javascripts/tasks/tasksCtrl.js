@@ -10,7 +10,7 @@ angular.module('textUp')
   function($scope, $state, $translate, Task, tasks, notifications){
     $scope.tasks = tasks.tasks;
     $scope.task = tasks.task;
-    $scope.customer = $scope.task ? $scope.task.customer : null;
+    $scope.customer = $scope.task ? $scope.task.customer : tasks.customer;
     $scope.projects = tasks.projects;
     $scope.project = tasks.project || ($scope.task ? $scope.task.project : null);
     $scope.statuses = tasks.statuses;

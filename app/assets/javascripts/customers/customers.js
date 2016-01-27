@@ -165,6 +165,53 @@ config([
         }
       })
 
+      .state('new_customer_task', {
+        url: '/customers/:customer_id/tasks/new',
+        templateUrl: 'tasks/_new.html',
+        controller: 'TasksCtrl',
+
+        resolve: {
+          tasks: ['$state', 'Auth', 'Task',
+            '$stateParams', 'Project', 'Customer', 'Status', '$q',
+            function($state, Auth, Task, $stateParams, Project, Customer, Status, $q){
+              var deferred = $q.defer();
+              Auth.currentUser().then(
+                function(user){
+                  Customer.query({user_id: user.id}).$promise.then(
+                    function(customers){
+                      Customer.get({user_id: user.id, id: $stateParams.customer_id }).$promise.then(
+                        function(customer){
+                          Project.query({user_id: user.id}).$promise.then(
+                            function(projects){
+                              Status.query().$promise.then(
+                                function(statuses){
+                                  deferred.resolve({
+                                    customers: customers,
+                                    customer: customer,
+                                    projects: projects,
+                                    statuses: statuses,
+                                    user: user
+                                  });
+                                }
+                              );
+                            }
+                          );
+                        }
+                      );
+                    }
+                  );
+                },
+                function(error){
+                  $state.go('welcome');
+                }
+              );
+
+              return deferred.promise;
+            }
+          ]
+        }
+      })
+
       .state('new_customer_project', {
         url: '/customers/:customer_id/projects/new',
         templateUrl: 'projects/_customer_new.html',

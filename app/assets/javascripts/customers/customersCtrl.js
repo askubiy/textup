@@ -6,12 +6,11 @@ angular.module('textUp')
   '$translate',
   'Project',
   'Customer',
+  'Task',
   'customers',
   'notifications',
 
-  function($scope, $state, $timeout, $translate, Project, Customer, customers, notifications){
-    //console.log("$state.$current.name---");
-    //console.log($state.$current.name);
+  function($scope, $state, $timeout, $translate, Project, Customer, Task, customers, notifications){
     $scope.customers = customers.customers;
     $scope.customer = customers.customer;
     $scope.newCustomerColour = "#FFFFFF";
@@ -57,6 +56,24 @@ angular.module('textUp')
           };
         }
       );
+    };
+
+    $scope.destroyTask = function(task, redirectState) {
+      $translate(['confirm_delete', 'task', 'deleted_success']).then(
+        function(translations){
+          if (confirm(translations.confirm_delete)) {
+            Task.remove({user_id: $scope.user.id, id: task.id}, function() {
+              $scope.customer.tasks.splice($scope.customer.tasks.indexOf(task), 1);
+              var message = translations.task + " '" + task.title +
+                "' " + translations.deleted_success;
+              notifications.addNotification(message, "success");
+            });
+          };
+        }
+      );
+      if (redirectState) {
+        $state.go(redirectState);
+      };
     };
 
     $scope.addCustomer = function() {
