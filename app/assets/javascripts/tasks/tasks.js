@@ -125,8 +125,9 @@ config([
         controller: 'TasksCtrl',
 
         resolve: {
-          tasks: ['$state', 'Auth', 'Task', 'Project', 'Customer', 'Status', '$q',
-            function($state, Auth, Task, Project, Customer, Status, $q){
+          tasks: ['$state', '$translate', 'notifications',
+            'Auth', 'Task', 'Project', 'Customer', 'Status', '$q',
+            function($state, $translate, notifications, Auth, Task, Project, Customer, Status, $q){
               var deferred = $q.defer();
               Auth.currentUser().then(
                 function(user){
@@ -138,6 +139,16 @@ config([
                             function(projects){
                               Status.query().$promise.then(
                                 function(statuses){
+                                  if (customers.length == 0) {
+                                    var message = "";
+                                    $translate('no_customers_task_error').then(
+                                      function(no_customers_task_error){
+                                        message = no_customers_task_error;
+                                        notifications.addNotification(message, "danger");
+                                      }
+                                    );
+                                    $state.go('tasks');
+                                  }
                                   deferred.resolve({
                                     tasks: tasks,
                                     customers: customers,

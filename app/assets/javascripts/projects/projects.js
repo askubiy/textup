@@ -42,8 +42,9 @@ config([
         controller: 'ProjectsCtrl',
 
         resolve: {
-          projects: ['$state', 'Auth', 'Project', 'Customer', '$q',
-            function($state, Auth, Project, Customer, $q){
+          projects: ['$state', '$translate', 'notifications',
+            'Auth', 'Project', 'Customer', '$q',
+            function($state, $translate, notifications, Auth, Project, Customer, $q){
               var deferred = $q.defer();
               Auth.currentUser().then(
                 function(user){
@@ -51,6 +52,16 @@ config([
                     function(projects) {
                       Customer.query({user_id: user.id}).$promise.then(
                         function(customers){
+                          if (customers.length == 0) {
+                            var message = "";
+                            $translate('no_customers_project_error').then(
+                              function(no_customers_project_error){
+                                message = no_customers_project_error;
+                                notifications.addNotification(message, "danger");
+                              }
+                            );
+                            $state.go('projects');
+                          }
                           deferred.resolve({
                             projects: projects,
                             customers: customers,

@@ -42,13 +42,24 @@ config([
         controller: 'ContactsCtrl',
 
         resolve: {
-          contact_people: ['$state', 'Auth', 'Customer', 'ContactPerson', '$q',
-            function($state, Auth, Customer, ContactPerson, $q){
+          contact_people: ['$state', 'Auth', '$translate', 'notifications',
+            'Customer', 'ContactPerson', '$q',
+            function($state, Auth, $translate, notifications, Customer, ContactPerson, $q){
               var deferred = $q.defer();
               Auth.currentUser().then(
                 function(user){
                   Customer.query({user_id: user.id}).$promise.then(
                     function(customers){
+                      if (customers.length == 0) {
+                        var message = "";
+                        $translate('no_customers_contact_error').then(
+                          function(no_customers_contact_error){
+                            message = no_customers_contact_error;
+                            notifications.addNotification(message, "danger");
+                          }
+                        );
+                        $state.go('contact_people');
+                      }
                       deferred.resolve({
                         customers: customers,
                         user: user
