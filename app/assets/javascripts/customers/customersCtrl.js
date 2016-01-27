@@ -16,6 +16,8 @@ angular.module('textUp')
     $scope.newCustomerColour = "#FFFFFF";
     $scope.newCustomerName = '';
     $scope.user = customers.user;
+    $scope.sortType = 'name';
+    $scope.sortReverse = false;
 
     $scope.rowClick = function(customer){
       $state.go("show_customer", {customer_id: customer.id});

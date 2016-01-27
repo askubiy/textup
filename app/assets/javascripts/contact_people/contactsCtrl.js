@@ -13,6 +13,8 @@ angular.module('textUp')
     $scope.customers = contact_people.customers;
     $scope.customer = contact_people.customer;
     $scope.user = contact_people.user;
+    $scope.sortType = 'name';
+    $scope.sortReverse = false;
 
     $scope.rowClick = function(contact_person){
       $state.go("show_contact_person", {contact_person_id: contact_person.id});

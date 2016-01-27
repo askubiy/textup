@@ -24,13 +24,25 @@
     <thead>
       <tr>
         <th></th>
-        <th>{{'name' | translate}}</th>
-        <th>{{'added' | translate}}</th>
+        <th>
+          <a ng-click="sortType = 'name'; sortReverse = !sortReverse">
+            {{'name' | translate}}
+            <span ng-show="sortType == 'name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'name' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'created_at'; sortReverse = !sortReverse">
+            {{'added' | translate}}
+            <span ng-show="sortType == 'created_at' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'created_at' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
         <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(customer)" ng-repeat="customer in customers | filter:tableFilter | orderBy: 'name'">
+      <tr ng-click="rowClick(customer)" ng-repeat="customer in customers | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-1"><div class="colorPicker-picker" style="background-color: {{customer.colour}}"></div></td>
         <td class="col-md-4">
           <a href="#/customers/{{customer.id}}/show">{{customer.name}}</a>

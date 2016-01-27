@@ -41,7 +41,7 @@
         <label for="customer-select">{{'customer' | translate}}:</label>
         <select class="form-control" id="customer-select" ng-model="customer"
           ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id"
-          ng-change="changeCustomer(customer)">
+          ng-change="changeCustomer(customer)" required>
           <option value="">--- {{'select_customer' | translate}} ---</option>
         </select>
       </div>

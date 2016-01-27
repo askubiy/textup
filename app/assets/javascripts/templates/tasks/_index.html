@@ -23,17 +23,53 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>{{'name' | translate}}</th>
-        <th>{{'start_time' | translate}}</th>
-        <th>Deadline</th>
-        <th>{{'status' | translate}}</th>
-        <th>{{'project' | translate}}</th>
-        <th>{{'customer' | translate}}</th>
+        <th>
+          <a ng-click="sortType = 'title'; sortReverse = !sortReverse">
+            {{'name' | translate}}
+            <span ng-show="sortType == 'title' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'title' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'started_at'; sortReverse = !sortReverse">
+            {{'start_time' | translate}}
+            <span ng-show="sortType == 'started_at' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'started_at' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'estimated_finish'; sortReverse = !sortReverse">
+            Deadline
+            <span ng-show="sortType == 'estimated_finish' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'estimated_finish' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'status.status_type'; sortReverse = !sortReverse">
+            {{'status' | translate}}
+            <span ng-show="sortType == 'status.status_type' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'status.status_type' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'project.title'; sortReverse = !sortReverse">
+            {{'project' | translate}}
+            <span ng-show="sortType == 'project.title' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'project.title' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'customer.name'; sortReverse = !sortReverse">
+            {{'customer' | translate}}
+            <span ng-show="sortType == 'customer.name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'customer.name' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
         <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(task)" ng-repeat="task in tasks | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="rowClick(task)" ng-repeat="task in tasks | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-2">
           <a href="#/tasks/{{task.id}}/show">
             {{task.title}}
@@ -53,13 +89,13 @@
             {{task.customer ? task.customer.name : '' }}
           </a>
         </td>
-        <td class="col-md-2">
+        <td class="col-md-1">
           <a href="#/tasks/{{task.id}}/edit" class="btn btn-warning"
             ng-click="$event.stopPropagation()">
-            {{'edit' | translate}} </a>
+            <span class="glyphicon glyphicon-pencil"></span> </a>
           <button class="btn btn-danger"
             ng-click="destroyTask(task); $event.stopPropagation();">
-            {{'delete' | translate}}
+            <span class="glyphicon glyphicon-trash"></span>
           </button>
         </td>
       </tr>

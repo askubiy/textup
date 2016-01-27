@@ -16,6 +16,8 @@ angular.module('textUp')
     $scope.statuses = tasks.statuses;
     $scope.customers = tasks.customers;
     $scope.user = tasks.user;
+    $scope.sortType = 'title';
+    $scope.sortReverse = false;
     var allProjects = [];
     angular.copy(tasks.projects, allProjects);
 
@@ -30,7 +32,6 @@ angular.module('textUp')
     };
 
     $scope.changeCustomer = function(customer){
-      console.log("changeCustomer");
       if (customer){
         $scope.projects = customer.projects;
       } else {
@@ -64,6 +65,7 @@ angular.module('textUp')
 
     $scope.addTask = function(redirectState) {
       if($scope.newTaskTitle === '') { return; };
+      if(!$scope.customer) { return; };
       var task = new Task({
         user_id: $scope.user.id,
         project_id: ($scope.project ? $scope.project.id : null),

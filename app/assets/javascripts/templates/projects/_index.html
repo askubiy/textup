@@ -23,14 +23,32 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>{{'project_name' | translate}}</th>
-        <th>{{'added' | translate}}</th>
-        <th>{{'customer' | translate}}</th>
+        <th>
+          <a ng-click="sortType = 'title'; sortReverse = !sortReverse">
+            {{'project_name' | translate}}
+            <span ng-show="sortType == 'title' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'title' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'created_at'; sortReverse = !sortReverse">
+            {{'added' | translate}}
+            <span ng-show="sortType == 'created_at' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'created_at' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'customer.name'; sortReverse = !sortReverse">
+            {{'customer' | translate}}
+            <span ng-show="sortType == 'customer.name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'customer.name' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
         <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(project)" ng-repeat="project in projects | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="rowClick(project)" ng-repeat="project in projects | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-2">
           <a href="#/projects/{{project.id}}/show">{{project.title}}
         </td>

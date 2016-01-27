@@ -23,16 +23,46 @@
   <table class="table table-hover table-vcenter">
     <thead>
       <tr>
-        <th>{{'first_name' | translate}}</th>
-        <th>{{'position' | translate}}</th>
-        <th>Email</th>
-        <th>{{'phone' | translate}}</th>
-        <th>{{'customer' | translate}}</th>
+        <th>
+          <a ng-click="sortType = 'name'; sortReverse = !sortReverse">
+            {{'first_name' | translate}}
+            <span ng-show="sortType == 'name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'name' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'position'; sortReverse = !sortReverse">
+            {{'position' | translate}}
+            <span ng-show="sortType == 'position' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'position' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'email'; sortReverse = !sortReverse">
+            Email
+            <span ng-show="sortType == 'email' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'email' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'phone'; sortReverse = !sortReverse">
+            {{'phone' | translate}}
+            <span ng-show="sortType == 'phone' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'phone' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
+        <th>
+          <a ng-click="sortType = 'customer.name'; sortReverse = !sortReverse">
+            {{'customer' | translate}}
+            <span ng-show="sortType == 'customer.name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            <span ng-show="sortType == 'customer.name' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+          </a>
+        </th>
         <th>{{'actions' | translate}}</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(person)" ng-repeat="person in contact_people | filter:tableFilter | orderBy: 'name'">
+      <tr ng-click="rowClick(person)" ng-repeat="person in contact_people | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-2">
           <a href="#/contact_people/{{person.id}}/show">
             {{person.name}}

@@ -24,6 +24,16 @@
   cursor: pointer;
 }
 
+th a {
+  cursor: pointer;
+  color: #449D44;
+}
+
+th a:hover {
+  cursor: pointer;
+  color: #EC971F;
+}
+
 .badge-important {
   background-color: #b94a48;
 }

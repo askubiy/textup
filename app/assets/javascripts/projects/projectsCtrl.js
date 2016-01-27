@@ -17,6 +17,8 @@ angular.module('textUp')
     $scope.user = projects.user;
     $scope.newProjectTitle = '';
     $scope.newProjectDescription = '';
+    $scope.sortType = 'title';
+    $scope.sortReverse = false;
 
     $scope.rowClick = function(project){
       $state.go("show_project", {project_id: project.id});
