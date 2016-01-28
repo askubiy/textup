@@ -27,9 +27,12 @@ angular.module('textUp')
       });
     };
 
-    o.formatEvents = function() {
+    o.formatEvents = function(excludeTypes) {
       var formattedEvents = [];
       angular.forEach(o.events, function(rawEvent) {
+        if (excludeTypes && excludeTypes.indexOf(rawEvent.status.status_type) != -1) {
+          return;
+        }
         var formatedEvent = {
           id: rawEvent.id,
           title: rawEvent.title + " (" + (rawEvent.project ? rawEvent.project.title : rawEvent.customer.name) + ")",

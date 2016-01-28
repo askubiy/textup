@@ -3,6 +3,14 @@
 </div>
 
 <div ng-controller="CalendarCtrl as vm">
+  <div class="text-right">
+    <label> {{'show_statuses' | translate}}: <span style="color: #7C007C">'{{'done' | translate}}'</span>:
+      <input type="checkbox" ng-model="showDone" ng-change="changeEvents()">
+    </label>
+    <label> <span style="color: #A01E1E">'{{'paid' | translate}}'</span>:
+      <input type="checkbox" ng-model="showPaid" ng-change="changeEvents()">
+    </label>
+  </div>
   <h2 class="text-center">{{ vm.calendarTitle }}</h2>
 
   <div class="row">

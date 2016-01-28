@@ -30,6 +30,24 @@ angular.module('textUp')
       en: originali18n
     };
 
+    $scope.excludeTypes = function(){
+      var excludeTypes = [];
+      if (!$scope.showDone) {
+        excludeTypes.push("done");
+      }
+      if (!$scope.showPaid) {
+        excludeTypes.push("paid");
+      }
+      return excludeTypes;
+    };
+
+    $scope.showDone = true;
+    $scope.showPaid = true;
+
+    $scope.changeEvents = function(){
+      vm.events = $scope.calendarEvents.formatEvents($scope.excludeTypes());
+    };
+
     calendarConfig.i18nStrings = locales[I18n.locale];
     vm.calendarView = 'month';
     vm.viewDate = new Date();

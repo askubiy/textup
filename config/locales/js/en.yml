@@ -91,3 +91,4 @@ en:
   no_customers_project_error: "Create at least one Customer to be able to create projects"
   no_customers_task_error: "Create at least one Customer to be able to create tasks"
   no_customers_contact_error: "Create at least one Customer to be able to create contacts"
+  show_statuses: "Show statuses"
