@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       end
     end
     resources :projects, :defaults => { :format => 'json' }
-    resources :tasks, :defaults => { :format => 'json' }
+    resources :tasks, :defaults => { :format => 'json' } do
+      resources :comments, :defaults => { :format => 'json' }
+    end
     resources :contact_people, :defaults => { :format => 'json' }
   end
 

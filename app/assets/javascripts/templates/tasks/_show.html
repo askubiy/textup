@@ -8,7 +8,7 @@
   <a class='delete' ng-click="destroyTask(task, 'tasks')"><span class="glyphicon glyphicon-remove"></span> {{'delete' | translate}} </a>
 </div>
 
-<div ng-model="tasks">
+<div>
   <div class="row">
     <div class="col-md-8">
       <table class="table table-stripped table-bordered table-vcenter">
@@ -56,6 +56,46 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h3 translate>comments</h3>
+  <div class="comments-list">
+    <div class="comment" ng-repeat="comment in task.comments | orderBy: '-created_at'">
+      <div class="text-right actions">
+        <span class="comment-date">
+          {{'added' | translate}} {{comment.created_at | date: "dd/MM/yyyy HH:mm"}}
+          <a ng-click="editorEnabled=!editorEnabled; currentEdit=comment.message;"><span class="glyphicon glyphicon-pencil"></span></a>
+          <a class="delete" ng-click="destroyComment(comment)"><span class="glyphicon glyphicon-remove"></span></a>
+        </span>
+      </div>
+      <p ng-hide="editorEnabled">{{comment.message}}</p>
+      <div ng-show="editorEnabled">
+        <textarea class="comment-edit" type="textarea" rows="7" ng-model="currentEdit"></textarea>
+        <br/>
+        <div class="text-right actions">
+          <a ng-click="comment.message = currentEdit; updateComment(comment); editorEnabled=!editorEnabled">
+            <span class="glyphicon glyphicon-ok"></span>
+          </a>
+          <a ng-click="editorEnabled=!editorEnabled" class="delete">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    </br>
+  </div>
+  <div class="new-comment">
+    <div class="inner">
+      <h4 translate>add_comment</h4>
+      <textarea type="textarea" rows="5" ng-model="newComment"></textarea>
+      <div class="text-right">
+        <button class="btn btn-success" ng-click="addComment()"
+          ng-disabled="!newComment || newComment == ''">{{'add' | translate}}
+        </button>
+      </div>
     </div>
   </div>
 </div>

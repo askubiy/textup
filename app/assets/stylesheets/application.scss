@@ -24,9 +24,21 @@
   cursor: pointer;
 }
 
+a {
+  cursor: pointer;
+}
+
 th a {
   cursor: pointer;
   color: #449D44;
+}
+
+span.paid {
+  color: #A01E1E;
+}
+
+span.done {
+  color: #7C007C;
 }
 
 th a:hover {
@@ -36,6 +48,41 @@ th a:hover {
 
 .badge-important {
   background-color: #b94a48;
+}
+
+div.comments-list {
+  max-height: 350px;
+  overflow: auto;
+  width: 55%;
+  float: left;
+}
+
+div.comment {
+  width: 97%;
+  margin: 4px 0px;
+  padding: 8px;
+}
+
+div.new-comment {
+  max-height: 300px;
+  overflow: auto;
+  width: 35%;
+  .inner {
+    padding-left: 15px;
+    textarea {
+      width: 100%
+    }
+  }
+}
+
+.comment-date {
+  font-size: 0.8em;
+  color: #333399;
+  font-style: italic;
+}
+
+.comment-edit {
+  width: 100%;
 }
 
 .top-menu {

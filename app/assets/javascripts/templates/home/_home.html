@@ -4,10 +4,10 @@
 
 <div ng-controller="CalendarCtrl as vm">
   <div class="text-right">
-    <label> {{'show_statuses' | translate}}: <span style="color: #7C007C">'{{'done' | translate}}'</span>:
+    <label> {{'show_statuses' | translate}}: <span class="done">'{{'done' | translate}}'</span>:
       <input type="checkbox" ng-model="showDone" ng-change="changeEvents()">
     </label>
-    <label> <span style="color: #A01E1E">'{{'paid' | translate}}'</span>:
+    <label> <span class="paid">'{{'paid' | translate}}'</span>:
       <input type="checkbox" ng-model="showPaid" ng-change="changeEvents()">
     </label>
   </div>

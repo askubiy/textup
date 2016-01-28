@@ -7,7 +7,7 @@ class TasksController < ApplicationController
 
   def show
     @task = current_user.tasks.find(params[:id])
-    respond_with @task.to_json(:include => [:project, :status, :customer])
+    respond_with @task.to_json(:include => [:project, :status, :customer, :comments])
   end
 
   def create
