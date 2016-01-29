@@ -14,6 +14,11 @@ angular.module('textUp')
 
     $scope.signedIn = Auth.isAuthenticated;
     $scope.logout = Auth.logout;
+    $scope.testRegex = function(str){
+      var re = new RegExp(str, "g");
+      return re.test($scope.state_name)
+    };
+
     Auth.currentUser().then(function (user){
       $scope.user = user;
     });

@@ -20,14 +20,9 @@ angular.module('textUp')
     $scope.sortType = 'title';
     $scope.sortReverse = false;
 
-    $scope.rowClick = function(project){
-      $state.go("show_project", {project_id: project.id});
+    $scope.rowClick = function(state, options){
+      $state.go(state, options);
     };
-
-    $scope.taskRowClick = function(task){
-      $state.go("show_task", {task_id: task.id});
-    };
-
 
     $scope.destroyProject = function(project, redirectState) {
       $translate(['confirm_delete', 'project', 'deleted_success']).then(

@@ -62,7 +62,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(person)" ng-repeat="person in contact_people | filter:tableFilter | orderBy:sortType:sortReverse">
+      <tr ng-click="rowClick('show_contact_person', {contact_person_id: person.id})"
+        class="row-clickable" ng-repeat="person in contact_people | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-2">
           <a href="#/contact_people/{{person.id}}/show">
             {{person.name}}

@@ -60,7 +60,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="taskRowClick(task)" ng-repeat="task in project.tasks | filter:tableFilter | orderBy: 'title'">
+      <tr ng-click="rowClick('show_task', {task_id: task.id})" class="row-clickable"
+        ng-repeat="task in project.tasks | filter:tableFilter | orderBy: 'title'">
         <td class="col-md-3">
           <a href="#/tasks/{{task.id}}/show">{{task.title}}</a>
         </td>

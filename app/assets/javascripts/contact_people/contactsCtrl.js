@@ -16,8 +16,8 @@ angular.module('textUp')
     $scope.sortType = 'name';
     $scope.sortReverse = false;
 
-    $scope.rowClick = function(contact_person){
-      $state.go("show_contact_person", {contact_person_id: contact_person.id});
+    $scope.rowClick = function(state, options){
+      $state.go(state, options);
     };
 
     $scope.destroyContact = function(contact_person, redirectState) {

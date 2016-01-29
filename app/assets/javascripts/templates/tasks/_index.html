@@ -69,7 +69,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(task)" ng-repeat="task in tasks | filter:tableFilter | orderBy:sortType:sortReverse">
+      <tr ng-click="rowClick('show_task', {task_id: task.id})" class="row-clickable"
+        ng-repeat="task in tasks | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-2">
           <a href="#/tasks/{{task.id}}/show">
             {{task.title}}

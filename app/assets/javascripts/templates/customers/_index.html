@@ -42,7 +42,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-click="rowClick(customer)" ng-repeat="customer in customers | filter:tableFilter | orderBy:sortType:sortReverse">
+      <tr ng-click="rowClick('show_customer', {customer_id: customer.id})" class="row-clickable"
+        ng-repeat="customer in customers | filter:tableFilter | orderBy:sortType:sortReverse">
         <td class="col-md-1"><div class="colorPicker-picker" style="background-color: {{customer.colour}}"></div></td>
         <td class="col-md-4">
           <a href="#/customers/{{customer.id}}/show">{{customer.name}}</a>

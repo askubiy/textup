@@ -20,6 +20,10 @@
 @import "bootstrap";
 @import 'bootstrap-datetimepicker';
 
+.row-clickable {
+  cursor: pointer;
+}
+
 .navbar-nav > li > a {
   cursor: pointer;
 }

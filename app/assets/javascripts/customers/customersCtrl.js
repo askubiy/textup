@@ -19,12 +19,8 @@ angular.module('textUp')
     $scope.sortType = 'name';
     $scope.sortReverse = false;
 
-    $scope.rowClick = function(customer){
-      $state.go("show_customer", {customer_id: customer.id});
-    };
-
-    $scope.projectRowClick = function(project){
-      $state.go("show_project", {project_id: project.id});
+    $scope.rowClick = function(state, options){
+      $state.go(state, options);
     };
 
     $scope.destroyCustomer = function(customer, redirectState) {

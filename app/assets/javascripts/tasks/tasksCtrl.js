@@ -22,8 +22,8 @@ angular.module('textUp')
     var allProjects = [];
     angular.copy(tasks.projects, allProjects);
 
-    $scope.rowClick = function(task){
-      $state.go("show_task", {task_id: task.id});
+    $scope.rowClick = function(state, options){
+      $state.go(state, options);
     };
 
     if (tasks.statuses) {
@@ -120,12 +120,13 @@ angular.module('textUp')
     };
 
     $scope.addTask = function(redirectState) {
+      console.log("Add task ---------");
       if($scope.newTaskTitle === '') { return; };
-      if(!$scope.customer) { return; };
+      if(!$scope.customer && !$scope.project) { return; };
       var task = new Task({
         user_id: $scope.user.id,
         project_id: ($scope.project ? $scope.project.id : null),
-        customer_id: ($scope.customer ? $scope.customer.id : null),
+        customer_id: ($scope.customer ? $scope.customer.id : $scope.project.customer_id),
         status_id: $scope.status.id,
         title: $scope.newTaskTitle,
         description: $scope.newTaskDescription,
