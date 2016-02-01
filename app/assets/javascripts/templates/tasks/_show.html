@@ -58,90 +58,47 @@
       </table>
     </div>
     <div class="col-md-4">
-      <div>
-        <h4><span class="glyphicon glyphicon-usd" style="color: #ec971f"></span> Payments</h4>
+      <div style="width: 100%; height: 42px;">
+        <div style="float: left; height: 100%;">
+          <h4><span class="glyphicon glyphicon-usd usd-sign"></span> {{'payments' | translate}}</h4>
+        </div>
+        <div style="float: right; height: 100%; padding-top: 12px; padding-bottom: 12px;">
+          <a href="#/tasks/{{task.id}}/checks/new" style="margin-top: 10px; margin-bottom: 10px;">{{'add_payment' | translate}}</a>
+        </div>
       </div>
-      <div style="margin: 10px 5px; max-height: 350px; overflow: auto;" >
+      <div class="checks-list">
         <table class="table">
           <tbody>
-            <tr class="success">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD">29/01/2015</span></td>
-              <td><span>Оплачен</span></td>
-              <td><span>200</span></td>
-              <td><span class="label label-info">USD</span></td>
-            </tr>
-            <tr class="warning">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>1000</span></td>
-              <td><span class="label label-info">UAH</span></td>
-            </tr>
-            <tr class="danger">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>5000</span></td>
-              <td><span class="label label-info">RUR</span></td>
-            </tr>
-            <tr class="warning">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>1000</span></td>
-              <td><span class="label label-info">UAH</span></td>
-            </tr>
-            <tr class="success">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD">29/01/2015</span></td>
-              <td><span>Оплачен</span></td>
-              <td><span>200</span></td>
-              <td><span class="label label-info">USD</span></td>
-            </tr>
-            <tr class="danger">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>5000</span></td>
-              <td><span class="label label-info">RUR</span></td>
-            </tr>
-            <tr class="warning">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>1000</span></td>
-              <td><span class="label label-info">UAH</span></td>
-            </tr>
-            <tr class="success">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD">29/01/2015</span></td>
-              <td><span>Оплачен</span></td>
-              <td><span>200</span></td>
-              <td><span class="label label-info">USD</span></td>
-            </tr>
-            <tr class="danger">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>5000</span></td>
-              <td><span class="label label-info">RUR</span></td>
-            </tr>
-            <tr class="warning">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>1000</span></td>
-              <td><span class="label label-info">UAH</span></td>
-            </tr>
-            <tr class="warning">
-              <td><span style="font-weight: bold">#</span></td>
-              <td><span style="color: #4E97CD"> 29/01/2015</span></td>
-              <td><span>Не оплачен</span></td>
-              <td><span>1000</span></td>
-              <td><span class="label label-info">UAH</span></td>
+            <tr ng-repeat="check in task.checks | orderBy: '-created_at'"
+              ng-class="{success: check.check_status.name == 'paid',
+                warning: check.check_status.name == 'unpaid'}">
+              <td><span class="checks-hash">#</span></td>
+              <td>
+                <span class="check-date">
+                  {{check.created_at | date: "dd/MM/yyyy"}}
+                </span>
+              </td>
+              <td><span>{{(check.check_status.name + '_check') | translate}}</span></td>
+              <td><span>{{check.price}}</span></td>
+              <td>
+                <span class="label label-info">
+                  {{check.currency.abbreviation}}
+                </span>
+              </td>
             </tr>
          </tbody>
+        </table>
+      </div>
+      <div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><span class="check-total">{{'total' | translate}}:</span></td>
+              <td ng-repeat="(key, value) in task.checks_totals">
+                <span class="check-paid">{{value.paid || "--"}}</span>/<span class="check-unpaid">{{value.unpaid || "--"}}</span>
+                <span class="label label-info">{{key}}</span></td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

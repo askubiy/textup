@@ -11,10 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128111325) do
+ActiveRecord::Schema.define(version: 20160201095433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "check_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "check_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "checks", force: :cascade do |t|
+    t.integer  "check_status_id"
+    t.integer  "check_type_id"
+    t.integer  "task_id"
+    t.integer  "currency_id"
+    t.decimal  "price"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "checks", ["check_status_id"], name: "index_checks_on_check_status_id", using: :btree
+  add_index "checks", ["check_type_id"], name: "index_checks_on_check_type_id", using: :btree
+  add_index "checks", ["currency_id"], name: "index_checks_on_currency_id", using: :btree
+  add_index "checks", ["task_id"], name: "index_checks_on_task_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "message"
@@ -41,6 +68,13 @@ ActiveRecord::Schema.define(version: 20160128111325) do
 
   add_index "contact_people", ["customer_id"], name: "index_contact_people_on_customer_id", using: :btree
   add_index "contact_people", ["user_id"], name: "index_contact_people_on_user_id", using: :btree
+
+  create_table "currencies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbreviation"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"

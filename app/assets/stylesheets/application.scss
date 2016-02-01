@@ -24,6 +24,36 @@
   cursor: pointer;
 }
 
+.usd-sign {
+  color: #ec971f;
+}
+
+.checks-list {
+  margin: 10px 5px;
+  max-height: 350px;
+  overflow: auto;
+}
+
+.checks-hash {
+  font-weight: bold;
+}
+
+.check-date {
+  color: #4E97CD;
+}
+
+.check-total {
+  font-weight: bold;
+}
+
+.check-paid {
+  color: #449D44;
+}
+
+.check-unpaid {
+  color: #EC971F;
+}
+
 .navbar-nav > li > a {
   cursor: pointer;
 }

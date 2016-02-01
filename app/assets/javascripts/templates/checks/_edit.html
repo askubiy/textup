@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h1 translate>edit_payment</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <form class="project-form">
+      <div class="form-group">
+        <label for="title">{{'price' | translate}}:</label>
+        <input type="text" autocomplete="off" class="form-control"
+          id="title" ng-model="check.price" placeholder="{{'price' | translate}}">
+      </div>
+
+      <div class="form-group">
+        <label for="status-select">{{'status' | translate}}:</label>
+        <select class="form-control" id="status-select" ng-model="status"
+          ng-options="(status.name + '_check' | translate) for status in check_statuses | orderBy:'id' track by status.id" required>
+          <option value="">--- {{'select_status' | translate}} ---</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="currency-select">{{'currency' | translate}}:</label>
+        <select class="form-control" id="currency-select" ng-model="currency" required
+          ng-options="currency.abbreviation for currency in currencies | orderBy:'abbreviation' track by currency.id">
+          <option value="">--- {{'select_currency' | translate}} ---</option>
+        </select>
+      </div>
+
+      <input ng-click="addPayment()" type="submit"
+        class="btn btn-success" value="{{'add' | translate}}">
+      <a href='#/tasks/{{task.id}}/show'> {{'go_to_task' | translate}} </a>
+    </form>
+  </div>
+</div>

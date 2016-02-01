@@ -120,7 +120,6 @@ angular.module('textUp')
     };
 
     $scope.addTask = function(redirectState) {
-      console.log("Add task ---------");
       if($scope.newTaskTitle === '') { return; };
       if(!$scope.customer && !$scope.project) { return; };
       var task = new Task({

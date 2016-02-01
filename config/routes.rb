@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :check_statuses, :defaults => { :format => 'json' }, only: [:index]
+  resources :currencies, :defaults => { :format => 'json' }, only: [:index]
+  resources :check_types, :defaults => { :format => 'json' }, only: [:index]
+
   devise_for :users
   resources :users
 
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
     end
     resources :projects, :defaults => { :format => 'json' }
     resources :tasks, :defaults => { :format => 'json' } do
+      resources :checks, :defaults => { :format => 'json' }
       resources :comments, :defaults => { :format => 'json' }
     end
     resources :contact_people, :defaults => { :format => 'json' }

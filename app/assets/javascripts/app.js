@@ -13,7 +13,8 @@ var app = angular.module('textUp', [
   'textUp.customers',
   'textUp.projects',
   'textUp.tasks',
-  'textUp.contact_people'
+  'textUp.contact_people',
+  'textUp.checks'
 ])
 .config([
   '$stateProvider',
