@@ -67,9 +67,11 @@
         </div>
       </div>
       <div class="checks-list">
-        <table class="table">
+        <table class="table table-hover">
           <tbody>
-            <tr ng-repeat="check in task.checks | orderBy: '-created_at'"
+            <tr ng-click="paymentRowClick('edit_check', {task_id: task.id, check_id: check.id})"
+              class="row-clickable"
+              ng-repeat="check in task.checks | orderBy: '-created_at'"
               ng-class="{success: check.check_status.name == 'paid',
                 warning: check.check_status.name == 'unpaid'}">
               <td><span class="checks-hash">#</span></td>

@@ -26,6 +26,10 @@ angular.module('textUp')
       $state.go(state, options);
     };
 
+    $scope.paymentRowClick = function(state, options){
+      $state.go(state, options);
+    };
+
     if (tasks.statuses) {
       tasks.statuses.$promise.then(function(statuses) {
         $scope.status = statuses[0];

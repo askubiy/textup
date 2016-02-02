@@ -21,14 +21,20 @@ angular.module('textUp.checks', ['ui.router'])
                     function(task){
                       CheckStatus.query().$promise.then(
                         function(checkStatuses){
-                          Currency.query().$promise.then(
-                            function(currencies){
-                              deferred.resolve({
-                                task: task,
-                                currencies: currencies,
-                                check_statuses: checkStatuses,
-                                user: user
-                              });
+                          Check.get({ task_id: $stateParams.task_id,
+                            user_id: user.id, id: $stateParams.check_id}).$promise.then(
+                            function(check){
+                              Currency.query().$promise.then(
+                                function(currencies){
+                                  deferred.resolve({
+                                    task: task,
+                                    check: check,
+                                    currencies: currencies,
+                                    check_statuses: checkStatuses,
+                                    user: user
+                                  });
+                                }
+                              );
                             }
                           );
                         }

@@ -2,14 +2,14 @@ class ChecksController < ApplicationController
 
   def show
     @task = current_user.tasks.find(params[:task_id])
-    @check = @task.find(params[:id])
+    @check = @task.checks.find(params[:id])
     respond_with @check.to_json(:include => [:task,
       :check_status, :check_type, :currency])
   end
 
   def update
     @task = current_user.tasks.find(params[:task_id])
-    @check = @task.find(params[:id])
+    @check = @task.checks.find(params[:id])
     @check.update_attributes(check_params)
     respond_with @check.to_json()
   end
@@ -22,7 +22,7 @@ class ChecksController < ApplicationController
 
   def destroy
     @task = current_user.tasks.find(params[:task_id])
-    @check = @task.find(params[:id])
+    @check = @task.checks.find(params[:id])
     @check.destroy
     respond_with @check
   end
