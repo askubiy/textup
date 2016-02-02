@@ -26,6 +26,7 @@ angular.module('textUp.checks', ['ui.router'])
                             function(check){
                               Currency.query().$promise.then(
                                 function(currencies){
+                                  check.price = angular.fromJson(check.price);
                                   deferred.resolve({
                                     task: task,
                                     check: check,

@@ -104,3 +104,6 @@ ru:
   payment: "Платёж"
   price: "Сумма"
   edit_payment: "Редактировать платёж"
+  error_number_greater: "Введите число больше чем"
+  field_not_filled: "Пожалуйста, заполните это поле"
+  item_not_selected: "Пожалуйста, выберите значение из списка"

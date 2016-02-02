@@ -104,3 +104,6 @@ en:
   payment: "Payment"
   price: "Price"
   edit_payment: "Edit Payment"
+  error_number_greater: "Input correct number greater than"
+  field_not_filled: "Please fill out this field"
+  item_not_selected: "Please select item from list"

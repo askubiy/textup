@@ -17,8 +17,9 @@ angular.module('textUp')
     $scope.currencies = checks.currencies;
 
     $scope.addPayment = function() {
-      if($scope.newPrice === '') { return; };
-      if(!$scope.status && !$scope.currency) { return; };
+      if(!$scope.newPrice || !$scope.status || !$scope.currency) {
+        return;
+      };
       var check = new Check({
         task_id: $scope.task.id,
         user_id: $scope.user.id,
@@ -52,26 +53,10 @@ angular.module('textUp')
       );
     };
 
-    $scope.destroyTask = function(task, redirectState) {
-      $translate(['confirm_delete', 'task', 'deleted_success']).then(
-        function(translations){
-          if (confirm(translations.confirm_delete)) {
-            Task.remove({user_id: $scope.user.id, id: task.id}, function() {
-              $scope.tasks.splice($scope.tasks.indexOf(task), 1);
-              var message = translations.task + " '" +
-                task.title + "' " + translations.deleted_success;
-              notifications.addNotification(message, "success");
-              if (redirectState) {
-                $state.go(redirectState);
-              };
-            });
-          };
-        }
-      );
-    };
-
     $scope.updatePayment = function() {
-      if($scope.check.price === '') { return; };
+      if(!$scope.check.price || !$scope.status || !$scope.currency) {
+        return;
+      };
       $scope.check.check_status_id = $scope.status.id;
       $scope.check.currency_id = $scope.currency.id;
       Check.update({ user_id: $scope.user.id,

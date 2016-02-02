@@ -4,27 +4,45 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="project-form">
+    <form name="newPayment" class="form-validation" novalidate>
       <div class="form-group">
         <label for="title">{{'price' | translate}}:</label>
-        <input type="text" autocomplete="off" class="form-control"
-          id="title" ng-model="newPrice" placeholder="{{'price' | translate}}">
+        <input name="price" type="number" autocomplete="off" class="form-control" min="0"
+          id="title" ng-model="newPrice" required placeholder="{{'price' | translate}}">
+        <div ng-show="newPayment.$submitted || newPayment.price.$touched">
+          <div ng-show="newPayment.price.$error.number" class="error-text">
+            {{'error_number_greater' | translate}} 0
+          </div>
+          <div ng-show="newPayment.price.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="status-select">{{'status' | translate}}:</label>
-        <select class="form-control" id="status-select" ng-model="status"
-          ng-options="(status.name + '_check' | translate) for status in check_statuses | orderBy:'id' track by status.id" required>
+        <select class="form-control" id="status-select" ng-model="status" name="status" required
+          ng-options="(status.name + '_check' | translate) for status in check_statuses | orderBy:'id' track by status.id">
           <option value="">--- {{'select_status' | translate}} ---</option>
         </select>
+        <div ng-show="newPayment.$submitted || newPayment.status.$touched">
+          <div ng-show="newPayment.status.$error.required" class="error-text">
+            {{'item_not_selected' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="currency-select">{{'currency' | translate}}:</label>
-        <select class="form-control" id="currency-select" ng-model="currency" required
+        <select class="form-control" id="currency-select" ng-model="currency" name="currency" required
           ng-options="currency.abbreviation for currency in currencies | orderBy:'abbreviation' track by currency.id">
           <option value="">--- {{'select_currency' | translate}} ---</option>
         </select>
+        <div ng-show="newPayment.$submitted || newPayment.currency.$touched">
+          <div ng-show="newPayment.currency.$error.required" class="error-text">
+            {{'item_not_selected' | translate}}
+          </div>
+        </div>
       </div>
 
       <input ng-click="addPayment()" type="submit"
