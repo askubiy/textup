@@ -11,8 +11,8 @@ angular.module('textUp')
     $scope.task = checks.task;
     $scope.user = checks.user;
     $scope.check = checks.check;
-    $scope.status = checks.check.check_status;
-    $scope.currency = checks.check.currency;
+    $scope.status = checks.check ? checks.check.check_status : undefined;
+    $scope.currency = checks.check ? checks.check.currency : undefined;
     $scope.check_statuses = checks.check_statuses;
     $scope.currencies = checks.currencies;
 
