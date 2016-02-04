@@ -12,7 +12,8 @@
       <div class="form-group">
         <label for="title">{{'price' | translate}}:</label>
         <input name="price" type="number" autocomplete="off" class="form-control" min="0"
-          id="title" ng-model="check.price" ng-value="angular.fromJson(check.price)" placeholder="{{'price' | translate}}" required>
+          ng-class="{'ng-touched': editPayment.$submitted}" id="title" ng-model="check.price"
+          ng-value="angular.fromJson(check.price)" placeholder="{{'price' | translate}}" required>
         <div ng-show="editPayment.$submitted || editPayment.price.$touched">
           <div ng-show="editPayment.price.$error.number" class="error-text">
             {{'error_number_greater' | translate}} 0

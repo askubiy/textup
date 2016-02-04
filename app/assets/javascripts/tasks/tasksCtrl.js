@@ -124,8 +124,12 @@ angular.module('textUp')
     };
 
     $scope.addTask = function(redirectState) {
-      if($scope.newTaskTitle === '') { return; };
-      if(!$scope.customer && !$scope.project) { return; };
+      if(!$scope.newTaskTitle || $scope.newTaskTitle === ''
+        || !$scope.customer || !$scope.status || !$scope.startDateTime
+        || !$scope.estimatedFinishDateTime) {
+        return;
+      };
+
       var task = new Task({
         user_id: $scope.user.id,
         project_id: ($scope.project ? $scope.project.id : null),
@@ -137,10 +141,6 @@ angular.module('textUp')
         estimated_finish: $scope.estimatedFinishDateTime,
       });
       task.$save().then(function(task){
-        $scope.newTaskTitle = '';
-        $scope.newTaskDescription = '';
-        $scope.startDateTime = undefined;
-        $scope.estimatedFinishDateTime = undefined;
         $translate(['task', 'added_success']).then(
           function(translations){
             var message = translations.task + " '" +
@@ -161,7 +161,11 @@ angular.module('textUp')
     };
 
     $scope.updateTask = function() {
-      if($scope.task.title === '') { return; };
+      if(!$scope.task.title || $scope.task.title === ''
+        || !$scope.customer || !$scope.task.status ||
+        !$scope.task.started_at || !$scope.task.estimated_finish) {
+        return;
+      };
       $scope.task.project_id = ($scope.project ? $scope.project.id : null);
       $scope.task.status_id = $scope.task.status.id;
       $scope.task.customer_id = ($scope.customer ? $scope.customer.id : null);

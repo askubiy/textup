@@ -4,11 +4,18 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="customer-form">
+    <form class="project-form form-validation" name="newCustomerProject" novalidate>
       <div class="form-group">
         <label for="title">{{'project_name' | translate}}:</label>
-        <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newProjectTitle" placeholder="{{'project_name' | translate}}">
+        <input name="projectTitle" type="text" ng-class="{'ng-touched': newCustomerProject.$submitted}"
+          autocomplete="off" class="form-control"
+          required="" id="title" ng-model="newProjectTitle"
+          placeholder="{{'project_name' | translate}}">
+        <div ng-show="newCustomerProject.$submitted || newCustomerProject.projectTitle.$touched">
+          <div ng-show="newCustomerProject.projectTitle.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -25,7 +32,7 @@
           rows="5" id="description" placeholder="{{'description' | translate}}"></textarea>
       </div>
 
-      <input ng-click="addProjectForCustomer()" type="submit"
+      <input ng-click="addProject()" type="submit"
         class="btn btn-success" value="{{'add' | translate}}">
       <a href='/#projects'> {{'go_to_project_list' | translate}} </a>
     </form>

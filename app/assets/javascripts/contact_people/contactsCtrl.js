@@ -38,7 +38,10 @@ angular.module('textUp')
     };
 
     $scope.addContact = function(redirectState) {
-      if($scope.newContactFirstName === '') { return; };
+      if(!$scope.customer || !$scope.newContactFirstName ||
+        $scope.newContactFirstName === '') {
+        return;
+      };
       var contact_person = new ContactPerson({
         user_id: $scope.user.id,
         customer_id: $scope.customer.id,
@@ -73,7 +76,10 @@ angular.module('textUp')
     };
 
     $scope.updateContact = function() {
-      if($scope.contact_person.first_name === '') { return; };
+      if(!$scope.contact_person.customer || !$scope.contact_person.first_name ||
+        $scope.contact_person.first_name === '') {
+        return;
+      };
       $scope.contact_person.customer_id = $scope.contact_person.customer.id;
       ContactPerson.update({ id: $scope.contact_person.id }, $scope.contact_person)
         .$promise.then(

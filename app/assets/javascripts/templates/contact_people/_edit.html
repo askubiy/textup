@@ -4,11 +4,17 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="contact-form">
+    <form class="contact-form form-validation" name="editContact" novalidate>
       <div class="form-group">
         <label for="first-name">{{'first_name' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="first-name" ng-model="contact_person.first_name" placeholder="{{'first_name' | translate}}">
+          id="first-name" ng-model="contact_person.first_name" required=""
+          name="firstName" placeholder="{{'first_name' | translate}}">
+        <div ng-show="editContact.$submitted || editContact.firstName.$touched">
+          <div ng-show="editContact.firstName.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -25,10 +31,16 @@
 
       <div class="form-group">
         <label for="customer-select">{{'customer' | translate}}:</label>
-        <select class="form-control" id="customer-select" ng-model="contact_person.customer"
-          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
+        <select class="form-control" id="customer-select" name="customer"
+          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id"
+          ng-model="contact_person.customer" required="">
           <option value="">--- {{'select_customer' | translate}} ---</option>
         </select>
+        <div ng-show="editContact.$submitted || editContact.customer.$touched">
+          <div ng-show="editContact.customer.$error.required" class="error-text">
+            {{'item_not_selected' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">

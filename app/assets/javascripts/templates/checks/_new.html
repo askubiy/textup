@@ -8,6 +8,7 @@
       <div class="form-group">
         <label for="title">{{'price' | translate}}:</label>
         <input name="price" type="number" autocomplete="off" class="form-control" min="0"
+          ng-class="{'ng-touched': newPayment.$submitted}"
           id="title" ng-model="newPrice" required placeholder="{{'price' | translate}}">
         <div ng-show="newPayment.$submitted || newPayment.price.$touched">
           <div ng-show="newPayment.price.$error.number" class="error-text">

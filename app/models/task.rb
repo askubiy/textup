@@ -6,6 +6,12 @@ class Task < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :checks, dependent: :destroy
 
+  validates :title, presence: true
+  validates :customer_id, presence: true
+  validates :status_id, presence: true
+  validates :estimated_finish, presence: true
+  validates :started_at, presence: true
+
   def checks_totals
     checks = self.checks
       .select("SUM(price) as total, currencies.abbreviation as abbreviation, check_statuses.name as status_name")

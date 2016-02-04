@@ -2,6 +2,8 @@ class ContactPerson < ActiveRecord::Base
   belongs_to :user
   belongs_to :customer
 
+  validates :first_name, presence: true
+
   def name
     name = first_name
     name += " #{middle_name}" if middle_name

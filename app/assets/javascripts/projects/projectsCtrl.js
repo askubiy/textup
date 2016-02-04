@@ -43,29 +43,11 @@ angular.module('textUp')
     };
 
     $scope.addProject = function() {
-      if($scope.newProjectTitle === '') { return; };
-      var project = new Project({
-        user_id: $scope.user.id,
-        customer_id: $scope.customerId.id,
-        title: $scope.newProjectTitle,
-        description: $scope.newProjectDescription
-      });
-      project.$save().then(function(project){
-        $translate(['project', 'added_success']).then(
-          function(translations){
-            var message = translations.project + " '" +
-              project.title + "' " + translations.added_success;
-            notifications.addNotification(message, "success");
-          }
-        );
-        $scope.newProjectTitle = '';
-        $scope.newProjectDescription = '';
-        $state.go('projects');
-      });
-    };
+      if(!$scope.newProjectTitle || $scope.newProjectTitle === ''
+        || !$scope.customer) {
+        return;
+      };
 
-    $scope.addProjectForCustomer = function() {
-      if($scope.newProjectTitle === '') { return; };
       var project = new Project({
         user_id: $scope.user.id,
         customer_id: $scope.customer.id,
@@ -77,12 +59,10 @@ angular.module('textUp')
           function(translations){
             var message = translations.project + " '" +
               project.title + "' " + translations.added_success;
+            notifications.addNotification(message, "success");
           }
         );
-
-        $scope.newProjectTitle = '';
-        $scope.newProjectDescription = '';
-        $state.go('show_customer', { customer_id: $scope.customer.id });
+        $state.go('projects');
       });
     };
 
@@ -105,7 +85,10 @@ angular.module('textUp')
     };
 
     $scope.updateProject = function() {
-      if($scope.project.title === '') { return; };
+      if(!$scope.project.title || $scope.project.title === ''
+        || !$scope.project.customer) {
+        return;
+      };
       $scope.project.customer_id = $scope.project.customer.id;
       Project.update({ id: $scope.project.id }, $scope.project)
         .$promise.then(
@@ -117,7 +100,6 @@ angular.module('textUp')
                 notifications.addNotification(message, "success");
               }
             );
-
             $state.go('show_project', { project_id: project.id });
           }
         );

@@ -83,8 +83,6 @@ angular.module('textUp')
         colour: $scope.newCustomerColour
       });
       customer.$save().then(function(customer){
-        $scope.newCustomerName = '';
-        $scope.newCustomerDescription = '';
         $translate(['customer', 'added_success']).then(
           function(translations){
             var message = translations.customer + " '" +
@@ -97,7 +95,7 @@ angular.module('textUp')
     };
 
     $scope.updateCustomer = function() {
-      if($scope.customer.name === '') { return; };
+      if(!$scope.customer.name) { return; };
       $scope.customer.colour = $scope.newCustomerColour;
       Customer.update({ id: $scope.customer.id }, $scope.customer)
         .$promise.then(

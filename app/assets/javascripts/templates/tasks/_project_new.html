@@ -4,37 +4,61 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="project-form">
+    <form class="task-form form-validation" name="newTask" novalidate>
       <div class="form-group">
         <label for="title">{{'task_name' | translate}}:</label>
-        <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newTaskTitle" placeholder="{{'task_name' | translate}}">
+        <input name="newTaskTitle" type="text" ng-class="{'ng-touched': newTask.$submitted}"
+          autocomplete="off" class="form-control"
+          required="" id="title" ng-model="newTaskTitle"
+          placeholder="{{'task_name' | translate}}">
+        <div ng-show="newTask.$submitted || newTask.newTaskTitle.$touched">
+          <div ng-show="newTask.newTaskTitle.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group has-feedback">
         <label for="start-date">{{'start_date' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="start-date" ng-model="startDateTime" placeholder="{'start_date' | translate}}"
+          name="startDateTime" id="start-date" ng-model="startDateTime"
+          placeholder="{{'start_date' | translate}}"
           date-time-picker>
         <i class="form-control-feedback glyphicon
           glyphicon-calendar pull-left"></i>
+        <div ng-show="newTask.$submitted || newTask.startDateTime.$touched">
+          <div ng-show="newTask.startDateTime.$error.dateTimeRequired" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group has-feedback">
-        <label for="start-date">{{'end_date' | translate}}:</label>
+        <label for="finish-date">{{'end_date' | translate}}:</label>
         <input type="text" autocomplete="off" class="form-control"
-          id="start-date" ng-model="estimatedFinishDateTime" placeholder="{{'end_date' | translate}}"
-          date-time-picker>
+          name="estimatedFinishDateTime" date-time-picker
+          id="finish-date" ng-model="estimatedFinishDateTime"
+          placeholder="{{'end_date' | translate}}">
         <i class="form-control-feedback glyphicon
           glyphicon-calendar pull-left"></i>
+        <div ng-show="newTask.$submitted || newTask.estimatedFinishDateTime.$touched">
+          <div ng-show="newTask.estimatedFinishDateTime.$error.dateTimeRequired" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="status-select">{{'status' | translate}}:</label>
-        <select class="form-control" id="status-select" ng-model="status"
-          ng-options="status.name for status in statuses | orderBy:'id' track by status.id" required="true">
+        <select class="form-control" name="status" id="status-select" ng-model="status"
+          ng-options="(status.status_type | translate) for status in statuses | orderBy:'id' track by status.id" required="">
           <option value="">--- {{'select_status' | translate}} ---</option>
         </select>
+        <div ng-show="newTask.$submitted || newTask.status.$touched">
+          <div ng-show="newTask.status.$error.required" class="error-text">
+            {{'item_not_selected' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">

@@ -4,19 +4,32 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="customer-form">
+    <form class="project-form form-validation" name="newProject" novalidate>
       <div class="form-group">
         <label for="title">{{'project_name' | translate}}:</label>
-        <input type="text" autocomplete="off" class="form-control"
-          id="title" ng-model="newProjectTitle" placeholder="{{'project_name' | translate}}">
+        <input name="projectTitle" type="text" ng-class="{'ng-touched': newProject.$submitted}"
+          autocomplete="off" class="form-control"
+          required="" id="title" ng-model="newProjectTitle"
+          placeholder="{{'project_name' | translate}}">
+        <div ng-show="newProject.$submitted || newProject.projectTitle.$touched">
+          <div ng-show="newProject.projectTitle.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="customer-select">{{'customer' | translate}}:</label>
-        <select class="form-control" id="customer-select" ng-model="customerId"
-          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id" required="true">
+        <select class="form-control" id="customer-select" ng-model="customer"
+          ng-options="customer.name for customer in customers | orderBy:'name' track by customer.id"
+          name="customer" required="">
           <option value="">--- {{'select_customer' | translate}} ---</option>
         </select>
+        <div ng-show="newProject.$submitted || newProject.customer.$touched">
+          <div ng-show="newProject.customer.$error.required" class="error-text">
+            {{'item_not_selected' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">

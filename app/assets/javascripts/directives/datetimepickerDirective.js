@@ -16,8 +16,12 @@ angular.module('textUp')
             $(elem).data("DateTimePicker").locale(data);
           });
 
+          ngModel.$validators.dateTimeRequired = function(modelValue, viewValue) {
+            return modelValue && viewValue;
+          };
+
           if (!ngModel.$modelValue) {
-            ngModel.$setViewValue(moment());
+            ngModel.$setViewValue(moment().toISOString());
           };
 
           $(elem).datetimepicker({
@@ -25,7 +29,6 @@ angular.module('textUp')
             locale: I18n.locale,
             allowInputToggle: true,
             useCurrent: true,
-            //keepInvalid: true,
             extraFormats: ["YYYY-MM-DDTHH:mm:ss.SSSZ"],
             defaultDate: moment()
           }).on('dp.change', function(event) {

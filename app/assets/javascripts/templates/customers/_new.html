@@ -4,11 +4,18 @@
 
 <div class="row">
   <div class="col-md-4">
-    <form class="customer-form">
+    <form class="customer-form form-validation" name="newCustomer" novalidate>
       <div class="form-group">
         <label for="name">{{'customer_name' | translate}}:</label>
-        <input type="text" autocomplete="off" class="form-control"
-          id="name" ng-model="newCustomerName" placeholder="{{'customer_name' | translate}}">
+        <input name="customerName" type="text" ng-class="{'ng-touched': newCustomer.$submitted}"
+          autocomplete="off" class="form-control"
+          required="" id="name" ng-model="newCustomerName"
+          placeholder="{{'customer_name' | translate}}">
+        <div ng-show="newCustomer.$submitted || newCustomer.customerName.$touched">
+          <div ng-show="newCustomer.customerName.$error.required" class="error-text">
+            {{'field_not_filled' | translate}}
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
