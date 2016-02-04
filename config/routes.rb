@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :currencies, :defaults => { :format => 'json' }, only: [:index]
   resources :check_types, :defaults => { :format => 'json' }, only: [:index]
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+  #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -25,7 +25,9 @@ gem 'angular-rails-templates'
 gem 'angular_rails_csrf'
 gem 'sprockets', '2.12.3'
 gem 'responders', '~> 2.0'
-gem "i18n-js", ">= 3.0.0.rc11"
+gem 'i18n-js', '>= 3.0.0.rc11'
+
+gem 'omniauth-google-oauth2'
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
