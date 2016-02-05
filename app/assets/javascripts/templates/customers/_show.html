@@ -64,14 +64,26 @@
       <table class="table table-hover table-vcenter">
         <thead>
           <tr>
-            <th translate>project_title</th>
-            <th translate>added</th>
-            <th translate>actions</th>
+            <th>
+              <a ng-click="projectSortType = 'title'; projectSortReverse = !projectSortReverse">
+                {{'project_name' | translate}}
+                <span ng-show="projectSortType == 'title' && !projectSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="projectSortType == 'title' && projectSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="projectSortType = 'created_at'; projectSortReverse = !projectSortReverse">
+                {{'added' | translate}}
+                <span ng-show="projectSortType == 'created_at' && !projectSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="projectSortType == 'created_at' && projectSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+            <th>{{'actions' | translate}}</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-click="rowClick('show_project', {project_id: project.id})" class="row-clickable"
-            ng-repeat="project in customer.projects | orderBy: 'title'">
+            ng-repeat="project in customer.projects | orderBy:projectSortType:projectSortReverse">
             <td class="col-md-3">
               <a href="#/projects/{{project.id}}/show">{{project.title}}</a>
             </td>
@@ -102,16 +114,40 @@
       <table class="table table-hover table-vcenter">
         <thead>
           <tr>
-            <th>{{'name' | translate}}</th>
-            <th>{{'start_time' | translate}}</th>
-            <th>Deadline</th>
-            <th>{{'status' | translate}}</th>
+            <th>
+              <a ng-click="taskSortType = 'title'; taskSortReverse = !taskSortReverse">
+                {{'name' | translate}}
+                <span ng-show="taskSortType == 'title' && !taskSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="taskSortType == 'title' && taskSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="taskSortType = 'started_at'; taskSortReverse = !taskSortReverse">
+                {{'start_time' | translate}}
+                <span ng-show="taskSortType == 'started_at' && !taskSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="taskSortType == 'started_at' && taskSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="taskSortType = 'estimated_finish'; taskSortReverse = !taskSortReverse">
+                Deadline
+                <span ng-show="taskSortType == 'estimated_finish' && !taskSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="taskSortType == 'estimated_finish' && taskSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
+            <th>
+              <a ng-click="taskSortType = 'status.status_type'; taskSortReverse = !taskSortReverse">
+                {{'status' | translate}}
+                <span ng-show="taskSortType == 'status.status_type' && !taskSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="taskSortType == 'status.status_type' && taskSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              </a>
+            </th>
             <th>{{'actions' | translate}}</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-click="rowClick('show_task', {task_id: task.id})"  class="row-clickable"
-            ng-repeat="task in customer.tasks | filter:tableFilter | orderBy: 'title'">
+            ng-repeat="task in customer.tasks | filter:tableFilter | orderBy:taskSortType:taskSortReverse">
             <td class="col-md-3">
               <a href="#/tasks/{{task.id}}/show">{{task.title}}</a>
             </td>

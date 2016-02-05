@@ -20,6 +20,9 @@ angular.module('textUp')
     $scope.sortType = 'title';
     $scope.sortReverse = false;
 
+    $scope.taskSortType = 'title';
+    $scope.taskSortReverse = false;
+
     $scope.rowClick = function(state, options){
       $state.go(state, options);
     };
