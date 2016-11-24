@@ -1,6 +1,6 @@
 == TextUP
-
-This project was developed to get some training in AngularJS + Ruby On Rails 
+TextUp - a simple task tracking system for freelancers.
+This project was developed to get some training in AngularJS + Ruby On Rails.
 It named "TextUP" because it was created as a web app for my friends who are freelance copywriters.
 
 You can see it live (but not very fast) at https://textup.herokuapp.com
